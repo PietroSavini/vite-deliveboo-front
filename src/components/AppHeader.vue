@@ -33,7 +33,7 @@ export default {
     <header class="">
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
             <div class="deliveboo-logo d-flex align-items-center">
-                DELIVEBOO
+                Deliveboo
             </div>
             <nav>
                 <ul class="d-flex align-items-center">
@@ -63,6 +63,12 @@ export default {
 <style scoped lang="scss">
 header {
     border: 1px solid black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+
     
 
     .container {
@@ -79,6 +85,8 @@ header {
             border: 1px solid red;
             width: 20%;
             height: 60px;
+            font-size: 2.5rem;
+            font-family: 'Great Vibes', cursive;
 
             img {
                 width: 50%;
