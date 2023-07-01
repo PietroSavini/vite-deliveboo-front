@@ -62,27 +62,27 @@ export default {
 
 <style scoped lang="scss">
 header {
-    border: 1px solid black;
-    position: fixed;
+    border-bottom: 2px solid ;
+    border-color:rgba($color: #ffffff, $alpha: .6) ;
+    position: absolute;
+    padding-top: 17px;
     top: 0;
     left: 0;
     right: 0;
     z-index: 999;
-
-    
+    color: #ffff;
 
     .container {
         margin: 0 auto;
         width: 80%;
         max-width: 1300px;
-        border: 1px solid black;
         height: 80px;
         transition: 500ms;
         &.header-extends{
             height: 120px;
         }
         .deliveboo-logo {
-            border: 1px solid red;
+            
             width: 20%;
             height: 60px;
             font-size: 2.5rem;
@@ -101,16 +101,18 @@ header {
                 justify-content: center;
                 padding: .5rem 0;
                 input{
-                    width: 100%;
+                    width: 80%;
                     border-radius: 30px;
                     outline: none;
-                    border:1px solid black;
+                    border:1px solid ;
+                    border-color: rgba($color: #ffffff, $alpha: .6);
+                    color: #fff;
                     transition: opacity 200ms;
+                    background-color: rgba($color: #bdb9b9, $alpha: .6);
                     &.hidden{
                         opacity: 1;
                     }
                     &.show{
-                        
                         opacity: 0;
                     }
 
@@ -118,7 +120,8 @@ header {
             }
 
             ul {
-                border: 1px solid green;
+                border: 3px solid ;
+                border-color: rgba($color: #ffffff, $alpha: .6);
                 height: 60px;
                 border-radius: 30px;
                 cursor: pointer;
@@ -128,8 +131,8 @@ header {
                     align-items: center;
                     justify-content: center;
                     width: 20%;
-                    border-right: 1px solid green;
-
+                    border-right: 3px solid;
+                    border-color:rgba($color: #ffffff, $alpha: .6) ;
                     height: 100%;
                     transition: 200ms;
 
@@ -145,41 +148,64 @@ header {
 
                     }
 
+                    &:hover{
+                        background-color: rgba($color: #ffffff, $alpha: .35);
+                        a{
+                            color: #ffff;
+                            
+                        }
+                    }
+
+                    i{
+                        color: rgba($color: #ffffff, $alpha: .8);
+                    }
+
                     a {
                         width: 100%;
                         text-align: center;
                         display: inline-block;
-                        color: inherit;
+                        color: rgba($color: #ffffff, $alpha: .8);
                         border-radius: 20px;
+                        font-weight: bold;
                     }
                 }
             }
         }
 
         .user-interactions {
-            border: 1px solid red;
+            
             width: 20%;
             justify-content: end;
             align-items: center;
             height: 60px;
 
             .login-btn{
-                border: 1px solid black;
+                border: 2px solid ;
+                border-color: rgba($color: #ffffff, $alpha: .6);
                 position: relative;
                 width: 60px;
                 border-radius: 15px ;
                 height: 30px;
                 z-index: 1;
                 text-align: center;
+                transition: 200ms;
+                margin-top: 25px;
+                &:hover{
+                    background-color: #FFC244;
+                    
+                    color: #ffff;
+                }
+
 
                 .login-cta {
                     font-family: 'Great Vibes', cursive;
-                    font-size: 1rem;
+                    color: #ffdd44;
+                    font-size: 2rem;
                     transform: rotate(-5deg);
                     position: absolute;
-                    width: 100px;
-                    top: -10px;
-                    left: -25px;
+                    width: 200px;
+                    top: -39px;
+                    left: -80px;
                     z-index: 2;
 
     
