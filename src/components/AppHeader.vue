@@ -120,7 +120,7 @@ header {
             }
 
             ul {
-                border: 3px solid ;
+                border: 2px solid ;
                 border-color: rgba($color: #ffffff, $alpha: .6);
                 height: 60px;
                 border-radius: 30px;
@@ -131,7 +131,7 @@ header {
                     align-items: center;
                     justify-content: center;
                     width: 20%;
-                    border-right: 3px solid;
+                    border-right: 1px solid;
                     border-color:rgba($color: #ffffff, $alpha: .6) ;
                     height: 100%;
                     transition: 200ms;
@@ -149,15 +149,19 @@ header {
                     }
 
                     &:hover{
-                        background-color: rgba($color: #ffffff, $alpha: .35);
+                        background-color: rgba($color: #FFC244, $alpha: .35);
                         a{
                             color: #ffff;
                             
+                        }
+                        i{
+                            color: #ffff
                         }
                     }
 
                     i{
                         color: rgba($color: #ffffff, $alpha: .8);
+                    
                     }
 
                     a {
