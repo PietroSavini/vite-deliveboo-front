@@ -15,6 +15,8 @@ import {store} from "./store"
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
+  <h1 class="text-danger text-center">daje cosi</h1>
+
 </template>
 
 <style lang="scss">
