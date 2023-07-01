@@ -17,7 +17,5 @@ import HelloWorld from './components/HelloWorld.vue'
 <style lang="scss">
 @use "./styles/style.scss";
 @use "./styles/partials/root.scss" as *;
-div{
-  background-color: $primary_color;
-}
+
 </style>
