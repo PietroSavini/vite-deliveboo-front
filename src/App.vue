@@ -1,5 +1,8 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import {store} from "./store"
+
+
 </script>
 
 <template>
