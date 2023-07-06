@@ -15,6 +15,10 @@ export default {
                     label: "Restaurants",
                     route: "restaurants"
                 },
+                {
+                    label: "About Us",
+                    route: "about-us"
+                },
             ]
         }
 
@@ -40,7 +44,7 @@ export default {
 </script>
 
 <template>
-    <header class="bg-dark-subtle">
+    <header class="bg-dark">
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
             <div class="deliveboo-logo d-flex align-items-center">
                 <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">

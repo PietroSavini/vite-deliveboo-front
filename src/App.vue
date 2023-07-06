@@ -16,7 +16,6 @@ export default {
 </script>
 
 <template>
-  <h1>ciao</h1>
   <AppHeader />
   <router-view />
 </template>
