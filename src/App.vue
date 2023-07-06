@@ -21,7 +21,7 @@ export default{
  <section class="hero">
     <video autoplay loop muted >
       
-      <source src="./assets/mixkit-donuts-with-various-types-of-icing-in-a-close-up-44096.mp4" type="video/mp4">
+      <source src="./assets/DeliveBoo_edited.mp4" type="video/mp4">
     </video>
  </section>
 </template>
@@ -31,8 +31,17 @@ export default{
 @use "./styles/partials/root.scss" as *;
 
 .hero{
-  height: 600px;
+  height: 45vh;
   border: 1px solid black;
+  position: relative;
+  video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 </style>
