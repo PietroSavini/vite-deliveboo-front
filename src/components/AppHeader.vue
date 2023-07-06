@@ -4,8 +4,22 @@ export default {
     data() {
         return {
             search: true,
-            headerHeight:true,
+            headerHeight: true,
             searchResults:'',
+            navLinks: [
+                {
+                    label: "Home",
+                    route: "home"
+                },
+                {
+                    label: "Restaurants",
+                    route: "restaurants"
+                },
+                {
+                    label: "About Us",
+                    route: "about-us"
+                },
+            ]
         }
 
     },
@@ -30,16 +44,16 @@ export default {
 </script>
 
 <template>
-    <header class="">
+    <header >
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
             <div class="deliveboo-logo d-flex align-items-center">
                 <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">
             </div>
             <nav>
-                <ul class="d-flex align-items-center">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Ristoranti</a></li>
+                <ul class="d-flex align-items-center text-dark">
+                    <li v-for="link in navLinks">
+                        <router-link :to="{ name: link.route }">{{ link.label }}</router-link>
+                    </li>
                     <li><a href="#">Contattaci</a></li>
                     <li @click="searchBar"><i class="fa-solid fa-magnifying-glass fa-rotate-90"></i></li>
                 </ul>
@@ -154,9 +168,9 @@ header {
                     }
 
                     &:hover{
-                        background-color: rgba($color: #FFC244, $alpha: .35);
+                        background-color: rgba($color: #FFC245, $alpha: .35);
                         a{
-                            color: #ffff;
+                            color: #ffffff;
                             
                         }
                         i{
@@ -224,5 +238,6 @@ header {
         }
     }
 
-}</style>
+}
+</style>
 
