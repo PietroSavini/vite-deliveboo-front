@@ -1,34 +1,32 @@
 <script >
-import {store} from "./store.js";
+import { store } from "../store.js";
 
-
-export default{
-  data(){
-    return{
+export default {
+  name: "HomePage",
+  data() {
+    return {
       store,
     }
-  },
-  components:{
-   
   }
 }
 
 </script>
 
 <template>
- <section class="hero">
-    <video autoplay loop muted >
+  <section class="hero">
+    <video autoplay loop muted>
       <source src="./assets/DeliveBoo_edited.mp4" type="video/mp4">
     </video>
- </section>
+  </section>
 </template>
 
 <style lang="scss">
-.hero{
+.hero {
   height: 45vh;
   border: 1px solid black;
   position: relative;
-  video{
+
+  video {
     position: absolute;
     top: 0;
     left: 0;
