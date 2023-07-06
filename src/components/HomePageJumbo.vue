@@ -14,7 +14,7 @@ export default {
 <section class="hero">
 
     <div class="carousel">
-      <h1 style="color:#ffff">ANTONIO FACCE ER CAROSELLO</h1>
+      <h1 ></h1>
     </div>
     <video autoplay loop muted>
         <source src="../assets/DeliveBoo_edited.mp4" type="video/mp4">
