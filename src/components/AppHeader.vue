@@ -44,7 +44,7 @@ export default {
 </script>
 
 <template>
-    <header class="bg-dark">
+    <header >
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
             <div class="deliveboo-logo d-flex align-items-center">
                 <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">
@@ -168,9 +168,9 @@ header {
                     }
 
                     &:hover{
-                        background-color: rgba($color: #FFC244, $alpha: .35);
+                        background-color: rgba($color: #FFC245, $alpha: .35);
                         a{
-                            color: #ffff;
+                            color: #ffffff;
                             
                         }
                         i{
