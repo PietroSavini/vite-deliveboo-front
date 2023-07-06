@@ -3,8 +3,8 @@ export default {
     name: 'AppHeader',
     data() {
         return {
-            search: false,
-            headerHeight:false,
+            search: true,
+            headerHeight:true,
             searchResults:'',
         }
 
@@ -33,7 +33,7 @@ export default {
     <header class="">
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
             <div class="deliveboo-logo d-flex align-items-center">
-                Deliveboo
+                <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">
             </div>
             <nav>
                 <ul class="d-flex align-items-center">
@@ -82,14 +82,19 @@ header {
             height: 120px;
         }
         .deliveboo-logo {
-            
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 20%;
             height: 60px;
-            font-size: 2.5rem;
-            font-family: 'Great Vibes', cursive;
+            
 
             img {
-                width: 50%;
+                position: relative;
+                top: 25%;
+                left: -40px;
+                min-width: 200px;    
             }
         }
 
