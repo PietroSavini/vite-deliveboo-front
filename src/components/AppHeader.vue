@@ -105,7 +105,7 @@ header {
             
             img {
                 position: relative;
-                top: 25%;
+                top: 0;
                 left: -40px;
                 min-width: 200px;    
             }
