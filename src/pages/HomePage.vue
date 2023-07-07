@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       store,
-      variable : true,
+      restaurantsTypes : [],
     }
   },
   mounted(){
@@ -18,20 +18,29 @@ export default {
     getTypes(){
       axios.get(store.ApiTypesUrl).then((resp)=>{
         this.store.types = resp.data.results
-        
       });
     },
     getRestaurants($type_id){
+      this.populateTypesArray($type_id)
+      const params = {};
+      if(this.store.types_id.length > 0 ){
+        params.type_id = this.store.types_id
+        axios.get(`${this.store.ApiRestaurantsUrl}`,{params}).then((resp)=>{
+          this.restaurantsTypes = resp.data.results.data
+        })
+        
+      }
+    },
+    populateTypesArray(type_id){
       let typesArray = this.store.types_id
-      if(!typesArray.includes($type_id)){
-        typesArray.push($type_id)
+      if(!typesArray.includes(type_id)){
+        typesArray.push(type_id)
         this.store.types_id = typesArray
-      }else if(typesArray.includes($type_id)){
-        const index = typesArray.indexOf($type_id);
+      }else if(typesArray.includes(type_id)){
+        const index = typesArray.indexOf(type_id);
         typesArray.splice(index, 1);
         this.store.types_id = typesArray;
       }
-      console.log(this.store.types_id)
     }
   },
   components: {
