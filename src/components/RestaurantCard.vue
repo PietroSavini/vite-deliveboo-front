@@ -18,14 +18,7 @@ export default {
             } else {
                 return this.restaurant.description
             }
-        },
-        typePreview() {
-            if (!this.restaurant.types.name) {
-                return "Nessuna tipologia"
-            } else {
-                return this.restaurant.types.name
-            }
-        },
+        }
     }
 }
 </script>
@@ -35,7 +28,7 @@ export default {
         <div class="ms_card-img">
             <h1 class="restaurant-name">{{ restaurant.name }}</h1>
             <div class="restaurant-category">
-                <p>{{ typePreview }}</p>
+                <p v-for="name in restaurant.types">{{ name.name }}</p>
             </div>
             <img :src="restaurant.image" class="" alt="Restaurant Image">
         </div>
@@ -43,7 +36,6 @@ export default {
             <div>
                 <p class="text-start">{{ restaurant.address }}</p>
                 <p>{{ descriptionPreview }}</p>
-                <!-- <p>AoAoAoAo</p> -->
             </div>
             <div class="d-flex gap-1">
                 <p><i class="fa-solid fa-burger fa-lg"></i></p>
@@ -73,6 +65,10 @@ export default {
         border: 0;
     }
 
+    & img:hover {
+            transform: scale(1.09);
+        }
+
     .ms_card-img {
         position: relative;
         width: 100%;
@@ -80,10 +76,6 @@ export default {
         border-radius: 10px 10px 0 0;
         transition: 0.3s ease-in-out;
         overflow: hidden;
-
-        &:hover {
-            transform: scale(1.09);
-        }
 
         img {
             position: absolute;
@@ -93,6 +85,7 @@ export default {
             height: 100%;
             object-fit: cover;
             opacity: .6;
+            transition: .1s;
         }
 
         .restaurant-name {
