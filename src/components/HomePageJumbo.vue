@@ -16,7 +16,10 @@ export default {
   <section class="hero d-flex">
 
     <div class="cta">
-      <h1>Di cosa hai voglia oggi?</h1>
+      <div class="hero-hook-container">
+        <h1 class="hero-hook">Fame?</h1>
+      </div>
+      <h1>Dicci di cosa hai voglia</h1>
       <div class="categories ">
         
         <div class="categories-lables d-flex justify-content-center ">
@@ -46,7 +49,7 @@ export default {
   min-height: 500px;
   max-height: 800px;
   position: relative;
-  padding-top: 140px;
+  padding-top: 200px;
   padding-bottom: 1rem;
   overflow-y: hidden;
 
@@ -58,10 +61,26 @@ export default {
     max-height: 290px;
     margin: 0 auto;
     text-align: center;
-
+    .hero-hook-container{
+      position: relative;
+      width: 80%;
+      margin: 0 auto;
+      .hero-hook{
+        font-family: 'Great Vibes', cursive;
+        color: $primary_color;
+        position: absolute;
+        font-size: 5rem;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+    }
     h1 {
+      position: relative;
+      z-index: 3;
       font-weight: 800;
-      color: $primary_color;
+      color: #ffff;
       text-shadow: 1px 1px 2px rgb(0, 0, 0);
     }
 
@@ -71,7 +90,7 @@ export default {
       max-height: 230px;
 
       p {
-        color: $primary_color;
+        color: #ffff;
         text-shadow: 1px 1px 2px rgb(0, 0, 0);
       }
 
@@ -100,7 +119,7 @@ export default {
           }
 
           .form-check-input {
-            background-color: rgba(255, 165, 47, 0.708);
+            background-color: rgba(255, 165, 47, 0.5);
             border: none;
             border-radius: 30px;
           }
@@ -123,6 +142,10 @@ export default {
             padding: 0;
             margin: 0;
             cursor: pointer;
+            transition: 200ms;
+            &:active{
+              transform: scale(.8);
+            }
           }
         }
       }
