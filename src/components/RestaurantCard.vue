@@ -32,6 +32,7 @@ export default {
             </div>
             <img :src="restaurant.image" class="" alt="Restaurant Image">
         </div>
+        
         <div class="ms_card-body d-flex justify-content-between align-items-center">
             <div>
                 <p class="text-start">{{ restaurant.address }}</p>
