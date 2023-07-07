@@ -1,6 +1,5 @@
 <script>
 import { store } from "../store";
-// import axios from 
 
 export default {
     name: "RestaurantCard.vue",
@@ -11,34 +10,38 @@ export default {
         return {
             store
         }
+    },
+    computed: {
+        descriptionPreview() {
+            if (!this.restaurant.description) {
+                return "Nessuna descrizione"
+            } else {
+                return this.restaurant.description
+            }
+        },
     }
 }
 </script>
 
 <template>
-    <div class="container vh-100">
-        <div class="row w-100 row-cols-1 row-cols-md-3 row-cols-lg-5 flex-wrap">
-            <div class="col col-md-3 col-lg-5 mb-4">
-                <div class="ms_card">
-                    <div class="ms_card-img">
-                        <h1 class="restaurant-name">Burger King</h1>
-                        <div class="restaurant-category">
-                            <p>Hamburgeria</p>
-                        </div>
-                        <img src="../assets/Testo_del_paragrafo-removebg-preview.png" class="" alt="Restaurant Image">
-                    </div>
-                    <div class="ms_card-body d-flex justify-content-between align-items-center">
-                        <div>
-                            <p>Via viaviavia, 99, 00100</p>
-                            <p>AoAoAoAo</p>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <p><i class="fa-solid fa-burger fa-lg"></i></p>
-                            <p><i class="fa-solid fa-burger fa-lg"></i></p>
-                            <p><i class="fa-solid fa-burger fa-lg"></i></p>
-                        </div>
-                    </div>
-                </div>
+    <div class="ms_card">
+        <div class="ms_card-img">
+            <h1 class="restaurant-name">{{ restaurant.name }}</h1>
+            <div class="restaurant-category">
+                <p>Hamburgeria</p>
+            </div>
+            <img :src="restaurant.image" class="" alt="Restaurant Image">
+        </div>
+        <div class="ms_card-body d-flex justify-content-between align-items-center">
+            <div>
+                <p class="text-start">{{ restaurant.address }}</p>
+                <p>{{ descriptionPreview }}</p>
+                <!-- <p>AoAoAoAo</p> -->
+            </div>
+            <div class="d-flex gap-1">
+                <p><i class="fa-solid fa-burger fa-lg"></i></p>
+                <p><i class="fa-solid fa-sushi fa-lg"></i></p>
+                <p><i class="fa-solid fa-pizza-slice fa-lg"></i></p>
             </div>
         </div>
     </div>
@@ -49,7 +52,7 @@ export default {
 @use "../styles/partials/root.scss" as *;
 
 .ms_card {
-    width: 600px;
+    width: calc(100% - 10px);
     height: 400px;
     border: 1px solid black;
     border-radius: 10px;
@@ -59,7 +62,7 @@ export default {
 
     &:hover {
         transition: 0.3s ease-in-out;
-        box-shadow: 0 2px 4px $primary_color;
+        box-shadow: 0 2px 4px coral;
         border: 0;
     }
 
@@ -68,35 +71,37 @@ export default {
         width: 100%;
         height: 80%;
         border-radius: 10px 10px 0 0;
+        transition: 0.3s ease-in-out;
+        overflow: hidden;
 
         &:hover {
-            scale: 1.07;
-            transition: 0.3s ease-in-out;
+            transform: scale(1.09);
         }
 
         img {
             position: absolute;
-            top: 20%;
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: .3;
+            opacity: .6;
         }
 
         .restaurant-name {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            color: white;
+            text-shadow: 15px 15px 15px rgba(0, 0, 0, 0.5);
+            transform: translate(-50%, -50%) rotateX(10deg);
             font-weight: bold;
             text-align: center;
             z-index: 1;
         }
 
         .restaurant-category {
-            top: 70%;
-            text-align: center;
+            top: 80%;
             transform: translate(-50%, -50%);
             position: absolute;
             left: 50%;
@@ -104,7 +109,7 @@ export default {
             border-radius: 5px;
             border: 1px solid black;
             background-color: $primary_color;
-            opacity: .9;
+            text-align: center;
 
             p {
                 font-weight: bold;
@@ -115,7 +120,7 @@ export default {
     .ms_card-body {
         height: 20%;
         padding: 10px;
-        background-color: lightblue;
+        background-color: rgba(255, 255, 255, 0.627);
 
         .restaurant-address {
             margin-top: 10px;
