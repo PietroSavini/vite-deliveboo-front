@@ -206,7 +206,7 @@ header {
                 border: 2px solid ;
                 border-color: rgba($color: #ffffff, $alpha: .6);
                 position: relative;
-                width: 60px;
+                width: 80px;
                 border-radius: 15px ;
                 height: 30px;
                 z-index: 1;
@@ -228,7 +228,7 @@ header {
                     position: absolute;
                     width: 200px;
                     top: -39px;
-                    left: -80px;
+                    left: -63px;
                     z-index: 2;
 
     
