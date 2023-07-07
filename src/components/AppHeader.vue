@@ -62,7 +62,7 @@ export default {
                 </div>
             </nav>
             <div class="user-interactions d-flex ">
-                <a href="#">
+                <a href="http://localhost:8000/">
                     <div class="login-btn">
                         <p class="login-cta">Sei un ristoratore?</p>
                         <span>accedi</span>
@@ -103,7 +103,6 @@ header {
             width: 20%;
             height: 60px;
             
-
             img {
                 position: relative;
                 top: 25%;
@@ -201,7 +200,6 @@ header {
             justify-content: end;
             align-items: center;
             height: 60px;
-
             .login-btn{
                 border: 2px solid ;
                 border-color: rgba($color: #ffffff, $alpha: .6);
@@ -218,7 +216,6 @@ header {
                     
                     color: #ffff;
                 }
-
 
                 .login-cta {
                     font-family: 'Great Vibes', cursive;
