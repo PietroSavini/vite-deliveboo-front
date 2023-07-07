@@ -27,16 +27,16 @@ export default {
     this.getTypes();
   },
   methods: {
-    getRestaurants() {
-      axios.get(`${store.ApiRestaurantsUrl}`).then((resp) => {
-        console.log(resp);
-        this.restaurants = resp.data.results.data;
-      });
-    },
     getTypes() {
       axios.get(`${store.ApiTypesUrl}`).then(resp => {
         console.log(resp);
         this.types = resp.data.results;
+      });
+    },
+    getRestaurants() {
+      axios.get(`${store.ApiRestaurantsUrl}`).then((resp) => {
+        console.log(resp);
+        this.restaurants = resp.data.results.data;
       });
     }
   }
@@ -52,7 +52,7 @@ export default {
     </section>
     <!-- / Jumbo Section -->
 
-    <section v-if="loading === false">
+    <section v-if="!loading">
       <main class="text-center my-5 ms_main">
         <div class="container-fluid my-3">
           <div class="row w-100 row-cols-5 g-3">
