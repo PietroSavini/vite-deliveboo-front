@@ -10,9 +10,16 @@ export default {
     }
     
   },
+
   components:{
       CategoryLable
-    }
+  },
+  methods:{
+    
+  },
+  emit:[
+    "getRestaurants"
+  ]
 }
 </script>
 
@@ -30,7 +37,7 @@ export default {
           
           <div class="row justify-content-center gy-2">
             <p class="text-center mb-2">categorie più richieste</p>
-            <CategoryLable v-for="category in store.types" :category="category"/>
+            <CategoryLable @getRestaurants="$emit('getRestaurants',category.id)" v-for="category in store.types" :key="category.id" :category="category"/>
           </div>
         </div>
       </div>
@@ -87,6 +94,12 @@ export default {
       height: calc(100% - 3.10rem);
       padding: 1rem 1.5rem;
       max-height: 230px;
+      .categories-lables {
+        height: 80%;
+        flex-wrap: wrap;
+        align-items: center;
+        
+      }
 
       p {
         color: #ffff;

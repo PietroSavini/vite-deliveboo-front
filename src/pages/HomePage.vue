@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       store,
+      variable : true,
     }
   },
   mounted(){
@@ -17,8 +18,20 @@ export default {
     getTypes(){
       axios.get(store.ApiTypesUrl).then((resp)=>{
         this.store.types = resp.data.results
-        console.log(this.store.types)
-      })
+        
+      });
+    },
+    getRestaurants($type_id){
+      let typesArray = this.store.types_id
+      if(!typesArray.includes($type_id)){
+        typesArray.push($type_id)
+        this.store.types_id = typesArray
+      }else if(typesArray.includes($type_id)){
+        const index = typesArray.indexOf($type_id);
+        typesArray.splice(index, 1);
+        this.store.types_id = typesArray;
+      }
+      console.log(this.store.types_id)
     }
   },
   components: {
@@ -30,7 +43,7 @@ export default {
 </script>
 
 <template>
-  <HomePageJumbo/>
+  <HomePageJumbo @getRestaurants="getRestaurants"/>
 </template>
 
 <style lang="scss" scoped>
