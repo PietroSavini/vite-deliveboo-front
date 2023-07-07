@@ -1,6 +1,7 @@
 <script >
 import { store } from "../store.js";
 import HomePageJumbo from "../components/HomePageJumbo.vue";
+import HomePageMain from "../components/HomePageMain.vue";
 import axios from "axios";
 
 export default {
@@ -45,7 +46,9 @@ export default {
   },
   components: {
     HomePageJumbo,
+    HomePageMain,
   }
+  
 
 }
 
@@ -53,6 +56,7 @@ export default {
 
 <template>
   <HomePageJumbo @getRestaurants="getRestaurants"/>
+  <HomePageMain/>
 </template>
 
 <style lang="scss" scoped>

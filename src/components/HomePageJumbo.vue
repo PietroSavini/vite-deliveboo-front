@@ -56,7 +56,7 @@ export default {
   max-height: 800px;
   position: relative;
   padding-top: 200px;
-  padding-bottom: 1rem;
+  padding-bottom: 3rem;
   overflow-y: hidden;
 
   .cta {
