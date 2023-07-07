@@ -1,5 +1,6 @@
 <script>
 import { store } from "../store.js";
+import CategoryLable from "./CategoryLable.vue";
 
 export default {
   name: 'HomePageJumbo',
@@ -7,8 +8,11 @@ export default {
     return {
       store,
     }
-
-  }
+    
+  },
+  components:{
+      CategoryLable
+    }
 }
 </script>
 
@@ -26,12 +30,7 @@ export default {
           
           <div class="row justify-content-center gy-2">
             <p class="text-center mb-2">categorie più richieste</p>
-            <div v-for="category in store.types" class="form-check form-check-tag">
-              <input class="form-check-input ms_form-check" type="checkbox" value="" :id="`category-${category.id}`">
-              <label class="form-check-label absolute" :for="`category-${category.id}`">
-                {{ category.name }}
-              </label>
-            </div>
+            <CategoryLable v-for="category in store.types" :category="category"/>
           </div>
         </div>
       </div>
@@ -92,62 +91,6 @@ export default {
       p {
         color: #ffff;
         text-shadow: 1px 1px 2px rgb(0, 0, 0);
-      }
-
-      .categories-lables {
-        height: 80%;
-        flex-wrap: wrap;
-        align-items: center;
-
-        .form-check-tag {
-          position: relative;
-          border-radius: 30px;
-          width: 120px;
-          height: 50px;
-          padding: 0;
-          margin-right: 5px;
-          z-index: 2;
-          
-
-          .form-check-input:focus {
-            box-shadow: none;
-          }
-
-          .form-check-input:checked[type=checkbox] {
-            background-image: none;
-            background-color: rgba(255, 165, 47, 1);
-          }
-
-          .form-check-input {
-            background-color: rgba(255, 165, 47, 0.5);
-            border: none;
-            border-radius: 30px;
-          }
-
-          .absolute {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translateX(-50%) translateY(-50%);
-            font-weight: bold;
-            font-size: 1srem;
-            z-index: 1;
-            cursor: pointer;
-
-          }
-
-          .ms_form-check {
-            width: 120px;
-            height: 50px;
-            padding: 0;
-            margin: 0;
-            cursor: pointer;
-            transition: 200ms;
-            &:active{
-              transform: scale(.8);
-            }
-          }
-        }
       }
     }
   }
