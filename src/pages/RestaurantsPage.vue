@@ -44,22 +44,31 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper ">
+
+    <!-- Jumbo Section -->
     <section class="jumbo-section">
       <SectionJumbo :text="`Restaurants Page`" />
-
     </section>
+    <!-- / Jumbo Section -->
 
-    <main class="text-center my-5 ms_main">
-      <div class="container-fluid my-3">
-        <div class="row w-100 row-cols-5 g-3">
-          <div class="col" v-for="restaurant in restaurants" :key="restaurant.name">
-            <!-- <h1>ciao</h1> -->
-            <RestaurantCard :restaurant="restaurant" />
+    <section v-if="loading === false">
+      <main class="text-center my-5 ms_main">
+        <div class="container-fluid my-3">
+          <div class="row w-100 row-cols-5 g-3">
+            <div class="col" v-for="restaurant in restaurants" :key="restaurant.name">
+              <!-- <h1>ciao</h1> -->
+              <RestaurantCard :restaurant="restaurant" />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </section>
+
+    <section v-else>
+      <h1 class="">Caricamento...</h1>
+    </section>
+
 
   </div>
 </template>

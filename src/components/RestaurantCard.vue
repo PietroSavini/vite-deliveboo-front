@@ -19,6 +19,13 @@ export default {
                 return this.restaurant.description
             }
         },
+        typePreview() {
+            if (!this.restaurant.types.name) {
+                return "Nessuna tipologia"
+            } else {
+                return this.restaurant.types.name
+            }
+        },
     }
 }
 </script>
@@ -28,7 +35,7 @@ export default {
         <div class="ms_card-img">
             <h1 class="restaurant-name">{{ restaurant.name }}</h1>
             <div class="restaurant-category">
-                <p>Hamburgeria</p>
+                <p>{{ typePreview }}</p>
             </div>
             <img :src="restaurant.image" class="" alt="Restaurant Image">
         </div>
