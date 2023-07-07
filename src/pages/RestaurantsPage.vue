@@ -55,9 +55,8 @@ export default {
     <section v-if="!loading">
       <main class="text-center my-5 ms_main">
         <div class="container-fluid my-3">
-          <div class="row w-100 row-cols-5 g-3">
-            <div class="col" v-for="restaurant in restaurants" :key="restaurant.name">
-              <!-- <h1>ciao</h1> -->
+          <div class="row row-cols-5 g-3 justify-content-center flex-wrap">
+            <div class="ms_col" v-for="restaurant in restaurants" :key="restaurant.name">
               <RestaurantCard :restaurant="restaurant" />
             </div>
           </div>
@@ -73,12 +72,23 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "../styles/style.scss";
 @use "../styles/partials/root.scss" as *;
 
 .wrapper {
   background-color: #ffc14578;
   height: 1800px;
+
+  .ms_main {
+
+    .row {
+      width: 100%;
+
+      .ms_col {
+        width: 400px;
+      }
+    }
+  }
 }
 </style>
