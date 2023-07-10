@@ -60,14 +60,12 @@ export default {
     <!-- Jumbo Section -->
     <section class="jumbo-section">
       <SectionJumbo :text="`Restaurants Page`" />
+      <img src="../assets/RestaurantImage.jpeg" alt="">
     </section>
     <!-- / Jumbo Section -->
 
 
     <section v-if="!loading">
-
-
-
       <main class="text-center my-5 ms_main">
         <div class="container-fluid my-3">
 
@@ -104,7 +102,19 @@ export default {
 
 .wrapper {
   background-color: #ffc14578;
-  height: 1800px;
+  height: 100%;
+  padding-bottom: 10px;
+
+  .jumbo-section {
+
+    width: 100%;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      filter: blur(5px);
+    }
+  }
 
   .ms_main {
 
