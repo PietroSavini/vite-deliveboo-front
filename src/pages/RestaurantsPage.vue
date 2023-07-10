@@ -34,17 +34,15 @@ export default {
         this.types = resp.data.results;
       });
     },
-    getRestaurants(pageNumber = 1) {
+    getRestaurants(pageNumber) {
       this.loading = true;
       const params = {
         page: pageNumber
       }
 
       axios.get(`${store.ApiRestaurantsUrl}`, { params }).then((resp) => {
-        console.log(resp);
         this.restaurants = resp.data.results.data;
         this.currentPage = resp.data.results.current_page;
-        // console.log(this.currentPage);
         this.lastPage = resp.data.results.last_page;
         this.allRestaurants = resp.data.results.total;
       }).finally(() => {
@@ -108,6 +106,7 @@ export default {
       }
     }
   }
+
   .ms_loader {
     width: 48px;
     height: 48px;
@@ -168,4 +167,5 @@ export default {
   }
 
 
-}</style>
+}
+</style>
