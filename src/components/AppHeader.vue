@@ -94,7 +94,7 @@ header {
         left: 0;
         top: 0;
         bottom: 0;
-        background-color: rgba($color: #000000, $alpha: .3);
+        background-color: rgba($color: #2e2e2e, $alpha: .4);
         filter: blur(10px);
     }
     .container {
