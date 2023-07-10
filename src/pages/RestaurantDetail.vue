@@ -111,7 +111,7 @@ export default {
                 padding: 1rem 2rem;
                 top: -75px;
                 border-radius: 20px;
-                box-shadow: 0px 0px 20px rgb(73, 73, 73);
+                box-shadow: 0px 10px 15px rgb(166, 166, 166) ;
                 background-color: #ffffff;
                 left: 0px;
                 right: 0;
@@ -214,7 +214,7 @@ export default {
                 top: 20px;
                 padding: 1rem 2rem;
                 border-radius: 20px;
-                box-shadow: 0px 0px 20px rgb(73, 73, 73);
+                box-shadow: 0px 10px 15px rgb(166, 166, 166);
                 background-color: #ffffff;
             }
         }
