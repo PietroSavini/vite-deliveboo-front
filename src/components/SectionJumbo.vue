@@ -23,6 +23,7 @@ export default {
         height: 100%;
         object-fit: cover;
         z-index: -1;
+        filter: blur(2px);
     }
 
 }
