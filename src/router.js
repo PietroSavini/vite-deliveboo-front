@@ -27,6 +27,7 @@ const router = createRouter({
             path:"/restaurant/detail/:id",
             name:"restaurant-detail",
             component: RestaurantDetail,
+            props:true
         }
     ],
 });

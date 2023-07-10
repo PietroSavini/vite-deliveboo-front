@@ -5,32 +5,35 @@ import SectionJumbo from "../components/SectionJumbo.vue"
 
 export default {
     name: "RestaurantDetail",
-   
+    
     data() {
         return {
             store,
-            products:[]
+            products:[],
+            restaurant:[],
         }
     },
     mounted(){
         const id= this.$route.params.id;
         this.getProducts(id);
-
+        this.getRestaurantDetails(id);
     },
     methods:{
         getProducts(restaurantId){
             axios.get(`${this.store.ApiProductsUrl}`, {params:{restaurant_id:restaurantId}}).then((resp)=>{
                 this.products = resp.data.results;
             })
+        },
+        getRestaurantDetails(restaurantId){
+            axios.get(`${this.store.ApiRestaurantUrl}`, {params:{restaurant_id:restaurantId}}).then((resp)=>{
+                this.restaurant=resp.data.results
+            })
         }
+        
     },
     components:{
         SectionJumbo,
     },
-
-    props:{
-        restaurant:Object
-    }
    
 }
 </script>
@@ -43,9 +46,9 @@ export default {
         <div class="restaurant-details-col">
             <div class="restaurant-detail-card-container">
                 <div class="restaurant-detail-card ">
-                    <h2 class="d-inline-block me-2">Titolo Ristorante</h2>
-                    <p><i class="fa-solid fa-location-dot"></i>via del ristorante n.5</p>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro consequuntur quos, quidem officia animi omnis repellendus. Itaque, praesentium? Facere ut distinctio molestias itaque nobis labore.</p>
+                    <h2 class="d-inline-block me-2">{{ restaurant.name }}</h2>
+                    <!-- Altrimenti, puoi mostrare un messaggio di caricamento o una stringa predefinita -->
+                    <p><i class="fa-solid fa-location-dot"></i>{{restaurant.address}}</p>
                 </div>
             </div>
             <div class="restaurant-products">
@@ -99,9 +102,19 @@ export default {
 
 .container{
     display: flex;
+    @media screen and (max-width: 768px){
+        .restaurant-details-col{
+            width: 100%;
+        }
+        .cart-col{
+            display: none;
+        }
+    }
     .restaurant-details-col{
         width: 60%;
-        
+        @media screen and (max-width: 768px){
+            width: 100%;
+        }
         .restaurant-detail-card-container{
             position: relative;
             min-height: 110px;
