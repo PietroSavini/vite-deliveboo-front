@@ -2,7 +2,7 @@
 import { store } from "../store";
 
 export default {
-    name: "RestaurantCard.vue",
+    name: "RestaurantCard",
     props: {
         restaurant: Object
     },

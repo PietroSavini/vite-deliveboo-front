@@ -12,12 +12,14 @@ export default {
     return {
       store,
       restaurantsTypes: [],
+      randomRestaurants:[],
       currentPage: 0,
       lastPage: 0
     }
   },
   mounted() {
-    this.getTypes()
+    this.getTypes();
+    this.getFeaturedRestaurants();
   },
   methods: {
     getTypes() {
@@ -47,13 +49,13 @@ export default {
         type_id: this.store.types_id,
         page: page
       };
-      console.log(page);
+      
 
       axios.get(`${this.store.ApiRestaurantsUrl}`, { params }).then((resp) => {
         this.restaurantsTypes = resp.data.results.data;
         this.currentPage = resp.data.results.current_page;
         this.lastPage = resp.data.results.last_page;
-        console.log('corrente', this.currentPage, this.lastPage);
+        
       })
     },
     populateTypesArray(type_id) {
@@ -66,6 +68,12 @@ export default {
         typesArray.splice(index, 1);
         this.store.types_id = typesArray;
       }
+    },
+    getFeaturedRestaurants(){
+      axios.get(`${this.store.ApiRestaurantUrl}`,{params:{random:'true'}}).then((resp)=>{
+        this.randomRestaurants= resp.data.results;
+        console.log(this.randomRestaurants)
+      })
     }
   },
   components: {
@@ -86,7 +94,7 @@ export default {
   
 
   
-  <HomePageMain v-if="restaurantsTypes.length === 0" />
+  <HomePageMain :randomRestaurants="randomRestaurants" v-if="restaurantsTypes.length === 0" />
   <section class="featured" v-if="restaurantsTypes.length > 0">
     <div class="background-extencion"></div> 
     <div class="container">

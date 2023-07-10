@@ -30,7 +30,8 @@ export default {
         },
         getRestaurantDetails(restaurantId) {
             axios.get(`${this.store.ApiRestaurantUrl}`, { params: { restaurant_id: restaurantId } }).then((resp) => {
-                this.restaurant = resp.data.results
+                this.restaurant = resp.data.results[0]
+                console.log(this.restaurant)
             })
         },
 
@@ -152,14 +153,16 @@ export default {
                 <div class="cart-container">
                     <div class="cart">
                         <ul id="cart">
-                            <li class="mb-2" v-for="obj, index in cartProducts">
-                                {{ obj.name }},quantity{{ obj.quantity }} &euro;: {{ getPrice(obj) }} <button
-                                    @click="decrementProduct(index)">&minus;</button> <button
-                                    @click="removeObj(index)">&cross;</button>
+                            <li class="mb-2 cart-item" v-for="obj, index in cartProducts">
+                                <p>{{ obj.name }} x {{ obj.quantity }} : {{ getPrice(obj) }}&euro; </p>
+                                <div class="cart-actions">
+                                    <button class="cart-btn" @click="decrementProduct(index)">&minus;</button>
+                                    <button class="cart-btn" @click="removeObj(index)">&cross;</button>
+                                </div>
                             </li>
 
                         </ul>
-                        <div>totale:{{ getTotal() }}</div>
+                        <div>totale: {{ getTotal() }}&euro;</div>
                         <button @click="removeCart()">cancella</button>
                     </div>
                 </div>
@@ -325,6 +328,9 @@ export default {
                 border-radius: 20px;
                 box-shadow: 0px 10px 15px rgb(166, 166, 166);
                 background-color: #ffffff;
+                .cart-item{
+                    display: block;
+                }
             }
         }
     }
