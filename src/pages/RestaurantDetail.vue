@@ -9,12 +9,17 @@ export default {
     data() {
         return {
             store,
-            products:[]
+            products:[],
+            cartProducts:store.method.getArray(),
+            quantity:0,
+            esiste:false,
         }
     },
     mounted(){
         const id= this.$route.params.id;
         this.getProducts(id);
+    this.store.method.getArray();
+    console.log(this.store.method.getArray());
 
     },
     methods:{
@@ -22,7 +27,33 @@ export default {
             axios.get(`${this.store.ApiProductsUrl}`, {params:{restaurant_id:restaurantId}}).then((resp)=>{
                 this.products = resp.data.results;
             })
-        }
+        },
+          // funzione che crea oggetto e lo aggiunge all array e salva nel localstorage
+    newObj(object) {
+     
+      //  vedi se contiene gia oggetto
+      if (this.cartProducts.some(item => item.id === object.id)) {
+        const obj = {
+        id:object.id,
+        name: object.name,
+        quantity:this.quantity,  
+      }
+        this.esiste=true,
+        this.quantity++;
+        this.cartProducts.push(obj);
+        this.store.method.salva(this.cartProducts);
+        console.log(this.quantity);
+      } else {
+        this.cartProducts.push(obj);
+        this.quantity=1;
+        this.store.method.salva(this.cartProducts);
+      }
+      // salvo array aaggiornato nel local storage
+     
+
+
+    },
+    
     },
     components:{
         SectionJumbo,
@@ -76,6 +107,7 @@ export default {
                                 </div>
                                 <div>
                                     <span class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
+                                    <button type="" @click="newObj(product)">aggiungi</button>
                                 </div>
 
                             </div>
@@ -86,7 +118,14 @@ export default {
         </div>
         <div class="cart-col">
             <div class="cart-container">
-                <div class="cart"></div>
+                <div class="cart">
+                    <ul id="cart">
+                        <li v-for="obj in cartProducts">
+                         {{ obj.name }},quantity{{ obj.quantity }}
+                        </li>
+                        
+                    </ul>
+                </div>
             </div>
         </div>
       </div>
