@@ -64,7 +64,6 @@ export default {
     </section>
     <!-- / Jumbo Section -->
 
-
     <section v-if="!loading">
       <main class="text-center my-5 ms_main">
         <div class="container-fluid my-3">

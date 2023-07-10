@@ -1,8 +1,12 @@
 <script>
+import { store } from '../store';
+import axios from 'axios';
 export default {
     name: 'AppHeader',
     data() {
         return {
+            store,
+            queries: [],
             search: true,
             headerHeight: true,
             searchResults:'',
@@ -36,6 +40,16 @@ export default {
             }else{
                 setTimeout(this.show,1000);  
             }
+        },
+        searchQuery() {
+            axios.get(`${store.ApiRestaurantsUrl}`, {
+                params: {
+                    query: this.searchResults
+                }
+            }).then((resp) => {
+                console.log("ciao");
+                this.queries = resp.data.results.data;
+            });
         }
 
     }
@@ -58,7 +72,7 @@ export default {
                     <li @click="searchBar"><i class="fa-solid fa-magnifying-glass fa-rotate-90"></i></li>
                 </ul>
                 <div>
-                    <input v-model="searchResults" class="px-3" type="search" name="" id="" :class="search ? 'show' : 'hidden'">
+                    <input v-model="searchResults" class="px-3" type="search" name="" id="" :class="search ? 'show' : 'hidden'" @keyup.enter="searchQuery">
                 </div>
             </nav>
             <div class="user-interactions d-flex ">
