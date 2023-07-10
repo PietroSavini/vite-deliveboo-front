@@ -19,7 +19,7 @@ export default {
 
                 <!-- Previous -->
                 <li class="page-item" :class="{ 'disabled': currentPage === 1 }">
-                    <a @click.prevent="$emit('changePage', currentPage - 1)" class="page-link"><i
+                    <a @click.prevent="$emit('changePage', currentPage - 1)" class="page-link prev"><i
                             class="fa-solid fa-arrow-left"></i></a>
                 </li>
 
@@ -30,7 +30,7 @@ export default {
 
                 <!-- Next -->
                 <li class="page-item" :class="{ 'disabled': currentPage === lastPage }">
-                    <a @click.prevent="$emit('changePage', currentPage + 1)" class="page-link"><i
+                    <a @click.prevent="$emit('changePage', currentPage + 1)" class="page-link next"><i
                             class="fa-solid fa-arrow-right"></i></a>
                 </li>
             </ul>
@@ -43,15 +43,32 @@ export default {
 @use "../styles/style.scss";
 @use "../styles/partials/root.scss" as *;
 
-.page-link {
-    height: 40px;
-    width: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    border-radius: 10px;
-    margin: 0 10px;
-    color: $green_deli;
+.page-item{
+    border-radius: 50%;
+    &:first-child .page-link,
+    &:last-child .page-link{
+        border-radius: 50%;
+    }
+    &.disabled .page-link{
+        color: grey;
+    }
+    .page-link {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        margin: 0 10px;
+        color: $green_deli;
+        cursor: pointer;
+        background-color: rgba($color: #000000, $alpha: .7) ;
+        &:hover{
+            color: #FFA52F;
+            background-color: rgba($color: #000000, $alpha: 1.0);
+        }
+        
+    }
 }
 </style>
