@@ -55,137 +55,121 @@ export default {
 </script>
 
 <template>
+<SectionJumbo />
+<section class="restaurants">
   <div class="wrapper ">
+    <main v-if="!loading" class="text-center ms_main">
+      <div class="container-fluid">
 
-    <!-- Jumbo Section -->
-    <section class="jumbo-section">
-      <SectionJumbo :text="`Restaurants Page`" />
-      <img src="../assets/RestaurantImage.jpeg" alt="">
-    </section>
-    <!-- / Jumbo Section -->
-
-
-    <section v-if="!loading">
-      <main class="text-center my-5 ms_main">
-        <div class="container-fluid my-3">
-
-          <div class="text-end m-5">
-            <h5>Ristoranti trovati: <span class="text-primary">{{ allRestaurants }}</span></h5>
-          </div>
-          
-          <div class="row row-cols-5 g-3 justify-content-center flex-wrap">
-
-            <!-- Card Section -->
-            <div class="ms_col" v-for="restaurant in restaurants" :key="restaurant.name">
-              <RestaurantCard :restaurant="restaurant" />
-            </div>
-          </div>
-
-
-          <!-- Pagination -->
-          <Pagination :currentPage="currentPage" :lastPage="lastPage" @changePage="getRestaurants" />
+        <div class="text-end">
+          <h5>Ristoranti trovati: <span class="restaurant-num">{{ allRestaurants }}</span></h5>
         </div>
-      </main>
-    </section>
+        
+        <div class="row row-cols-5 g-3 justify-content-center flex-wrap">
 
+          <!-- Card Section -->
+          <div class="ms_col" v-for="restaurant in restaurants" :key="restaurant.name">
+            <RestaurantCard :restaurant="restaurant" />
+          </div>
+        </div>
+
+
+        <!-- Pagination -->
+        <Pagination :currentPage="currentPage" :lastPage="lastPage" @changePage="getRestaurants" />
+      </div>
+    </main>
+    
+  
     <section v-else>
       <span class="text-center ms_loader"></span>
     </section>
-
-
+  
+  
   </div>
+
+</section>
 </template>
 
 <style lang="scss" scoped>
-@use "../styles/style.scss";
 @use "../styles/partials/root.scss" as *;
-
-.wrapper {
-  background-color: #ffc14578;
-  height: 100%;
-  padding-bottom: 10px;
-
-  .jumbo-section {
-
-    width: 100%;
-
-    img {
-      width: 100%;
-      object-fit: cover;
-      filter: blur(5px);
-    }
-  }
-
-  .ms_main {
-
-    .row {
-      width: 100%;
-
-      .ms_col {
-        width: 400px;
+.restaurants{
+  background-color: $secondary_color;
+  min-height: 800px;
+  .wrapper {
+    
+    padding-bottom: 10px;
+  
+    .ms_main {
+  
+      .row {
+        width: 100%;
+  
+        .ms_col {
+          width: 400px;
+        }
       }
     }
-  }
-
-  .ms_loader {
-    width: 48px;
-    height: 48px;
-    display: block;
-    margin: 20px auto;
-    box-sizing: border-box;
-    position: relative;
-  }
-
-  .ms_loader::after {
-    content: '';
-    box-sizing: border-box;
-    width: 48px;
-    height: 48px;
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    border-radius: 50% 50% 0;
-    border: 15px solid $green_deli;
-    transform: rotate(45deg) translate(0, 0);
-    box-sizing: border-box;
-    animation: animMarker 0.4s ease-in-out infinite alternate;
-  }
-
-  .ms_loader::before {
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 150%;
-    width: 24px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.2);
-    animation: animShadow 0.4s ease-in-out infinite alternate;
-  }
-
-  @keyframes animMarker {
-    0% {
-      transform: rotate(45deg) translate(5px, 5px);
+  
+    .ms_loader {
+      width: 48px;
+      height: 48px;
+      display: block;
+      margin: 20px auto;
+      box-sizing: border-box;
+      position: relative;
     }
-
-    100% {
-      transform: rotate(45deg) translate(-5px, -5px);
+  
+    .ms_loader::after {
+      content: '';
+      box-sizing: border-box;
+      width: 48px;
+      height: 48px;
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      border-radius: 50% 50% 0;
+      border: 15px solid $green_deli;
+      transform: rotate(45deg) translate(0, 0);
+      box-sizing: border-box;
+      animation: animMarker 0.4s ease-in-out infinite alternate;
     }
+  
+    .ms_loader::before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      top: 150%;
+      width: 24px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.2);
+      animation: animShadow 0.4s ease-in-out infinite alternate;
+    }
+  
+    @keyframes animMarker {
+      0% {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+  
+      100% {
+        transform: rotate(45deg) translate(-5px, -5px);
+      }
+    }
+  
+    @keyframes animShadow {
+      0% {
+        transform: scale(0.5);
+      }
+  
+      100% {
+        transform: scale(1);
+      }
+    }
+  
+  
   }
-
-  @keyframes animShadow {
-    0% {
-      transform: scale(0.5);
-    }
-
-    100% {
-      transform: scale(1);
-    }
-  }
-
-
 }
 </style>
