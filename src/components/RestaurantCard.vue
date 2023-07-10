@@ -24,6 +24,7 @@ export default {
 </script>
 
 <template>
+<router-link :to="{name:'restaurant-detail', params:{id:restaurant.id, restaurant:restaurant}}" >
     <div class="ms_card">
         <div class="ms_card-img">
             <h1 class="restaurant-name">{{ restaurant.name }}</h1>
@@ -45,6 +46,7 @@ export default {
             </div>
         </div>
     </div>
+</router-link>
 </template>
 
 <style lang="scss" scoped>

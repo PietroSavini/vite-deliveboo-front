@@ -9,8 +9,10 @@ export const store = reactive({
     types_id:[],
 
     //Restaurant With Types Url
-    ApiRestaurantsUrl : 'http://localhost:8000/api/restaurants'
-    
+    ApiRestaurantsUrl : 'http://localhost:8000/api/restaurants',
+    ApiRestaurantUrl: 'http://localhost:8000/api/restaurant',
+    //getProducts from restaurant
+    ApiProductsUrl: 'http://localhost:8000/api/restaurants/products',
 })
 
 
