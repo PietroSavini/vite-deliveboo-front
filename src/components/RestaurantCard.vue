@@ -25,7 +25,7 @@ export default {
 
 <template>
 <router-link :to="{name:'restaurant-detail', params:{id:restaurant.id, restaurant:restaurant}}" >
-    <div class="ms_card">
+    <div class="ms_card d-flex">
         <div class="ms_card-img">
             <h1 class="restaurant-name">{{ restaurant.name }}</h1>
             <div class="restaurant-category">
@@ -54,29 +54,23 @@ export default {
 @use "../styles/partials/root.scss" as *;
 
 .ms_card {
-    width: calc(100% - 10px);
-    height: 400px;
-    border: 1px solid black;
+    width: 100%;
+    flex-direction: column;
+    height: 100%;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     background-color: rgba(0, 0, 0, 0.200);
     cursor: pointer;
+    transition: 200ms;
 
-    &:hover {
-        transition: 0.3s ease-in-out;
-        box-shadow: 0 2px 4px coral;
-        border: 0;
-    }
-
-    & img:hover {
+    &:hover img {
         transform: scale(1.09);
+        
     }
-
     .ms_card-img {
         position: relative;
-        width: 100%;
-        height: 80%;
+        height: 70%;
         border-radius: 10px 10px 0 0;
         transition: 0.3s ease-in-out;
         overflow: hidden;
@@ -126,7 +120,7 @@ export default {
     }
 
     .ms_card-body {
-        height: 20%;
+        height: 30%;
         padding: 10px;
         background-color: rgba(255, 255, 255, 0.627);
 
