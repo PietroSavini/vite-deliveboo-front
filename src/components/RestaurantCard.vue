@@ -32,7 +32,7 @@ export default {
             </div>
             <img :src="restaurant.image" class="" alt="Restaurant Image">
         </div>
-        
+
         <div class="ms_card-body d-flex justify-content-between align-items-center">
             <div>
                 <p class="text-start">{{ restaurant.address }}</p>
@@ -67,8 +67,8 @@ export default {
     }
 
     & img:hover {
-            transform: scale(1.09);
-        }
+        transform: scale(1.09);
+    }
 
     .ms_card-img {
         position: relative;
@@ -106,14 +106,17 @@ export default {
             transform: translate(-50%, -50%);
             position: absolute;
             left: 50%;
-            padding: 1px 5px;
-            border-radius: 5px;
-            border: 1px solid black;
-            background-color: $primary_color;
             text-align: center;
+            display: flex;
 
             p {
+                border: 1px solid black;
+                background-color: $primary_color;
                 font-weight: bold;
+                border: 1px solid black;
+                border-radius: 5px;
+                padding: 1px 5px;
+                margin: 2px;
             }
         }
     }
