@@ -109,6 +109,7 @@ export default {
             left: 50%;
             text-align: center;
             display: flex;
+            z-index: 1;
 
             p {
                 border: 1px solid black;
