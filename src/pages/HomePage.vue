@@ -4,10 +4,14 @@ import HomePageJumbo from "../components/HomePageJumbo.vue";
 import HomePageMain from "../components/HomePageMain.vue";
 import RestaurantCard from "../components/RestaurantCard.vue";
 import Pagination from "../components/Pagination.vue";
+import AppHeader from "../components/AppHeader.vue";
 import axios from "axios";
 
 export default {
   name: "HomePage",
+  props: {
+    AppHeader
+  },
   data() {
     return {
       store,
