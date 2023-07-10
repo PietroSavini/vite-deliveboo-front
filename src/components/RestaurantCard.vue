@@ -25,8 +25,9 @@ export default {
 
 <template>
 <router-link :to="{name:'restaurant-detail', params:{id:restaurant.id, restaurant:restaurant}}" >
-    <div class="ms_card">
+    <div class="ms_card d-flex">
         <div class="ms_card-img">
+            <div class="overlay"></div>
             <h1 class="restaurant-name">{{ restaurant.name }}</h1>
             <div class="restaurant-category">
                 <p v-for="name in restaurant.types">{{ name.name }}</p>
@@ -54,54 +55,54 @@ export default {
 @use "../styles/partials/root.scss" as *;
 
 .ms_card {
-    width: calc(100% - 10px);
-    height: 400px;
-    border: 1px solid black;
+    width: 100%;
+    flex-direction: column;
+    height: 100%;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     background-color: rgba(0, 0, 0, 0.200);
     cursor: pointer;
+    transition: 200ms;
 
-    &:hover {
-        transition: 0.3s ease-in-out;
-        box-shadow: 0 2px 4px coral;
-        border: 0;
-    }
-
-    & img:hover {
+    &:hover img {
         transform: scale(1.09);
+        
     }
-
     .ms_card-img {
         position: relative;
-        width: 100%;
-        height: 80%;
+        height: 70%;
         border-radius: 10px 10px 0 0;
         transition: 0.3s ease-in-out;
         overflow: hidden;
-
-        img {
+        .overlay{
             position: absolute;
-            top: 0;
             left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 2;
+            background-color: rgba($color: #232323, $alpha: .6);
+        }
+        img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: .6;
-            transition: .1s;
+            opacity: 1;
+            transition: .3s;
         }
 
         .restaurant-name {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 10px;
+            left: 0;
+            right: 0;
             color: white;
             text-shadow: 15px 15px 15px rgba(0, 0, 0, 0.5);
-            transform: translate(-50%, -50%) rotateX(10deg);
+            transform: rotateX(10deg);
             font-weight: bold;
             text-align: center;
-            z-index: 1;
+            z-index: 4;
         }
 
         .restaurant-category {
@@ -111,7 +112,7 @@ export default {
             left: 50%;
             text-align: center;
             display: flex;
-            z-index: 1;
+            z-index: 4;
 
             p {
                 border: 1px solid black;
@@ -126,7 +127,7 @@ export default {
     }
 
     .ms_card-body {
-        height: 20%;
+        height: 30%;
         padding: 10px;
         background-color: rgba(255, 255, 255, 0.627);
 

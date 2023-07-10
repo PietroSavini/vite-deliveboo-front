@@ -55,137 +55,158 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper ">
-
-    <!-- Jumbo Section -->
-    <section class="jumbo-section">
-      <SectionJumbo :text="`Restaurants Page`" />
-      <img src="../assets/RestaurantImage.jpeg" alt="">
-    </section>
-    <!-- / Jumbo Section -->
-
-
-    <section v-if="!loading">
-      <main class="text-center my-5 ms_main">
-        <div class="container-fluid my-3">
-
-          <div class="text-end m-5">
-            <h5>Ristoranti trovati: <span class="text-primary">{{ allRestaurants }}</span></h5>
+  <!--   -->
+  <!-- -->
+  <!--  -->
+  <!-- <section v-else>
+      
+    </section> -->
+  <SectionJumbo />
+  <section class="restaurants">
+    <div v-if="!loading">
+      <div class="background-extencion"></div> 
+      <div class="container">
+          <div class="section-title">
+              <div class="img-absolute">
+                  <img src="https://res.cloudinary.com/glovoapp/f_auto,h_48,w_48,q_auto:best/CX/new_backend_driven_home_screen/newUserRecommendationsWidgetIconLight" alt="">
+              </div>   
+              <h5>Tutti i locali</h5>
           </div>
-          
-          <div class="row row-cols-5 g-3 justify-content-center flex-wrap">
-
-            <!-- Card Section -->
-            <div class="ms_col" v-for="restaurant in restaurants" :key="restaurant.name">
-              <RestaurantCard :restaurant="restaurant" />
-            </div>
+          <div class="row">
+              <div v-for="restaurant in restaurants" class="ms_col"><RestaurantCard :restaurant="restaurant" /> </div>
           </div>
-
-
-          <!-- Pagination -->
           <Pagination :currentPage="currentPage" :lastPage="lastPage" @changePage="getRestaurants" />
-        </div>
-      </main>
-    </section>
-
-    <section v-else>
+      </div>
+    </div>
+    <div v-else  class="restaurants" >
+      <div class="background-extencion"></div> 
       <span class="text-center ms_loader"></span>
-    </section>
-
-
-  </div>
+    </div>
+    
+</section>
+  
 </template>
 
 <style lang="scss" scoped>
-@use "../styles/style.scss";
 @use "../styles/partials/root.scss" as *;
 
-.wrapper {
-  background-color: #ffc14578;
-  height: 100%;
-  padding-bottom: 10px;
-
-  .jumbo-section {
-
-    width: 100%;
-
-    img {
-      width: 100%;
-      object-fit: cover;
-      filter: blur(5px);
-    }
-  }
-
-  .ms_main {
-
-    .row {
-      width: 100%;
-
-      .ms_col {
-        width: 400px;
-      }
-    }
-  }
-
-  .ms_loader {
-    width: 48px;
-    height: 48px;
-    display: block;
-    margin: 20px auto;
-    box-sizing: border-box;
+.restaurants{
+    background-color: $secondary_color;
+    padding:1.5rem 0;
     position: relative;
-  }
-
-  .ms_loader::after {
-    content: '';
-    box-sizing: border-box;
-    width: 48px;
-    height: 48px;
-    left: 0;
-    bottom: 0;
-    position: absolute;
-    border-radius: 50% 50% 0;
-    border: 15px solid $green_deli;
-    transform: rotate(45deg) translate(0, 0);
-    box-sizing: border-box;
-    animation: animMarker 0.4s ease-in-out infinite alternate;
-  }
-
-  .ms_loader::before {
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 150%;
-    width: 24px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.2);
-    animation: animShadow 0.4s ease-in-out infinite alternate;
-  }
-
-  @keyframes animMarker {
-    0% {
-      transform: rotate(45deg) translate(5px, 5px);
+    min-height: 700px;
+    .background-extencion{
+        
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: -25px;
+        height: 50px;
+        border-radius: 100%;
+        z-index: 1;
+        background-color: $secondary_color ;
     }
-
-    100% {
-      transform: rotate(45deg) translate(-5px, -5px);
+    .container{
+        position: relative;
+        z-index: 3;
+        
+        .section-title{
+            color: black;
+            @media screen and (max-width : 768px) {
+                padding-left: 37%;
+            }
+            
+            .img-absolute{
+                position: relative;
+            }
+            
+            img{
+                position: absolute;
+                z-index: 0;
+                top: -15px;
+                left: -50px;
+                transform: rotate(25deg);
+            }
+            
+            h5{
+                position: relative;
+                z-index: 1;
+                font-weight: bold;
+            }
+        }
+        .row{
+            
+            flex-wrap: wrap;
+            justify-content: center;
+            
+            .ms_col{
+               
+                width: 400px;
+                height: 220px;
+                padding: 5px 5px;
+            }
+        }
     }
-  }
-
-  @keyframes animShadow {
-    0% {
-      transform: scale(0.5);
-    }
-
-    100% {
-      transform: scale(1);
-    }
-  }
-
-
 }
+
+//loader Css-------------------------------------------------------------------
+.ms_loader {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 20px auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.ms_loader::after {
+  content: '';
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  border-radius: 50% 50% 0;
+  border: 15px solid $green_deli;
+  transform: rotate(45deg) translate(0, 0);
+  box-sizing: border-box;
+  animation: animMarker 0.4s ease-in-out infinite alternate;
+}
+
+.ms_loader::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 150%;
+  width: 24px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  animation: animShadow 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes animMarker {
+  0% {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  100% {
+    transform: rotate(45deg) translate(-5px, -5px);
+  }
+}
+
+@keyframes animShadow {
+  0% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 </style>

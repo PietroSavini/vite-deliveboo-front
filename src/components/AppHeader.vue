@@ -45,6 +45,7 @@ export default {
 
 <template>
     <header >
+        <div class="overlay"></div>
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
             <div class="deliveboo-logo d-flex align-items-center">
                 <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">
@@ -85,7 +86,17 @@ header {
     right: 0;
     z-index: 999;
     color: #ffff;
-
+    
+    .overlay{
+        position: absolute;
+        z-index: -1;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba($color: #2e2e2e, $alpha: .4);
+        filter: blur(10px);
+    }
     .container {
         margin: 0 auto;
         width: 80%;
