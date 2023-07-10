@@ -60,20 +60,19 @@ export default {
                 </div>
                 <div class="product-list">
                     <!-- CREAZIONE COMPONENTE? -->
-                    <div class="product-card">
+                    <div v-for="product in products" class="product-card mb-3">
                         <div class="product-img">
-                            <img src="" alt="">
+                            <img :src="product.image" alt="">
                         </div>
                         <div class="product-content d-flex">
                             <div class="product-description">
-                                <h6>Titolo piatto</h6>
-                                <p class="product-detail">
-                                    polpette di gamberi in umido fatte bene
-                                </p>
+                                <h6>{{ product.name }}</h6>
+                                <p v-if="product.description" class="product-detail">{{ product.description }}</p>
+                                <p v-else class="product-detail">nessuna descrizione</p>
                             </div>
                             <div class="product-price d-flex align-items-center justify-content-between">
                                 <div>
-                                    <span>5.00</span><span>€</span>
+                                    <span>{{product.price}}</span><span>€</span>
                                 </div>
                                 <div>
                                     <span class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
@@ -100,12 +99,9 @@ export default {
 
 .container{
     display: flex;
-    
-    height: 1500px;
-   
     .restaurant-details-col{
         width: 60%;
-        border: 1px solid black;
+        
         .restaurant-detail-card-container{
             position: relative;
             min-height: 110px;
@@ -139,11 +135,10 @@ export default {
             }
         }
         .restaurant-products{
-            border: 1px solid rgb(0, 0, 0);
+            
             display: flex;
             height: 100%;
             .product-categories{
-                border: 1px solid red;
                 width: 20%;
                 padding: 0.5rem ;
                 .categories{
@@ -152,9 +147,7 @@ export default {
                 }
             }
             .product-list{
-                border: 1px solid green;
                 width: 80%;
-                overflow-y: auto;
                 padding: .5rem .5rem;
                 .product-card{
                     border: 1px solid grey;
@@ -163,23 +156,20 @@ export default {
                     overflow: hidden;
                     box-shadow: 0px 10px 15px rgb(166, 166, 166);
                     .product-img{
-                        border: 1px solid red;
                         width: 30%;
                         
                         img{
                             object-fit: cover;
-                            display: inline-block;
+                            height: 100%;
                         }
                     }
                     .product-content{
                         width: 70%;
-                        border: 1px solid green;
                         min-height: 100px;
                         padding: .5rem .5rem;
                         flex-direction: column;
                         justify-content: space-between;
                         .product-description{
-                            border: 1px solid yellow;
                             height: 70%;
                             p.product-detail{
                                 font-size: .75rem;
@@ -188,7 +178,19 @@ export default {
                         }
                         .product-price{
                             height: 30%;
-                            border: 1px solid red;
+                            .buy{
+                                display: inline-block;
+                                padding: 0 1rem;
+                                line-height: 30px;
+                                height: 30px;
+                                background-color: $primary_color;
+                                border-radius: 50px;
+                                cursor: pointer;
+                                transition: 200ms;
+                                &:active{
+                                    transform: scale(.8);
+                                }
+                            }
                         }
                     }
                 }
@@ -196,7 +198,6 @@ export default {
         }
     }
     .cart-col{
-        border: 1px solid black;
         width: 40%;
         padding: 0 .5rem;
         position: relative;
