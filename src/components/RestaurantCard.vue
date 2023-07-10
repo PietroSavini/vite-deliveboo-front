@@ -59,6 +59,7 @@ export default {
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     background-color: rgba(0, 0, 0, 0.200);
+    cursor: pointer;
 
     &:hover {
         transition: 0.3s ease-in-out;
