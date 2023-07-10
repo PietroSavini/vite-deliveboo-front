@@ -28,9 +28,7 @@ export const store = reactive({
          delete(){
           localStorage.clear();
          },
-         remove(obj){
-            localStorage.removeItem('cart',JSON.stringify(obj));
-         }
+        
      }
 })
 

@@ -10,13 +10,13 @@ export default {
         return {
             store,
             products:[],
-            cartProducts:store.method.getArray(),
+            cartProducts:[]
         }
     },
     mounted(){
         const id= this.$route.params.id;
         this.getProducts(id);
-    this.store.method.getArray();
+    this.cartProducts=this.store.method.getArray();
     console.log(this.store.method.getArray());
 
     },
@@ -31,10 +31,12 @@ export default {
         const obj = {
         id:object.id,
         name: object.name,
-        quantity:0, 
+        quantity:0,
+        price:object.price 
       }
       //  vedi se contiene gia oggetto
       if (this.cartProducts.some(item => item.id === object.id)) {
+    
         const oggetto = this.cartProducts.find(item => item.id === object.id);
         oggetto.quantity++
       } else {
@@ -46,6 +48,37 @@ export default {
       this.store.method.salva(this.cartProducts);
 
 
+    },
+    decrementProduct(index){
+        const product=this.cartProducts[index];
+        if(product.quantity > 1){
+            product.quantity--;
+        }else{
+            this.removeObj(index);
+        }
+        this.store.method.salva(this.cartProducts);
+
+    },
+    removeObj(index){
+       
+        if (index >= 0 && index < this.cartProducts.length) {
+    this.cartProducts.splice(index, 1);
+    this.store.method.salva(this.cartProducts);
+  }
+    },
+    removeCart(){
+        this.store.method.delete();
+        this.cartProducts=[];
+    },
+    getPrice(obj){
+        return parseFloat(obj.price) *obj.quantity
+    },
+    getTotal(){
+        let total=0;
+        this.cartProducts.forEach(product => {
+            total += parseFloat(product.price) * product.quantity
+        })
+        return total
     },
     
     },
@@ -85,7 +118,7 @@ export default {
                 </div>
                 <div class="product-list">
                     <!-- CREAZIONE COMPONENTE? -->
-                    <div v-for="product in products" class="product-card mb-3">
+                    <div v-for="product,index in products" class="product-card mb-3">
                         <div class="product-img">
                             <img :src="product.image" alt="">
                         </div>
@@ -101,7 +134,7 @@ export default {
                                 </div>
                                 <div>
                                     <span class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
-                                    <button type="" @click="newObj(product)">aggiungi</button>
+                                    <button type="" @click="newObj(product,index)">aggiungi</button>
                                 </div>
 
                             </div>
@@ -114,12 +147,13 @@ export default {
             <div class="cart-container">
                 <div class="cart">
                     <ul id="cart">
-                        <li class="mb-2" v-for="obj in cartProducts">
-                         {{ obj.name }},quantity{{ obj.quantity }} <button  @click="store.method.remove(obj)">&minus;</button>
+                        <li class="mb-2" v-for="obj,index in cartProducts">
+                         {{ obj.name }},quantity{{ obj.quantity }} &euro;: {{ getPrice(obj) }} <button  @click="decrementProduct(index)">&minus;</button> <button  @click="removeObj(index)">&cross;</button>
                         </li>
                         
                     </ul>
-                    <button @click="store.method.delete()">cancella</button>
+                    <div >totale:{{getTotal()}}</div>
+                    <button @click="removeCart()">cancella</button>
                 </div>
             </div>
            
