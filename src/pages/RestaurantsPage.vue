@@ -132,16 +132,15 @@ export default {
                 position: relative;
                 z-index: 1;
                 font-weight: bold;
-                //text-shadow: 1px 1px 2px rgb(0, 0, 0);
             }
         }
         .row{
-            border: 1px solid black;
+            
             flex-wrap: wrap;
             justify-content: center;
             
             .ms_col{
-                border: 1px solid red;
+               
                 width: 400px;
                 height: 220px;
                 padding: 5px 5px;
