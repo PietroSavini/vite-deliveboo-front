@@ -13,6 +13,24 @@ export const store = reactive({
     ApiRestaurantUrl: 'http://localhost:8000/api/restaurant',
     //getProducts from restaurant
     ApiProductsUrl: 'http://localhost:8000/api/restaurants/products',
+    method:{
+        getArray(){
+            const cart=document.getElementById('cart');
+        return JSON.parse(localStorage.getItem('cart')) || [];
+            
+            
+         },
+         // salva prodotti
+         salva(obj){
+         return localStorage.setItem('cart',JSON.stringify(obj));
+     
+         },
+         // cancella carrello
+         delete(){
+          localStorage.clear();
+         },
+        
+     }
 })
 
 
