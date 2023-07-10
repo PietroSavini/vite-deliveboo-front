@@ -12,7 +12,7 @@ export default {
     return {
       store,
       restaurantsTypes: [],
-      pageNumber: 1,
+      currentPage: 0,
       lastPage: 0
     }
   },
@@ -32,14 +32,19 @@ export default {
         params.type_id = this.store.types_id
         axios.get(`${this.store.ApiRestaurantsUrl}`, { params }).then((resp) => {
           this.restaurantsTypes = resp.data.results.data;
-          this.pageNumber = resp.data.results.current_page;
+          this.currentPage = resp.data.results.current_page;
           this.lastPage = resp.data.results.last_page;
         })
+      } else {
+        this.restaurantsTypes = [];
+        this.currentPage = 0;
+        this.lastPage = 0;
 
       }
     },
     getRestaurantsPage(page) {
       const params = {
+        type_id: this.store.types_id,
         page: page
       };
       console.log(page);
@@ -80,7 +85,7 @@ export default {
   <div class="ms_col" v-for="restaurant in restaurantsTypes" :key="restaurant.name">
     <RestaurantCard :restaurant="restaurant" />
   </div>
-  <Pagination v-if="restaurantsTypes.length > 0" class="mb-4" :currentPage="pageNumber" :lastPage="lastPage"
+  <Pagination v-if="restaurantsTypes.length > 0" class="mb-4" :currentPage="currentPage" :lastPage="lastPage"
     @changePage="getRestaurantsPage" />
 
   <HomePageMain class="mt-4" />
