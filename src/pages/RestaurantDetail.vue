@@ -11,8 +11,6 @@ export default {
             store,
             products:[],
             cartProducts:store.method.getArray(),
-            quantity:0,
-            esiste:false,
         }
     },
     mounted(){
@@ -30,26 +28,22 @@ export default {
         },
           // funzione che crea oggetto e lo aggiunge all array e salva nel localstorage
     newObj(object) {
-     
-      //  vedi se contiene gia oggetto
-      if (this.cartProducts.some(item => item.id === object.id)) {
         const obj = {
         id:object.id,
         name: object.name,
-        quantity:this.quantity,  
+        quantity:0, 
       }
-        this.esiste=true,
-        this.quantity++;
-        this.cartProducts.push(obj);
-        this.store.method.salva(this.cartProducts);
-        console.log(this.quantity);
+      //  vedi se contiene gia oggetto
+      if (this.cartProducts.some(item => item.id === object.id)) {
+        const oggetto = this.cartProducts.find(item => item.id === object.id);
+        oggetto.quantity++
       } else {
         this.cartProducts.push(obj);
-        this.quantity=1;
-        this.store.method.salva(this.cartProducts);
+        obj.quantity=1;
+      
       }
       // salvo array aaggiornato nel local storage
-     
+      this.store.method.salva(this.cartProducts);
 
 
     },
@@ -120,13 +114,15 @@ export default {
             <div class="cart-container">
                 <div class="cart">
                     <ul id="cart">
-                        <li v-for="obj in cartProducts">
-                         {{ obj.name }},quantity{{ obj.quantity }}
+                        <li class="mb-2" v-for="obj in cartProducts">
+                         {{ obj.name }},quantity{{ obj.quantity }} <button  @click="store.method.remove(obj)">&minus;</button>
                         </li>
                         
                     </ul>
+                    <button @click="store.method.delete()">cancella</button>
                 </div>
             </div>
+           
         </div>
       </div>
   </section>

@@ -27,6 +27,9 @@ export const store = reactive({
          // cancella carrello
          delete(){
           localStorage.clear();
+         },
+         remove(obj){
+            localStorage.removeItem('cart',JSON.stringify(obj));
          }
      }
 })
