@@ -20,6 +20,7 @@ export default {
       lastPage: null,
       loading: false,
       types: [],
+      allRestaurants: 0
 
     };
   },
@@ -62,9 +63,18 @@ export default {
     </section>
     <!-- / Jumbo Section -->
 
+
     <section v-if="!loading">
+
+
+
       <main class="text-center my-5 ms_main">
         <div class="container-fluid my-3">
+
+          <div class="text-end m-5">
+            <h5>Ristoranti trovati: <span class="text-primary">{{ allRestaurants }}</span></h5>
+          </div>
+          
           <div class="row row-cols-5 g-3 justify-content-center flex-wrap">
 
             <!-- Card Section -->
