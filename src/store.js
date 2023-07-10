@@ -17,7 +17,7 @@ export const store = reactive({
     method:{
         getArray(){
             const cart=document.getElementById('cart');
-        return JSON.parse(localStorage.getItem('cart')) || [];
+            return JSON.parse(localStorage.getItem('cart')) || [];
             
             
          },

@@ -138,9 +138,7 @@ export default {
                                         <span>{{ product.price }}</span><span>€</span>
                                     </div>
                                     <div>
-                                        <span class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping"
-                                                style="color: #000000;"></i></span>
-                                        <button type="" @click="newObj(product, index)">aggiungi</button>
+                                        <span @click="newObj(product, index)" class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
                                     </div>
 
                                 </div>
@@ -152,18 +150,28 @@ export default {
             <div class="cart-col">
                 <div class="cart-container">
                     <div class="cart">
-                        <ul id="cart">
-                            <li class="mb-2 cart-item" v-for="obj, index in cartProducts">
-                                <p>{{ obj.name }} x {{ obj.quantity }} : {{ getPrice(obj) }}&euro; </p>
-                                <div class="cart-actions">
-                                    <button class="cart-btn" @click="decrementProduct(index)">&minus;</button>
-                                    <button class="cart-btn" @click="removeObj(index)">&cross;</button>
-                                </div>
-                            </li>
-
-                        </ul>
-                        <div>totale: {{ getTotal() }}&euro;</div>
-                        <button @click="removeCart()">cancella</button>
+                        <div v-if="cartProducts.length>0">
+                            <ul  id="cart">
+                                <li class="mb-2 cart-item" v-for="obj, index in cartProducts">
+                                    <p>{{ obj.name }} x {{ obj.quantity }} : {{ getPrice(obj) }}&euro; </p>
+                                    <div class="cart-actions">
+                                        <button class="cart-btn minus " @click="decrementProduct(index)">&minus;</button>
+                                        <button class="cart-btn" @click="newObj(obj, index)">&plus;</button>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                            <div>totale: {{ getTotal() }}&euro;</div>
+                            <div class="final-actions d-flex justify-content-center">
+                                <span class="btn btn-danger ms_btn" @click="removeCart()">svuota carrello</span>
+                                <span class="btn btn-success ms_btn">checkout</span>
+                            </div>
+                        </div>
+                        <div v-else class="empty-cart">
+                            <h2 class="text-center">Il tuo carrello</h2>
+                            <img src="../assets/empty-cart.png" alt="">
+                            <p class="text-center">il tuo carrello è attulamente vuoto, quando aggiungerai dei prodotti li visualizzerai qui</p>
+                        </div>
                     </div>
                 </div>
 
@@ -328,9 +336,52 @@ export default {
                 border-radius: 20px;
                 box-shadow: 0px 10px 15px rgb(166, 166, 166);
                 background-color: #ffffff;
-                .cart-item{
-                    display: block;
+                .ms_btn{
+                    width: 130px;
+                    border-radius: 40px;
+                    font-size: .8rem;
+                    margin: 0 5px;
+
                 }
+                .final-actions{
+                    margin: .5rem auto;
+                }
+                #cart {
+                    
+                    .cart-item{
+                        display: flex;
+                        width: 100%;
+                        padding-bottom: 1rem;
+                        border-bottom: 1px solid rgb(218, 218, 218);
+                        
+                        p{
+                            width: 70%;
+                        }
+                        .cart-actions{
+                            width: 30%;
+                            .cart-btn{
+
+                                cursor: pointer;
+                                margin: 0 2px;
+                                height: 25px;
+                                width: 25px;
+                                border: none;
+                                background-color: lightgreen;
+                                display: inline-block;
+                                border-radius: 100%;
+                                &.minus{
+                                    background-color: lightcoral;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                .empty-cart{
+                        h2{
+                            font-weight: bold;
+                        }
+                    }
             }
         }
     }
