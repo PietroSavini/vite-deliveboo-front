@@ -44,12 +44,45 @@ export default {
             <div class="restaurant-detail-card-container">
                 <div class="restaurant-detail-card ">
                     <h2 class="d-inline-block me-2">Titolo Ristorante</h2>
-                    <span><i class="fa-solid fa-location-dot"></i>via del ristorante n.5</span>
+                    <p><i class="fa-solid fa-location-dot"></i>via del ristorante n.5</p>
                     <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro consequuntur quos, quidem officia animi omnis repellendus. Itaque, praesentium? Facere ut distinctio molestias itaque nobis labore.</p>
                 </div>
             </div>
             <div class="restaurant-products">
-                
+                <div class="product-categories">
+                    <div class="categories">
+                        <!-- DA INSERIRE LE CATEGORIE DEI PRODOTTI CHE HA IL RISTORANTE -->
+                        <p class="text-center">categorie</p>
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-list">
+                    <!-- CREAZIONE COMPONENTE? -->
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="product-content d-flex">
+                            <div class="product-description">
+                                <h6>Titolo piatto</h6>
+                                <p class="product-detail">
+                                    polpette di gamberi in umido fatte bene
+                                </p>
+                            </div>
+                            <div class="product-price d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span>5.00</span><span>€</span>
+                                </div>
+                                <div>
+                                    <span class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="cart-col">
@@ -64,20 +97,18 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/root.scss" as *;
 
-section{
-    background-color: $secondary_color;
-}
+
 .container{
     display: flex;
     
     height: 1500px;
    
     .restaurant-details-col{
-        width: 75%;
+        width: 60%;
         border: 1px solid black;
         .restaurant-detail-card-container{
             position: relative;
-            height: 110px;
+            min-height: 110px;
             .restaurant-detail-card{
                 
                 position: absolute;
@@ -88,14 +119,14 @@ section{
                 background-color: #ffffff;
                 left: 0px;
                 right: 0;
-                bottom: 10px;
+                
                 
                 h2{
                     margin: 0;
                     font-weight: 700;
                     font-size: 3rem;
                 }
-                span{
+                p{
                     margin: 0;
                     font-size: .8rem;
                     color: #797979;
@@ -108,12 +139,65 @@ section{
             }
         }
         .restaurant-products{
-                border: 1px solid rgb(0, 0, 0);
+            border: 1px solid rgb(0, 0, 0);
+            display: flex;
+            height: 100%;
+            .product-categories{
+                border: 1px solid red;
+                width: 20%;
+                padding: 0.5rem ;
+                .categories{
+                    position: sticky;
+                    top: 10px;
+                }
             }
+            .product-list{
+                border: 1px solid green;
+                width: 80%;
+                overflow-y: auto;
+                padding: .5rem .5rem;
+                .product-card{
+                    border: 1px solid grey;
+                    border-radius: 10px;
+                    display: flex;
+                    overflow: hidden;
+                    box-shadow: 0px 10px 15px rgb(166, 166, 166);
+                    .product-img{
+                        border: 1px solid red;
+                        width: 30%;
+                        
+                        img{
+                            object-fit: cover;
+                            display: inline-block;
+                        }
+                    }
+                    .product-content{
+                        width: 70%;
+                        border: 1px solid green;
+                        min-height: 100px;
+                        padding: .5rem .5rem;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        .product-description{
+                            border: 1px solid yellow;
+                            height: 70%;
+                            p.product-detail{
+                                font-size: .75rem;
+                                color: #797979;  
+                            }
+                        }
+                        .product-price{
+                            height: 30%;
+                            border: 1px solid red;
+                        }
+                    }
+                }
+            }
+        }
     }
     .cart-col{
         border: 1px solid black;
-        width: 25%;
+        width: 40%;
         padding: 0 .5rem;
         position: relative;
         .cart-container{
