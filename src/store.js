@@ -10,6 +10,7 @@ export const store = reactive({
 
     //Restaurant With Types Url
     ApiRestaurantsUrl : 'http://localhost:8000/api/restaurants',
+    //Single restaurant used for details in RestaurantDetailPage.vue
     ApiRestaurantUrl: 'http://localhost:8000/api/restaurant',
     //getProducts from restaurant
     ApiProductsUrl: 'http://localhost:8000/api/restaurants/products',
