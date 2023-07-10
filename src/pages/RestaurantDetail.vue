@@ -170,7 +170,7 @@ export default {
                         <div v-else class="empty-cart">
                             <h2 class="text-center">Il tuo carrello</h2>
                             <img src="../assets/empty-cart.png" alt="">
-                            <p class="text-center">il tuo carrello è attulamente vuoto, quando aggiungerai dei prodotti li visualizzerai qui</p>
+                            <p class="text-center">Non hai ancora aggiunto alcun prodotto. Quando lo farai, compariranno qui!</p>
                         </div>
                     </div>
                 </div>
@@ -381,6 +381,7 @@ export default {
                         h2{
                             font-weight: bold;
                         }
+                       
                     }
             }
         }
