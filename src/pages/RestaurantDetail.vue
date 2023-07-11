@@ -164,7 +164,7 @@ export default {
                             <div>totale: {{ getTotal() }}&euro;</div>
                             <div class="final-actions d-flex justify-content-center">
                                 <span class="btn btn-danger ms_btn" @click="removeCart()">svuota carrello</span>
-                                <span class="btn btn-success ms_btn">checkout</span>
+                                <span class="btn btn-success ms_btn"><router-link :to="{name:'payment'}">checkout</router-link></span>
                             </div>
                         </div>
                         <div v-else class="empty-cart">

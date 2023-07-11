@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage.vue";
 import RestaurantsPage from "./pages/RestaurantsPage.vue";
 import AboutUsPage from "./pages/AboutUsPage.vue";
 import RestaurantDetail from "./pages/RestaurantDetail.vue";
+import PaymentPage from "./pages/PaymentPage.vue"
 
 
 const router = createRouter({
@@ -28,6 +29,12 @@ const router = createRouter({
             name:"restaurant-detail",
             component: RestaurantDetail,
             props:true
+        },
+        {
+            path:"/payment",
+            name:"payment",
+            component: PaymentPage,
+           
         }
     ],
 });
