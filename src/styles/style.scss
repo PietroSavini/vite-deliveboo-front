@@ -5,6 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 //common 
+*{
+  user-select: none;
+}
 body{
   font-family: 'Poppins', sans-serif;
   // background-color: $primary_color;
