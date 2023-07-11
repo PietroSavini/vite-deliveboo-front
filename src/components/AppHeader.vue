@@ -63,14 +63,9 @@ export default {
 </script>
 
 <template>
-<<<<<<< HEAD
     <header >
         <div class="overlay"></div>
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
-=======
-    <header>
-        <div :class="headerHeight ? '' : 'header-extends'" class="container d-flex py-2">
->>>>>>> SearchEngine-started
             <div class="deliveboo-logo d-flex align-items-center">
                 <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">
             </div>
