@@ -1,11 +1,16 @@
 <script>
+import { store } from '../store';
+import axios from 'axios';
 export default {
     name: 'AppHeader',
     data() {
         return {
+            store,
+            queries: [],
+            searchInterval: null,
             search: true,
             headerHeight: true,
-            searchResults:'',
+            searchResults: '',
             navLinks: [
                 {
                     label: "Home",
@@ -23,19 +28,33 @@ export default {
         }
 
     },
-    methods:{
+    methods: {
         //cambio il valore di search
-        show(){
-           this.search = !this.search;
+        show() {
+            this.search = !this.search;
         },
-        searchBar(){
+        searchBar() {
             this.headerHeight = !this.headerHeight;
-            if(this.search !== true && this.headerHeight){
+            if (this.search !== true && this.headerHeight) {
                 this.search = !this.search
-                
-            }else{
-                setTimeout(this.show,1000);  
+
+            } else {
+                setTimeout(this.show, 1000);
             }
+        },
+        searchQuery() {
+            clearTimeout(this.searchInterval);
+            this.queries = [];
+            this.searchInterval = setTimeout(() => {
+                axios.get(`${store.ApiRestaurantsUrl}`, {
+                    params: {
+                        query: this.searchResults
+                    }
+                }).then((resp) => {
+                    console.log("ciao");
+                    this.queries = resp.data.results.data;
+                });
+            }, 1000);
         }
 
     }
@@ -44,9 +63,14 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
     <header >
         <div class="overlay"></div>
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
+=======
+    <header>
+        <div :class="headerHeight ? '' : 'header-extends'" class="container d-flex py-2">
+>>>>>>> SearchEngine-started
             <div class="deliveboo-logo d-flex align-items-center">
                 <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">
             </div>
@@ -59,7 +83,8 @@ export default {
                     <li @click="searchBar"><i class="fa-solid fa-magnifying-glass fa-rotate-90"></i></li>
                 </ul>
                 <div>
-                    <input v-model="searchResults" class="px-3" type="search" name="" id="" :class="search ? 'show' : 'hidden'">
+                    <input v-model="searchResults" class="px-3" type="search" name="" id=""
+                        :class="search ? 'show' : 'hidden'" @input="searchQuery">
                 </div>
             </nav>
             <div class="user-interactions d-flex ">
@@ -77,8 +102,8 @@ export default {
 
 <style scoped lang="scss">
 header {
-    border-bottom: 2px solid ;
-    border-color:rgba($color: #ffffff, $alpha: .6) ;
+    border-bottom: 2px solid;
+    border-color: rgba($color: #ffffff, $alpha: .6);
     position: absolute;
     padding-top: 17px;
     top: 0;
@@ -103,9 +128,11 @@ header {
         max-width: 1300px;
         height: 80px;
         transition: 500ms;
-        &.header-extends{
+
+        &.header-extends {
             height: 120px;
         }
+
         .deliveboo-logo {
             position: relative;
             display: flex;
@@ -113,35 +140,39 @@ header {
             justify-content: center;
             width: 20%;
             height: 60px;
-            
+
             img {
                 position: relative;
                 top: 0;
                 left: -40px;
-                min-width: 200px;    
+                min-width: 200px;
             }
         }
 
         nav {
             width: 60%;
-            &>div{
-                
+
+            &>div {
+
                 display: flex;
                 justify-content: center;
                 padding: .5rem 0;
-                input{
+
+                input {
                     width: 80%;
                     border-radius: 30px;
                     outline: none;
-                    border:1px solid ;
+                    border: 1px solid;
                     border-color: rgba($color: #ffffff, $alpha: .6);
                     color: #fff;
                     transition: opacity 200ms;
                     background-color: rgba($color: #bdb9b9, $alpha: .6);
-                    &.hidden{
+
+                    &.hidden {
                         opacity: 1;
                     }
-                    &.show{
+
+                    &.show {
                         opacity: 0;
                     }
 
@@ -149,7 +180,7 @@ header {
             }
 
             ul {
-                border: 2px solid ;
+                border: 2px solid;
                 border-color: rgba($color: #ffffff, $alpha: .6);
                 height: 60px;
                 border-radius: 30px;
@@ -161,7 +192,7 @@ header {
                     justify-content: center;
                     width: 20%;
                     border-right: 1px solid;
-                    border-color:rgba($color: #ffffff, $alpha: .6) ;
+                    border-color: rgba($color: #ffffff, $alpha: .6);
                     height: 100%;
                     transition: 200ms;
 
@@ -177,20 +208,22 @@ header {
 
                     }
 
-                    &:hover{
+                    &:hover {
                         background-color: rgba($color: #FFC245, $alpha: .35);
-                        a{
+
+                        a {
                             color: #ffffff;
-                            
+
                         }
-                        i{
+
+                        i {
                             color: #ffff
                         }
                     }
 
-                    i{
+                    i {
                         color: rgba($color: #ffffff, $alpha: .8);
-                    
+
                     }
 
                     a {
@@ -206,25 +239,27 @@ header {
         }
 
         .user-interactions {
-            
+
             width: 20%;
             justify-content: end;
             align-items: center;
             height: 60px;
-            .login-btn{
-                border: 2px solid ;
+
+            .login-btn {
+                border: 2px solid;
                 border-color: rgba($color: #ffffff, $alpha: .6);
                 position: relative;
                 width: 80px;
-                border-radius: 15px ;
+                border-radius: 15px;
                 height: 30px;
                 z-index: 1;
                 text-align: center;
                 transition: 200ms;
                 margin-top: 25px;
-                &:hover{
+
+                &:hover {
                     background-color: #FFC244;
-                    
+
                     color: #ffff;
                 }
 
@@ -239,7 +274,7 @@ header {
                     left: -63px;
                     z-index: 2;
 
-    
+
                 }
             }
 
