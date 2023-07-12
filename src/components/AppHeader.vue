@@ -39,7 +39,7 @@ export default {
             }
         },
         toggleHamburgerMenu() {
-            this.isHamburgerMenuOpen = !this.isHamburgerMenuOpen;
+            this.isHamburgerBarOpen = !this.isHamburgerBarOpen;
         },
 
     }
