@@ -19,6 +19,7 @@ export default {
             email: "",
             notes: "",
             cardOwner:"",
+            hover:false,
 
         }
     },
@@ -55,7 +56,7 @@ export default {
                             },
                             expirationDate: {
                                 selector: '#expireDate',
-                                placeholder: '00 / 0000'
+                                placeholder: '00 / 00'
                             }
                         }
                     }
@@ -127,6 +128,7 @@ export default {
 
 
 }
+
 </script>
 <template>
     <SectionJumbo />
@@ -138,12 +140,12 @@ export default {
 
                 <div class="card-container">
 
-                    <div class="front">
+                    <div :class="hover?'front-rotate':'' " class="front">
                         <div class="image">
                             <img src="../assets/chip.png" alt="">
                             <img src="../assets/visa.png" alt="">
                         </div>
-                        <div class="card-number-box">################</div>
+                        <div class="card-number-box">0000-0000-0000-0000</div>
                         <div class="flexbox">
                             <div class="box">
                                 <span>Intestatario</span>
@@ -152,18 +154,18 @@ export default {
                             <div class="box">
                                 <span>Scade il</span>
                                 <div class="expiration">
-                                    <span class="exp-month">mm</span>
-                                    <span class="exp-year">yy</span>
+                                    <span class="exp-month">00 /</span>
+                                    <span class="exp-year"> 00</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="back">
+                    <div :class="hover?'back-rotate':'' " class="back">
                         <div class="stripe"></div>
                         <div class="box">
                             <span>cvv</span>
-                            <div class="cvv-box"></div>
+                            <div class="cvv-box">123</div>
                             <img src="image/visa.png" alt="">
                         </div>
                     </div>
@@ -212,9 +214,11 @@ export default {
                         
                             <label for="expireDate">Data di Scadenza</label>
                             <div id="expireDate" class="form-control mb-2"></div>
-                                      
-                            <label for="cvv">CVV</label>
-                            <div id="cvv" class="form-control mb-2"></div>
+                            
+                            <div @mouseenter="hover = true" @mouseleave="hover = false" class="cvv-input">
+                                <label for="cvv">CVV</label>
+                                <div id="cvv" class="form-control mb-2"></div>
+                            </div>         
                         </form>
                     </div>
                 </div>
@@ -225,6 +229,7 @@ export default {
         </div>
 
     </section>
+    
 </template>
 
 
@@ -414,4 +419,12 @@ section.payment-page {
             }
         }
     }
-}</style>
+}
+
+.front-rotate{
+    transform: perspective(1000px) rotateY(-180deg) !important;
+}
+.back-rotate{
+    transform: perspective(1000px) rotateY(0deg) !important;
+}
+</style>
