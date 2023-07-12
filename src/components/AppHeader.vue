@@ -6,6 +6,7 @@ export default {
             search: true,
             headerHeight: true,
             searchResults:'',
+            isHamburgerMenuOpen: false,
             navLinks: [
                 {
                     label: "Home",
@@ -36,7 +37,10 @@ export default {
             }else{
                 setTimeout(this.show,1000);  
             }
-        }
+        },
+        toggleHamburgerMenu() {
+            this.isHamburgerMenuOpen = !this.isHamburgerMenuOpen;
+        },
 
     }
 
@@ -50,7 +54,7 @@ export default {
             <div class="deliveboo-logo d-flex align-items-center">
                 <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">
             </div>
-            <nav>
+            <nav class="normal-bar" v-if="!isHamburgerBarOpen">
                 <ul class="d-flex align-items-center text-dark">
                     <li v-for="link in navLinks">
                         <router-link :to="{ name: link.route }">{{ link.label }}</router-link>
@@ -62,6 +66,20 @@ export default {
                     <input v-model="searchResults" class="px-3" type="search" name="" id="" :class="search ? 'show' : 'hidden'">
                 </div>
             </nav>
+
+            <div class="dropdown hamburger-bar" v-else @click="toggleHamburgerBar">>
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#" v-for="link in navLinks">
+                        <router-link :to="{ name: link.route }">{{ link.label }}</router-link>
+                    </a>
+                    <a href="#">Contattaci</a>
+                    <a href="#" @click="searchBar"><i class="fa-solid fa-magnifying-glass fa-rotate-90"></i></a>
+                </div>
+            </div>
+
             <div class="user-interactions d-flex ">
                 <a href="http://localhost:8000/">
                     <div class="login-btn">
@@ -246,6 +264,41 @@ header {
         }
     }
 
+}
+
+/* MEDIA QUERY (cioè le modifiche di Leonardo, template e method a parte) */
+
+/* Stili per il tablet */
+@media (max-width: 768px) {
+  .normal-bar {
+    display: none; /* Nascondi la navbar */
+  }
+
+  .hamburger-bar {
+    display: block; /* Mostra il menu hamburger */
+  }
+  
+  
+
+}
+
+/* Stili per il cellulare */
+@media (max-width: 576px) {
+
+    .deliveboo-logo {
+            img {
+                margin-left: 10px;
+                max-width: 80px;    
+            }
+        }
+    .user-interactions {
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+  .hamburger-menu {
+    /* Stili per il menu hamburger */
+  }
 }
 </style>
 
