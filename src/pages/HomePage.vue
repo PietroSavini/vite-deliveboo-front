@@ -139,6 +139,7 @@ export default {
         
         .section-title{
             color: black;
+            padding-left: 2rem ;
             @media screen and (max-width : 768px) {
                 padding-left: 37%;
             }
@@ -163,6 +164,7 @@ export default {
             }
         }
         .row{
+            padding-top: 2rem;
             flex-wrap: wrap;
             justify-content: center;
             

@@ -92,7 +92,7 @@ export default {
 
 .restaurants{
     background-color: $secondary_color;
-    padding:1.5rem 0;
+    padding:1rem 0;
     position: relative;
     min-height: 700px;
     .background-extencion{
@@ -109,11 +109,14 @@ export default {
     .container{
         position: relative;
         z-index: 3;
+        border: 1px solid red;
+        padding: 0;
         
         .section-title{
             color: black;
+            padding-left: 2rem ;
             @media screen and (max-width : 768px) {
-                padding-left: 37%;
+                padding-left: 40%;
             }
             
             .img-absolute{
@@ -135,9 +138,10 @@ export default {
             }
         }
         .row{
-            
+            border: 1px solid black;
             flex-wrap: wrap;
             justify-content: center;
+            padding-top: 1.5rem;
             
             .ms_col{
                
