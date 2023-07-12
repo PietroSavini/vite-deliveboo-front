@@ -74,7 +74,7 @@ export default {
 <style scoped lang="scss">
 
     .ms_footer {
-        background-color: rgb(121, 69, 69);
+        background-color: rgb(133, 40, 40);
         height: 20%;
         color: rgb(164, 231, 255);
         padding: 50px 20px 50px 20px;
