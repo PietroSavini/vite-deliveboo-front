@@ -3,6 +3,8 @@
 import { store } from '../store';
 import axios from 'axios';
 import braintree from 'braintree-web';
+import SectionJumbo from '../components/SectionJumbo.vue';
+
 export default {
     name: "PaymentPage",
     data() {
@@ -15,7 +17,8 @@ export default {
             nameSurname: "",
             address: "",
             email: "",
-            notes: ""
+            notes: "",
+            cardOwner:"",
 
         }
     },
@@ -37,18 +40,18 @@ export default {
                         client: clientInstance,
                         styles: {
                             input: {
-                                'font-size': '14px',
+                                'font-size': '15px',
                                 'font-family': 'Open Sans'
                             }
                         },
                         fields: {
                             number: {
                                 selector: '#creditCardNumber',
-                                placeholder: 'Enter Credit Card'
+                                placeholder: '0000-0000-0000-0000'
                             },
                             cvv: {
                                 selector: '#cvv',
-                                placeholder: 'Enter CVV'
+                                placeholder: '123'
                             },
                             expirationDate: {
                                 selector: '#expireDate',
@@ -114,90 +117,301 @@ export default {
 
 
     },
+    components: {
+
+        SectionJumbo
+    }
+
+
 
 
 
 }
 </script>
 <template>
-    <div class="container text-center ">
-        <div>
-            <label for="name">nome</label>
-            <input class="mb-2" type="text" id="name" v-model="nameSurname">
-        </div>
+    <SectionJumbo />
+    <section class="payment-page">
 
-        <div>
-            <label for="address">indirizzo</label>
-            <input class="mb-2" type="text" id="address" v-model="address">
-        </div>
-        <div>
-            <label for="email">email</label>
-            <input class="mb-2" type="email" id="email" v-model="email">
-        </div>
-        <div>
-            <label for="text">informazioni aggiuntive:</label>
-            <input class="mb-2" type="text" id="text" v-model="notes">
-        </div>
-        <!-- dati carta -->
-        <div class="form-group">
-            <label>Credit Card Number</label>
-            <div id="creditCardNumber" class="form-control"></div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-6">
-                    <label>Expire Date</label>
-                    <div id="expireDate" class="form-control"></div>
-                </div>
-                <div class="col-6">
-                    <label>CVV</label>
-                    <div id="cvv" class="form-control"></div>
+        <div class="container py-4">
+            <!-- CARTA  ------------------------------------------------------------------>
+            <div class="card-section-container">
+
+                <div class="card-container">
+
+                    <div class="front">
+                        <div class="image">
+                            <img src="../assets/chip.png" alt="">
+                            <img src="../assets/visa.png" alt="">
+                        </div>
+                        <div class="card-number-box">################</div>
+                        <div class="flexbox">
+                            <div class="box">
+                                <span>Intestatario</span>
+                                <div class="card-holder-name">{{cardOwner}}</div>
+                            </div>
+                            <div class="box">
+                                <span>Scade il</span>
+                                <div class="expiration">
+                                    <span class="exp-month">mm</span>
+                                    <span class="exp-year">yy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="back">
+                        <div class="stripe"></div>
+                        <div class="box">
+                            <span>cvv</span>
+                            <div class="cvv-box"></div>
+                            <img src="image/visa.png" alt="">
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            <!-- /CARTA----------------------------------------------------------------->
+
+
+            <!-- FORM SPEDIZIONE-------------------------------------------------------->
+            <div class="shipping-payment text-center ">
+                <h2 class="text-center">Completa il tuo Ordine</h2>
+                <div class="forms d-flex mt-4">
+                    <!-- shipping form info -->
+                    <div class="shipping text-start">
+                        <h5 class="text-center">informazioni di consegna</h5>    
+                        <form>
+
+                            <label for="name">Nome e Cognome: *</label>
+                            <input class="mb-2" type="text" id="name" v-model="nameSurname">
+                     
+                            <label for="address">indirizzo di Consegna: *</label>
+                            <input class="mb-2" type="text" id="address" v-model="address">
+                           
+                            <label for="email">email: *</label>
+                            <input class="mb-2" type="email" id="email" v-model="email">
+                         
+                            <label for="text">Note: </label>
+                            <textarea class="mb-2"  id="text" v-model="notes"></textarea>
+                            
+                        </form>
+                        
+
+                    </div>
+                    <!-- /shipping form info -->
+
+                    <!-- Credit Card from Info -->
+                    <div class="payment text-start">
+                        <h5 class="text-center">Dettagli Carta</h5>
+                        <form >
+                            <label for="cardOwner">Intestatario Carta</label>
+                            <input type="text" class="mb-2" v-model="cardOwner" id="cardOwner">
+
+                            <label for="creditCardNumber">Numero Carta</label>
+                            <div id="creditCardNumber" class="form-control mb-2"></div>
+                        
+                            <label for="expireDate">Data di Scadenza</label>
+                            <div id="expireDate" class="form-control mb-2"></div>
+                                      
+                            <label for="cvv">CVV</label>
+                            <div id="cvv" class="form-control mb-2"></div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /Credit Card from Info -->
+                <button class="submit-btn" @click="sendPayment()"> Procedi all' ordine</button>
+            </div>
+
         </div>
-        <button class="button button--small button--green" @click="sendPayment()"> Invia</button>
 
-
-    </div>
+    </section>
 </template>
 
 
 <style lang="scss" scoped>
-.container {
-    margin-top: 200px;
-}
+section.payment-page {
+    background-color: #EEEEEE;
+    padding: 2rem 0;
+    min-height: calc(100vh - 300px);
+    position: relative;
 
-// .button {
-//     cursor: pointer;
-//     font-weight: 500;
-//     left: 3px;
-//     line-height: inherit;
-//     position: relative;
-//     text-decoration: none;
-//     text-align: center;
-//     border-style: solid;
-//     border-width: 1px;
-//     border-radius: 3px;
-//     -webkit-appearance: none;
-//     -moz-appearance: none;
-//     display: inline-block;
-// }
+    .container {
+        background-color: #ffff;
+        position: absolute;
+        border-radius: 25px;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0px 10px 30px rgb(77, 77, 77);
+        .shipping-payment{
+            .submit-btn{
+                display: inline-block;
+                
+                width: 50%;
+                background:linear-gradient(45deg, blueviolet, deeppink);
+                margin-top: 20px;
+                padding: 10px;
+                font-size: 20px;
+                color:#fff;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: .2s linear;
+                border: none;
+            }
+            @media screen and (max-width:768px){
+                .forms{
+                    flex-direction: column-reverse;
+                    align-items: center;
+                    gap: 2rem;
+                    .payment,.shipping{
+                        width: 70%;
+                        
+                    }
+                }
+            }
+            .payment,.shipping{
+                width: 50%;
+                padding: 0 .5rem;
+                form{
+                    display: flex;
+                    flex-direction: column;
+                    .form-control{
+                        height: 26px;
+                        border-radius: 10px ;
+                        border-color: grey ;
+                        width: 100%;
+                        transition: 200ms;
+                       
+                        
+                    }
+                    label{
+                        display: block;
+                        color: #585858;
+                    }
+                    input,textarea{
+                        border-radius: 10px;
+                        border: 1px solid grey;
+                        padding: 0 .8rem;
+                        transition: 200ms;
+                        
+                        &:focus{
+                            outline: none;
+                            
+                        }
+                    }
+                }
+            }
+           
+        }
 
-// .button--small {
-//     padding: 10px 20px;
-//     font-size: 0.875rem;
-// }
+        .card-section-container {
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: column;
+            margin-bottom: 2rem;
 
-// .button--green {
-//     outline: none;
-//     background-color: #64d18a;
-//     border-color: #64d18a;
-//     color: white;
-//     transition: all 200ms ease;
-// }
+            .card-container {
 
-// .button--green:hover {
-//     background-color: #8bdda8;
-//     color: white;
-// }
-</style>
+                position: relative;
+                height: 250px;
+                margin-bottom: -100px;
+                width: 400px;
+
+                .back {
+                    position: absolute;
+                    top: -100px;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    background: linear-gradient(45deg, blueviolet, deeppink);
+                    border-radius: 5px;
+                    padding: 20px 0;
+                    text-align: right;
+                    backface-visibility: hidden;
+                    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+                    transform: perspective(1000px) rotateY(180deg);
+                    transition: transform .4s ease-out;
+
+                    .cvv-box {
+                        height: 50px;
+                        padding: 10px;
+                        margin-top: 5px;
+                        color: #333;
+                        background: #fff;
+                        border-radius: 5px;
+                        width: 100%;
+                    }
+
+                    .stripe {
+                        background: #000;
+                        width: 100%;
+                        margin: 10px 0;
+                        height: 50px;
+                    }
+
+                    .box {
+                        padding: 0 20px;
+
+                        span {
+                            color: #fff;
+                            font-size: 15px;
+                        }
+
+                        img {
+                            margin-top: 30px;
+                            height: 30px;
+                        }
+                    }
+                }
+
+                .front {
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    top: -100px;
+                    left: 0;
+                    background: linear-gradient(45deg, blueviolet, deeppink);
+                    border-radius: 5px;
+                    backface-visibility: hidden;
+                    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+                    padding: 20px;
+                    transform: perspective(1000px) rotateY(0deg);
+                    transition: transform .4s ease-out;
+
+                    .card-number-box {
+                        padding: 30px 0;
+                        font-size: 22px;
+                        color: #fff;
+                    }
+
+                    .image {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding-top: 10px;
+
+                        img {
+                            height: 50px;
+                        }
+                    }
+
+                    .flexbox {
+                        display: flex;
+
+                        .box:nth-child(1) {
+                            margin-right: auto;
+                        }
+
+                        .box {
+                            font-size: 15px;
+                            color: #fff;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}</style>
