@@ -8,28 +8,72 @@ export default {
     data() {
         return {
             store,
+            hostedFieldInstance: false,
             cartProducts: [],
             detailsProducts: [],
             token: "",
             nameSurname: "",
             address: "",
             email: "",
-            tel: ""
+            notes: ""
 
         }
     },
     mounted() {
+
         this.cartProducts = this.store.method.getArray();
         this.getIdQuantity();
         // token
-           this.getToken();
+
+        axios.get(this.store.ApiToken).then((resp) => {
+
+
+            braintree.client.create({
+                authorization: resp.data.token
+
+            })
+                .then(clientInstance => {
+                    let options = {
+                        client: clientInstance,
+                        styles: {
+                            input: {
+                                'font-size': '14px',
+                                'font-family': 'Open Sans'
+                            }
+                        },
+                        fields: {
+                            number: {
+                                selector: '#creditCardNumber',
+                                placeholder: 'Enter Credit Card'
+                            },
+                            cvv: {
+                                selector: '#cvv',
+                                placeholder: 'Enter CVV'
+                            },
+                            expirationDate: {
+                                selector: '#expireDate',
+                                placeholder: '00 / 0000'
+                            }
+                        }
+                    }
+                    return braintree.hostedFields.create(options)
+                })
+                .then(hostedFieldInstance => {
+                    // @TODO - Use hostedFieldInstance to send data to Braintree
+                    this.hostedFieldInstance = hostedFieldInstance;
+                })
+                .catch(err => {
+                });
+
+
+        })
+
+
+
+
     },
     methods: {
-        getToken() {
-            axios.get(this.store.ApiToken).then((resp) => {
-                console.log(resp);
-            })
-        },
+
         getIdQuantity() {
             this.cartProducts.forEach(product => {
                 const products = {
@@ -44,15 +88,20 @@ export default {
             if (this.hostedFieldInstance) {
                 this.hostedFieldInstance.tokenize().then(payload => {
                     axios.post(`${this.store.ApiPayment}`, {
-                        params: {
-                            // array oggetti id quantità
-                            products: this.detailsProducts,
-                            // token
-                            token: this.token,
-                            // array oggetto user
-                            userDetails: this.user,
 
-                        }
+                        // array oggetti id quantità
+                        cart: this.detailsProducts,
+                        // token
+                        token: payload.nonce,
+                        // array oggetto user
+                        customer_name_surname: this.nameSurname,
+                        customer_address: this.address,
+                        customer_notes: this.notes,
+                        customer_email: this.email,
+                        date_time: "2023-07-15",
+
+
+
                     }).then(resp => {
                         this.$router.push('/state');
                     })
@@ -87,10 +136,9 @@ export default {
         </div>
         <div>
             <label for="text">informazioni aggiuntive:</label>
-            <input class="mb-2" type="text" id="text">
+            <input class="mb-2" type="text" id="text" v-model="notes">
         </div>
         <!-- dati carta -->
-
         <div class="form-group">
             <label>Credit Card Number</label>
             <div id="creditCardNumber" class="form-control"></div>
@@ -107,7 +155,9 @@ export default {
                 </div>
             </div>
         </div>
-        <button class="button button--small button--green">{{ sendPayment() }} Invia</button>
+        <button class="button button--small button--green" @click="sendPayment()"> Invia</button>
+
+
     </div>
 </template>
 
@@ -117,37 +167,37 @@ export default {
     margin-top: 200px;
 }
 
-.button {
-    cursor: pointer;
-    font-weight: 500;
-    left: 3px;
-    line-height: inherit;
-    position: relative;
-    text-decoration: none;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    display: inline-block;
-}
+// .button {
+//     cursor: pointer;
+//     font-weight: 500;
+//     left: 3px;
+//     line-height: inherit;
+//     position: relative;
+//     text-decoration: none;
+//     text-align: center;
+//     border-style: solid;
+//     border-width: 1px;
+//     border-radius: 3px;
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     display: inline-block;
+// }
 
-.button--small {
-    padding: 10px 20px;
-    font-size: 0.875rem;
-}
+// .button--small {
+//     padding: 10px 20px;
+//     font-size: 0.875rem;
+// }
 
-.button--green {
-    outline: none;
-    background-color: #64d18a;
-    border-color: #64d18a;
-    color: white;
-    transition: all 200ms ease;
-}
+// .button--green {
+//     outline: none;
+//     background-color: #64d18a;
+//     border-color: #64d18a;
+//     color: white;
+//     transition: all 200ms ease;
+// }
 
-.button--green:hover {
-    background-color: #8bdda8;
-    color: white;
-}
+// .button--green:hover {
+//     background-color: #8bdda8;
+//     color: white;
+// }
 </style>
