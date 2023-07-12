@@ -225,9 +225,10 @@ export default {
                 <!-- /Credit Card from Info -->
                 <button class="submit-btn" @click="sendPayment()"> Procedi all' ordine</button>
                 <hr>
-                <div class="text-center">
+                <p class="text-center mb-2">
                      ti invieremo un email con i dettagli della consegna ad avvenuto pagamento 
-                </div>
+                </p>
+                <p>* campi obbligatori</p>
             </div>
 
         </div>
@@ -241,8 +242,11 @@ export default {
 section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
-    height: 100vh;
+    height: calc(100vh - 200px);
     position: relative;
+    @media screen and (max-width: 768px){
+        height: calc(100vh + 100px);
+    }
 
     .container {
         background-color: #ffff;
@@ -327,6 +331,12 @@ section.payment-page {
                 height: 250px;
                 margin-bottom: -100px;
                 width: 400px;
+                @media screen and (max-width: 450px){
+                    width: 100%;
+                }
+                @media screen and (max-width : 330px){
+                    display: none;
+                }
 
                 .back {
                     position: absolute;

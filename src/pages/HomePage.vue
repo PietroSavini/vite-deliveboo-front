@@ -139,9 +139,9 @@ export default {
         
         .section-title{
             color: black;
-            padding-left: 2rem ;
+            padding-left: 3rem ;
             @media screen and (max-width : 768px) {
-                padding-left: 37%;
+                padding-left: 40%;
             }
             
             .img-absolute{
