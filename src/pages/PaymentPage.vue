@@ -98,7 +98,6 @@ export default {
                         customer_address: this.address,
                         customer_notes: this.notes,
                         customer_email: this.email,
-                        date_time: "2023-07-15",
 
 
 
