@@ -166,7 +166,7 @@ export default {
                         <div class="box">
                             <span>cvv</span>
                             <div class="cvv-box">123</div>
-                            <img src="image/visa.png" alt="">
+                            <img src="../assets/visa.png" alt="">
                         </div>
                     </div>
 
@@ -224,6 +224,10 @@ export default {
                 </div>
                 <!-- /Credit Card from Info -->
                 <button class="submit-btn" @click="sendPayment()"> Procedi all' ordine</button>
+                <hr>
+                <div class="text-center">
+                     ti invieremo un email con i dettagli della consegna ad avvenuto pagamento 
+                </div>
             </div>
 
         </div>
@@ -237,7 +241,7 @@ export default {
 section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
-    min-height: calc(100vh - 300px);
+    height: 100vh;
     position: relative;
 
     .container {
