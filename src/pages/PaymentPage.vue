@@ -103,7 +103,8 @@ export default {
 
 
                     }).then(resp => {
-                        this.$router.push('/state');
+                        this.store.method.delete();
+                        this.$router.push('/restaurants');
                     })
                 })
                     .catch(err => {
