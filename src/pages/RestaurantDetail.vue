@@ -17,7 +17,6 @@ export default {
     },
     mounted() {
         const id = this.$route.params.id;
-        this.getProducts(id);
         this.getRestaurantDetails(id);
         this.cartProducts = this.store.method.getArray();
      
@@ -27,11 +26,14 @@ export default {
         getProducts(restaurantId) {
             axios.get(`${this.store.ApiProductsUrl}`, { params: { restaurant_id: restaurantId } }).then((resp) => {
                 this.products = resp.data.results;
+               
             })
         },
         getRestaurantDetails(restaurantId) {
             axios.get(`${this.store.ApiRestaurantUrl}`, { params: { restaurant_id: restaurantId } }).then((resp) => {
-                this.restaurant = resp.data.results[0]
+                this.restaurant = resp.data.results[0];
+                this.getProducts(restaurantId);
+                this.not_allowed=false;
 
             })
         },
@@ -53,7 +55,7 @@ export default {
             } else {
                 // se è un altro ristorante non puoi
                 if (this.cartProducts.some(item => item.restaurant !== object.restaurant_id)) {
-                    console.log('non puoi');
+                    console.log(this.cartProducts[0].restaurant);
                     this.not_allowed=true;
                     //  senno pusha oggetto
                 } else {
@@ -100,6 +102,7 @@ export default {
             })
             return total
         },
+   
 
     },
     components: {
@@ -172,13 +175,15 @@ export default {
                                     </div>
                                 </li>
                                 <div v-if="not_allowed" class="">
-                                        <p class="">hai un ordine in corso con un altro ristorante completa o svuota carrello per continuare</p>
+                                         <p class="">hai un ordine in corso con un altro ristorante  <router-link :to="{name:'restaurant-detail', params:{id:cartProducts[0].restaurant}}" @click="getRestaurantDetails(cartProducts[0].restaurant)" class="btn btn-primary" >continua</router-link> o svuota carrello per continuare</p>
+                                      
+                                    
                                     </div>
 
                             </ul>
                             <div>totale: {{ getTotal() }}&euro;</div>
                             <div class="final-actions d-flex justify-content-center">
-                                <span class="btn btn-danger ms_btn" @click="removeCart()">svuota carrello</span>
+                                <span class="btn btn-danger ms_btn" @click="removeCart">svuota carrello</span>
                                 <span class="btn btn-success ms_btn"><router-link
                                         :to="{ name: 'payment' }">checkout</router-link></span>
                             </div>
