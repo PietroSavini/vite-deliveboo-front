@@ -21,6 +21,7 @@ export default {
       loading: false,
       types: [],
       allRestaurants: 0,
+      payment_message:this.$route.query.success
 
      
 
@@ -70,7 +71,19 @@ export default {
           </div>
           <h5>Tutti i locali</h5>
         </div>
-        <div v-if="$route.query.success " class="payment-success">il pagamento è stato effettuato,controlla l'email per i dettagli dell'ordine</div>
+        <!-- message payment success -->
+  <div v-if="payment_message" class="payment-success text-center w-25 p-2 ">
+  <i class="fa-regular fa-circle-check fa-3x"></i>
+
+  <h5>pagamento effettuato</h5>
+  <hr>
+  <p class="mb-2">riceverai un email con il riepilogo del tuo ordine</p>
+  <button type="button" class="btn btn-secondary" @click="payment_message =false">Close</button>
+
+</div>
+        <!-- /message payment success -->
+
+     
         <div class="row">
           <div v-for="restaurant in restaurants" class="ms_col">
             <RestaurantCard :restaurant="restaurant" />
@@ -90,9 +103,12 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/root.scss" as *;
 .payment-success{
-  height:70px;
-  background-color:greenyellow;
-
+margin: 0 auto;
+border: 2px solid #28a181;
+  i{color:#28a181};
+  h5{
+    color: #28a181;
+  }
 }
 
 
