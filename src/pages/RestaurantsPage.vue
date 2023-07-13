@@ -20,18 +20,21 @@ export default {
       lastPage: null,
       loading: false,
       types: [],
-      allRestaurants: 0
+      allRestaurants: 0,
+      payment_message:this.$route.query.success
+
+     
 
     };
   },
   mounted() {
     this.getRestaurants();
     this.getTypes();
+  
   },
   methods: {
     getTypes() {
       axios.get(`${store.ApiTypesUrl}`).then(resp => {
-        console.log(resp);
         this.types = resp.data.results;
       });
     },
@@ -68,6 +71,19 @@ export default {
           </div>
           <h5>Tutti i locali</h5>
         </div>
+        <!-- message payment success -->
+  <div v-if="payment_message" class="payment-success text-center w-25 p-2 ">
+  <i class="fa-regular fa-circle-check fa-3x"></i>
+
+  <h5>pagamento effettuato</h5>
+  <hr>
+  <p class="mb-2">riceverai un email con il riepilogo del tuo ordine</p>
+  <button type="button" class="btn btn-secondary" @click="payment_message =false">Close</button>
+
+</div>
+        <!-- /message payment success -->
+
+     
         <div class="row">
           <div v-for="restaurant in restaurants" class="ms_col">
             <RestaurantCard :restaurant="restaurant" />
@@ -80,12 +96,21 @@ export default {
       <div class="background-extencion"></div>
       <span class="text-center ms_loader"></span>
     </div>
-
   </section>
+
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/partials/root.scss" as *;
+.payment-success{
+margin: 0 auto;
+border: 2px solid #28a181;
+  i{color:#28a181};
+  h5{
+    color: #28a181;
+  }
+}
+
 
 .restaurants {
   background-color: $secondary_color;
