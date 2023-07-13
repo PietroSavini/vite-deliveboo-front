@@ -47,7 +47,7 @@ export default{
 
 .featured{
     background-color: $secondary_color;
-    padding:1.5rem 0;
+    padding-top: 1.5rem;
     position: relative;
     
     
