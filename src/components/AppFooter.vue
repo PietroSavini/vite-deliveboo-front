@@ -49,7 +49,7 @@ export default {
                     <h5 class="text-center">Newsletter</h5>
                     <div class="ms_subscribe">
                         <form class="subscription d-flex flex-column gap-3">
-                            <input class="add-email" type="email" placeholder="subscribe@me.now">
+                            <input class="add-email text-center" type="email" placeholder="subscribe@me.now">
                             <button v-if="!isSubscribed" class="submit-email" @click="subNow" type="button">Iscriviti</button>
                             <div v-else class="subscribed" type="button">Iscritto!</div>
 
@@ -259,30 +259,30 @@ export default {
     .ms_footer-first-row {
         display: flex;
         width: 100%;
-        margin: 0 0;
         justify-content: center;
         .deliveboo-logo {
-            img {
-
-                // object-fit: contain;
-            }
+            width: 70%;
         }
     }
 
 
     .ms_links {
-        display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 40px;
     }
 
-    .ms_apps {
-        display: flex;
+
+    .ms_footer-third-row {
         flex-direction: column;
-        gap: 20px;
+        gap: 40px;
+
+        .ms_credits {
+        }
+        .ms_apps {
+            flex-direction: column;
+        }
+
     }
 }
-
-
 
 </style>
