@@ -11,7 +11,8 @@ export default {
             store,
             products: [],
             restaurant: [],
-            cartProducts: []
+            cartProducts: [],
+            not_allowed:false,
         }
     },
     mounted() {
@@ -19,7 +20,7 @@ export default {
         this.getProducts(id);
         this.getRestaurantDetails(id);
         this.cartProducts = this.store.method.getArray();
-        console.log(this.store.method.getArray());
+     
 
     },
     methods: {
@@ -31,7 +32,7 @@ export default {
         getRestaurantDetails(restaurantId) {
             axios.get(`${this.store.ApiRestaurantUrl}`, { params: { restaurant_id: restaurantId } }).then((resp) => {
                 this.restaurant = resp.data.results[0]
-                console.log(this.restaurant)
+
             })
         },
 
@@ -41,7 +42,8 @@ export default {
                 id: object.id,
                 name: object.name,
                 quantity: 0,
-                price: object.price
+                price: object.price,
+                restaurant: object.restaurant_id
             }
             //  vedi se contiene gia oggetto
             if (this.cartProducts.some(item => item.id === object.id)) {
@@ -49,8 +51,17 @@ export default {
                 const oggetto = this.cartProducts.find(item => item.id === object.id);
                 oggetto.quantity++
             } else {
-                this.cartProducts.push(obj);
-                obj.quantity = 1;
+                // se è un altro ristorante non puoi
+                if (this.cartProducts.some(item => item.restaurant !== object.restaurant_id)) {
+                    console.log('non puoi');
+                    this.not_allowed=true;
+                    //  senno pusha oggetto
+                } else {
+                    this.cartProducts.push(obj);
+                    obj.quantity = 1;
+                    console.log(obj);
+                    this.not_allowed=false;
+                }
 
             }
             // salvo array aaggiornato nel local storage
@@ -138,7 +149,8 @@ export default {
                                         <span>{{ product.price }}</span><span>€</span>
                                     </div>
                                     <div>
-                                        <span @click="newObj(product, index)" class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
+                                        <span @click="newObj(product, index)" class="buy">Aggiungi al <i
+                                                class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
                                     </div>
 
                                 </div>
@@ -150,8 +162,8 @@ export default {
             <div class="cart-col">
                 <div class="cart-container">
                     <div class="cart">
-                        <div v-if="cartProducts.length>0">
-                            <ul  id="cart">
+                        <div v-if="cartProducts.length > 0">
+                            <ul id="cart">
                                 <li class="mb-2 cart-item" v-for="obj, index in cartProducts">
                                     <p>{{ obj.name }} x {{ obj.quantity }} : {{ getPrice(obj) }}&euro; </p>
                                     <div class="cart-actions">
@@ -159,18 +171,25 @@ export default {
                                         <button class="cart-btn" @click="newObj(obj, index)">&plus;</button>
                                     </div>
                                 </li>
-                                
+                                <div v-if="not_allowed" class="">
+                                        <p class="">hai un ordine in corso con un altro ristorante completa o svuota carrello per continuare</p>
+                                    </div>
+
                             </ul>
                             <div>totale: {{ getTotal() }}&euro;</div>
                             <div class="final-actions d-flex justify-content-center">
                                 <span class="btn btn-danger ms_btn" @click="removeCart()">svuota carrello</span>
-                                <span class="btn btn-success ms_btn"><router-link :to="{name:'payment'}">checkout</router-link></span>
+                                <span class="btn btn-success ms_btn"><router-link
+                                        :to="{ name: 'payment' }">checkout</router-link></span>
                             </div>
+
                         </div>
+
                         <div v-else class="empty-cart">
                             <h2 class="text-center">Il tuo carrello</h2>
                             <img src="../assets/empty-cart.png" alt="">
-                            <p class="text-center">Non hai ancora aggiunto alcun prodotto. Quando lo farai, compariranno qui!</p>
+                            <p class="text-center">Non hai ancora aggiunto alcun prodotto. Quando lo farai, compariranno
+                                qui!</p>
                         </div>
                     </div>
                 </div>
@@ -183,10 +202,11 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/root.scss" as *;
 
-section{
+section {
     background-color: #FFF3DA;
-    
+
 }
+
 .container {
     display: flex;
 
@@ -340,30 +360,35 @@ section{
                 border-radius: 20px;
                 box-shadow: 0px 10px 15px rgb(166, 166, 166);
                 background-color: #ffffff;
-                .ms_btn{
+
+                .ms_btn {
                     width: 130px;
                     border-radius: 40px;
                     font-size: .8rem;
                     margin: 0 5px;
 
                 }
-                .final-actions{
+
+                .final-actions {
                     margin: .5rem auto;
                 }
+
                 #cart {
-                    
-                    .cart-item{
+
+                    .cart-item {
                         display: flex;
                         width: 100%;
                         padding-bottom: 1rem;
                         border-bottom: 1px solid rgb(218, 218, 218);
-                        
-                        p{
+
+                        p {
                             width: 70%;
                         }
-                        .cart-actions{
+
+                        .cart-actions {
                             width: 30%;
-                            .cart-btn{
+
+                            .cart-btn {
 
                                 cursor: pointer;
                                 margin: 0 2px;
@@ -373,20 +398,22 @@ section{
                                 background-color: lightgreen;
                                 display: inline-block;
                                 border-radius: 100%;
-                                &.minus{
+
+                                &.minus {
                                     background-color: lightcoral;
                                 }
                             }
                         }
                     }
-                    
+
                 }
-                .empty-cart{
-                        h2{
-                            font-weight: bold;
-                        }
-                       
+
+                .empty-cart {
+                    h2 {
+                        font-weight: bold;
                     }
+
+                }
             }
         }
     }
