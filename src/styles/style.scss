@@ -5,8 +5,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 //common 
+*{
+  user-select: none;
+}
 body{
   font-family: 'Poppins', sans-serif;
+  background-color: $secondary_color;
   // background-color: $primary_color;
 }
 
@@ -35,6 +39,11 @@ ul{
     margin: 0;
     padding: 0;
   }
+}
+
+section.featured {
+  padding-bottom: 6rem;
+  
 }
 
 

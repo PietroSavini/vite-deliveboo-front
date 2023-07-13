@@ -1,13 +1,18 @@
 <script>
+import RestaurantCard from "./RestaurantCard.vue"
 export default{
     name:"HomePageMain",
+    props:{randomRestaurants:Object},
     data(){
         return{
 
         }
     },
     methods:{
-        featuredRestaurants:[],
+        
+    },
+    components:{
+        RestaurantCard
     }
 }
 </script>
@@ -23,12 +28,9 @@ export default{
             <h5>Consigliati per te</h5>
         </div>
         <div class="row">
-            <div class="ms_col"></div>
-            <div class="ms_col"></div>
-            <div class="ms_col"></div>
-            <div class="ms_col"></div>
-            <div class="ms_col"></div>
-            <div class="ms_col"></div>
+            <div class="ms_col" v-for="restaurant in randomRestaurants">
+                <RestaurantCard :restaurant="restaurant" />       
+            </div>
         </div>
     </div>
 </section>
@@ -45,7 +47,7 @@ export default{
 
 .featured{
     background-color: $secondary_color;
-    padding:1.5rem 0;
+    padding-top: 1.5rem;
     position: relative;
     
     
@@ -65,6 +67,7 @@ export default{
         
         
         .section-title{
+            padding-left: 2rem;
             color: black;
             @media screen and (max-width : 768px) {
                 padding-left: 37%;
@@ -86,16 +89,16 @@ export default{
                 position: relative;
                 z-index: 1;
                 font-weight: bold;
-                //text-shadow: 1px 1px 2px rgb(0, 0, 0);
+                
             }
         }
         .row{
-            border: 1px solid black;
+            padding-top: 2rem;
             flex-wrap: wrap;
             justify-content: center;
             
             .ms_col{
-                border: 1px solid red;
+                
                 width: 350px;
                 height: 150px;
                 padding: 5px 5px;
