@@ -19,7 +19,7 @@ export default {
         this.getProducts(id);
         this.getRestaurantDetails(id);
         this.cartProducts = this.store.method.getArray();
-        console.log(this.store.method.getArray());
+        console.log(this.restaurant);
 
     },
     methods: {
@@ -99,7 +99,7 @@ export default {
 </script>
 
 <template>
-    <SectionJumbo />
+    <SectionJumbo :restaurant="restaurant"/>
     <section>
 
         <div class="container">

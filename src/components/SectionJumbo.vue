@@ -1,16 +1,22 @@
 <script>
 export default {
+    props:{
+        restaurant:Object
+    },
     name: "SectionJumbo",
 }
 </script>
 
 <template>
-    <div class="jumbo-container">
+    <div v-if="restaurant" class="jumbo-container">
+        <img :src="restaurant.image" alt="">
+    </div>
+    <div v-else class="jumbo-container">
         <img src="../assets/RestaurantImage.jpeg" alt="">
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped>w
 .jumbo-container {
     height: 300px;
     position: relative;
