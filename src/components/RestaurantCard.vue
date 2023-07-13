@@ -24,30 +24,31 @@ export default {
 </script>
 
 <template>
-<router-link :to="{name:'restaurant-detail', params:{id:restaurant.id, restaurant:restaurant}}" >
-    <div class="ms_card d-flex">
-        <div class="ms_card-img">
-            <div class="overlay"></div>
-            <h1 class="restaurant-name">{{ restaurant.name }}</h1>
-            <div class="restaurant-category">
-                <p v-for="name in restaurant.types">{{ name.name }}</p>
+    <router-link :to="{ name: 'restaurant-detail', params: { id: restaurant.id, restaurant: restaurant } }">
+        <div class="ms_card d-flex">
+            <div class="ms_card-img">
+                <div class="overlay"></div>
+                <h1 class="restaurant-name">{{ restaurant.name }}</h1>
+                <div class="restaurant-category">
+                    <p v-for="name in restaurant.types">{{ name.name }}</p>
+                </div>
+                <img v-if="restaurant.image" :src="store.method.getImgPath(restaurant.image)" class=""
+                    alt="Restaurant Image">
             </div>
-            <img :src="restaurant.image" class="" alt="Restaurant Image">
-        </div>
 
-        <div class="ms_card-body d-flex justify-content-between align-items-center">
-            <div>
-                <p class="text-start">{{ restaurant.address }}</p>
-                <p>{{ descriptionPreview }}</p>
-            </div>
-            <div class="d-flex gap-1">
-                <p><i class="fa-solid fa-burger fa-lg"></i></p>
-                <p><i class="fa-solid fa-sushi fa-lg"></i></p>
-                <p><i class="fa-solid fa-pizza-slice fa-lg"></i></p>
+            <div class="ms_card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="text-start">{{ restaurant.address }}</p>
+                    <p>{{ descriptionPreview }}</p>
+                </div>
+                <div class="d-flex gap-1">
+                    <p><i class="fa-solid fa-burger fa-lg"></i></p>
+                    <p><i class="fa-solid fa-sushi fa-lg"></i></p>
+                    <p><i class="fa-solid fa-pizza-slice fa-lg"></i></p>
+                </div>
             </div>
         </div>
-    </div>
-</router-link>
+    </router-link>
 </template>
 
 <style lang="scss" scoped>
@@ -67,15 +68,17 @@ export default {
 
     &:hover img {
         transform: scale(1.09);
-        
+
     }
+
     .ms_card-img {
         position: relative;
         height: 70%;
         border-radius: 10px 10px 0 0;
         transition: 0.3s ease-in-out;
         overflow: hidden;
-        .overlay{
+
+        .overlay {
             position: absolute;
             left: 0;
             right: 0;
@@ -84,6 +87,7 @@ export default {
             z-index: 2;
             background-color: rgba($color: #232323, $alpha: .6);
         }
+
         img {
             width: 100%;
             height: 100%;
