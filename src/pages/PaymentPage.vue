@@ -107,7 +107,8 @@ export default {
 
                     }).then(resp => {
                         this.store.method.delete();
-                        this.$router.push('/restaurants');
+                        this.$router.push({path: '/restaurants',query:{success:true}}) ;
+                        console.log(resp);
                     })
                 })
                     .catch(err => {

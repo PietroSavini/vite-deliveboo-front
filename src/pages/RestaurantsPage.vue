@@ -20,18 +20,20 @@ export default {
       lastPage: null,
       loading: false,
       types: [],
-      allRestaurants: 0
+      allRestaurants: 0,
+
+     
 
     };
   },
   mounted() {
     this.getRestaurants();
     this.getTypes();
+  
   },
   methods: {
     getTypes() {
       axios.get(`${store.ApiTypesUrl}`).then(resp => {
-        console.log(resp);
         this.types = resp.data.results;
       });
     },
@@ -68,6 +70,7 @@ export default {
           </div>
           <h5>Tutti i locali</h5>
         </div>
+        <div v-if="$route.query.success " class="payment-success">il pagamento è stato effettuato,controlla l'email per i dettagli dell'ordine</div>
         <div class="row">
           <div v-for="restaurant in restaurants" class="ms_col">
             <RestaurantCard :restaurant="restaurant" />
@@ -80,12 +83,18 @@ export default {
       <div class="background-extencion"></div>
       <span class="text-center ms_loader"></span>
     </div>
-
   </section>
+
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/partials/root.scss" as *;
+.payment-success{
+  height:70px;
+  background-color:greenyellow;
+
+}
+
 
 .restaurants {
   background-color: $secondary_color;
