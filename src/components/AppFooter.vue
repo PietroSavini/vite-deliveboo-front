@@ -3,11 +3,13 @@ export default {
     name: 'AppFooter',
     data() {
         return {
-
-        }
+            isSubscribed: false,
+        };
     },
     methods: {
-
+        subNow() {
+            this.isSubscribed = true
+        }
     },
 }
 </script>
@@ -25,16 +27,6 @@ export default {
             <div class="ms_links">
                 <div class="ms_link-column">
                     <ul class="d-flex flex-column gap-2 text-center">
-                        <h5>FAQs</h5>
-                        <li>DeliveBoo per Clienti</li>
-                        <li>DeliveBoo per Riders</li>
-                        <li>DeliveBoo per Ristoratori</li>
-                        <li>Link Prova</li>
-                    </ul>
-                </div>
-
-                <div class="ms_link-column">
-                    <ul class="d-flex flex-column gap-2 text-center">
                         <h5>About Us</h5>
                         <li>La nostra storia</li>
                         <li>Blog</li>
@@ -44,8 +36,30 @@ export default {
                 </div>
 
                 <div class="ms_link-column">
-                    <ul class="d-flex flex-column gap-2 text-cente">
-                        <h5 class="text-center">Contatti</h5>
+                    <ul class="d-flex flex-column gap-2 text-center">
+                        <h5>FAQs</h5>
+                        <li>DeliveBoo per Clienti</li>
+                        <li>DeliveBoo per Riders</li>
+                        <li>DeliveBoo per Ristoratori</li>
+                        <li>Link Prova</li>
+                    </ul>
+                </div>
+
+                <div class="ms_link-column d-flex align-items-center flex-column">
+                    <h5 class="text-center">Newsletter</h5>
+                    <div class="ms_subscribe">
+                        <form class="subscription d-flex flex-column gap-3">
+                            <input class="add-email" type="email" placeholder="subscribe@me.now">
+                            <button v-if="!isSubscribed" class="submit-email" @click="subNow" type="button">Iscriviti</button>
+                            <div v-else class="subscribed" type="button">Iscritto!</div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="ms_link-column">
+                    <ul class="d-flex flex-column gap-2 text-center">
+                        <h5>Contatti</h5>
                         <li><a href=""> <span class="mx-1"><i class="fa-solid fa-envelope"></i></span>
                                 delive.boo@gmoil.com</a></li>
                         <li><a href=""> <span class="mx-1"><i class="fa-solid fa-phone"></i></span> 02-927 94 304</a></li>
@@ -80,11 +94,11 @@ export default {
 
             <div class="ms_apps d-flex gap-3">
                 <div class="ms_apple">
-                    <i class="fa-brands fa-apple" style="color: #ffffff;"></i>
+                    <i class="fa-brands fa-apple"></i>
                     <p class="">Download from the <span>Apple Store</span></p>
                 </div>
                 <div class="ms_play">
-                    <i class="fa-brands fa-google-play" style="color: #ffffff;"></i>
+                    <i class="fa-brands fa-google-play"></i>
                     <p class="">Download from the <span>Play Store</span></p>
                 </div>
             </div>
@@ -94,18 +108,17 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use "../styles/style.scss";
+@use "../styles/partials/root.scss" as *;
+
 .ms_footer {
     background-color: rgb(0, 0, 0);
-    // height: 700px;
     color: silver;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    // border-top-left-radius: 10%;
-    // border-top-right-radius: 10%;
     position: relative;
-    // z-index: 2;
-    // top: -50px;
+
     .background-extencion {
         position: absolute;
         left: 0px;
@@ -117,10 +130,11 @@ export default {
     }
 
     &-first-row {
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
 
         .deliveboo-logo {
-            width: 25%;
+            width: 20%;
             height: 100px;
 
             img {
@@ -132,7 +146,7 @@ export default {
     }
 
     &-second-row {
-        width: 90%;
+        width: 80%;
         margin: 0 auto;
 
         .ms_links {
@@ -147,7 +161,51 @@ export default {
                             padding: 10px;
                             margin: 0 5px;
                             border-radius: 2px;
-                            background-color: red;
+                            color: black;
+                            background-color: $green_deli;
+                            transition: .2s ease-in-out;
+
+                            &:hover {
+                                transform: scale(1.05);
+                                background-color: $primary_color;
+                                color: $green_deli;
+                            }
+                        }
+                    }
+                }
+
+                // SUBSCRIBE FORM
+                .ms_subscribe {
+                    width: 100%;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .subscription {
+                        width: 100%;
+                        padding: 20px;
+
+                        .add-email {
+                            padding: 10px;
+                            border-radius: 5px;
+                        }
+
+                        .submit-email {
+                            border-radius: 10px;
+                            height: 30%;
+
+                            background-color: $green_deli;
+                            font-size: 1.2rem;
+                        }
+
+                        .subscribed {
+                            border-radius: 10px;
+                            height: 30%;
+                            background-color: $primary_color;
+                            font-size: 1.2rem;
+                            color: black;
+                            text-align: center;
                         }
                     }
                 }
@@ -156,7 +214,7 @@ export default {
     }
 
     &-third-row {
-        width: 90%;
+        width: 80%;
         margin: 0 auto;
 
         .ms_apps {
@@ -172,6 +230,13 @@ export default {
                 text-align: center;
                 align-items: center;
                 font-size: .8rem;
+                cursor: pointer;
+                transition: .2s ease-in-out;
+
+                &:hover {
+                    transform: scale(1.05);
+                    background-color: rgba(255, 255, 255, 0.5);
+                }
 
 
                 span {
@@ -185,13 +250,39 @@ export default {
             }
         }
     }
-
-    /* Stili per il cellulare */
 }
 
-@media (max-width: 576px) {
-    .ms_link-column {
-        width: calc(100% / 2 - 40px);
+// MEDIA QUERIES
+
+@media screen and (max-width: 578px) {
+
+    .ms_footer-first-row {
+        display: flex;
+        width: 100%;
+        margin: 0 0;
+        justify-content: center;
+        .deliveboo-logo {
+            img {
+
+                // object-fit: contain;
+            }
+        }
+    }
+
+
+    .ms_links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .ms_apps {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 }
+
+
+
 </style>
