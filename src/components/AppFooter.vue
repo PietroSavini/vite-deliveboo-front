@@ -50,7 +50,8 @@ export default {
                     <div class="ms_subscribe">
                         <form class="subscription d-flex flex-column gap-3">
                             <input class="add-email text-center" type="email" placeholder="subscribe@me.now">
-                            <button v-if="!isSubscribed" class="submit-email" @click="subNow" type="button">Iscriviti</button>
+                            <button v-if="!isSubscribed" class="submit-email" @click="subNow"
+                                type="button">Iscriviti</button>
                             <div v-else class="subscribed" type="button">Iscritto!</div>
 
                         </form>
@@ -260,6 +261,7 @@ export default {
         display: flex;
         width: 100%;
         justify-content: center;
+
         .deliveboo-logo {
             width: 70%;
         }
@@ -276,8 +278,8 @@ export default {
         flex-direction: column;
         gap: 40px;
 
-        .ms_credits {
-        }
+        .ms_credits {}
+
         .ms_apps {
             flex-direction: column;
         }
@@ -285,4 +287,28 @@ export default {
     }
 }
 
+// @media screen and (max-width: 768px) {
+
+//     .ms_footer-first-row {
+//         display: flex;
+//         width: 100%;
+//         justify-content: center;
+
+//         .deliveboo-logo {
+//             width: 50%;
+//         }
+//     }
+
+//     .ms_footer-second-row {
+//         // flex-wrap: wrap;
+//         // justify-content: space-around;
+
+//         .ms_link-column {
+//             flex-direction: column;
+//             flex-wrap: wrap;
+//             width: calc(100% / 2);
+//             gap: 40px;
+//         }
+//     }
+// }
 </style>
