@@ -17,7 +17,7 @@ export const store = reactive({
     // getToken
     ApiToken: 'http://localhost:8000/api/generate/token',
     // sendPayment
-    ApiPayment:'http://localhost:8000/api/make/payment',
+    ApiPayment: 'http://localhost:8000/api/make/payment',
     method: {
         getArray() {
             const cart = document.getElementById('cart');
@@ -48,6 +48,14 @@ export const store = reactive({
                     });
                 })
             });
+        },
+        getImgPath(objImg) {
+            if (objImg.startsWith("http")) {
+                return objImg;
+
+            } else {
+                return `http://localhost:8000/storage/${objImg}`
+            }
         }
 
     }

@@ -1,7 +1,13 @@
 <script>
+import { store } from '../store';
 export default {
-    props:{
-        restaurant:Object
+    data() {
+        return {
+            store,
+        }
+    },
+    props: {
+        restaurant: Object
     },
     name: "SectionJumbo",
 }
@@ -9,7 +15,7 @@ export default {
 
 <template>
     <div v-if="restaurant && restaurant.image" class="jumbo-container">
-        <img :src="restaurant.image" alt="">
+        <img :src="store.method.getImgPath(restaurant.image)" alt="">
     </div>
     <div v-else class="jumbo-container">
         <img src="../assets/RestaurantImage.jpeg" alt="">
@@ -20,15 +26,14 @@ export default {
 .jumbo-container {
     height: 300px;
     position: relative;
-    
-    img{
+
+    img {
         height: 100%;
         width: 100%;
         object-fit: cover;
         z-index: -1;
-        
+
     }
 
 }
-
 </style>
