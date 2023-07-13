@@ -183,7 +183,10 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/root.scss" as *;
 
-
+section{
+    background-color: #FFF3DA;
+    
+}
 .container {
     display: flex;
 
@@ -260,6 +263,7 @@ export default {
                 padding: .5rem .5rem;
 
                 .product-card {
+                    background-color: #ffff;
                     border: 1px solid grey;
                     border-radius: 10px;
                     display: flex;
