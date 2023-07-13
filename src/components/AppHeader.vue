@@ -6,6 +6,7 @@ export default {
             search: true,
             headerHeight: true,
             searchResults:'',
+            isHamburgerMenuOpen: false,
             navLinks: [
                 {
                     label: "Home",
@@ -37,14 +38,13 @@ export default {
                 setTimeout(this.show,1000);  
             }
         }
-
     }
 
 }
 </script>
 
 <template>
-    <header >
+    <header>
         <div class="overlay"></div>
         <div :class="headerHeight? '':'header-extends'" class="container d-flex py-2">
             <div class="deliveboo-logo d-flex align-items-center">
@@ -62,6 +62,7 @@ export default {
                     <input v-model="searchResults" class="px-3" type="search" name="" id="" :class="search ? 'show' : 'hidden'">
                 </div>
             </nav>
+
             <div class="user-interactions d-flex ">
                 <a href="http://localhost:8000/">
                     <div class="login-btn">
@@ -247,5 +248,7 @@ header {
     }
 
 }
+
+
 </style>
 
