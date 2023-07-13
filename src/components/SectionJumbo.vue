@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-    <div v-if="restaurant" class="jumbo-container">
+    <div v-if="restaurant && restaurant.image" class="jumbo-container">
         <img :src="restaurant.image" alt="">
     </div>
     <div v-else class="jumbo-container">
@@ -16,20 +16,17 @@ export default {
     </div>
 </template>
 
-<style lang="scss" scoped>w
+<style lang="scss" scoped>
 .jumbo-container {
     height: 300px;
     position: relative;
     
     img{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
         height: 100%;
+        width: 100%;
         object-fit: cover;
         z-index: -1;
-        filter: blur(2px);
+        
     }
 
 }
