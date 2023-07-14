@@ -346,15 +346,9 @@ export default {
 section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
-<<<<<<< HEAD
-    
-    min-height: 1100px;
-    
-=======
 
     min-height: 1500px;
 
->>>>>>> fix-restaurant-page-2
     position: relative;
 
     @media screen and (max-width: 768px) {
