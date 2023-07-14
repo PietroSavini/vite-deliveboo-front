@@ -105,6 +105,10 @@ export default {
             </div>
         </div>
 
+        <a class="return-btn text-white" href="#">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+
     </div>
 </template>
 
@@ -115,10 +119,12 @@ export default {
 .ms_footer {
     background-color: rgb(0, 0, 0);
     color: silver;
-    padding: 20px;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     position: relative;
+    
+    
 
     .background-extencion {
         position: absolute;
@@ -130,7 +136,7 @@ export default {
         background-color: rgb(0, 0, 0);
     }
 
-    &-first-row {
+    .ms_footer-first-row {
         width: 90%;
         margin: 0 auto;
 
@@ -146,7 +152,7 @@ export default {
         }
     }
 
-    &-second-row {
+    .ms_footer-second-row {
         width: 80%;
         margin: 0 auto;
 
@@ -195,9 +201,14 @@ export default {
                         .submit-email {
                             border-radius: 10px;
                             height: 30%;
-
                             background-color: $green_deli;
                             font-size: 1.2rem;
+                            transition: 0.2s;
+
+                            &:hover {
+                                transform: scale(1.05);
+                                color: $primary_color;
+                            }
                         }
 
                         .subscribed {
@@ -214,9 +225,10 @@ export default {
         }
     }
 
-    &-third-row {
+    .ms_footer-third-row {
         width: 80%;
         margin: 0 auto;
+        position: relative;
 
         .ms_apps {
 
@@ -239,7 +251,6 @@ export default {
                     background-color: rgba(255, 255, 255, 0.5);
                 }
 
-
                 span {
                     font-size: 1.5rem;
                 }
@@ -251,6 +262,24 @@ export default {
             }
         }
     }
+    .return-btn {
+            position: absolute;
+            right: 1%;
+            bottom: 30px;
+            padding: 5px 10px;
+            font-size: 30px;
+            border: 1px solid white;
+
+            i {
+                transition: .2s ease-in-out;
+            }
+
+            i:hover {
+                scale: 1.3;
+                transition: .2s ease-in-out;
+            }
+        }
+
 }
 
 // MEDIA QUERIES
@@ -278,8 +307,6 @@ export default {
         flex-direction: column;
         gap: 40px;
 
-        .ms_credits {}
-
         .ms_apps {
             flex-direction: column;
         }
@@ -287,28 +314,4 @@ export default {
     }
 }
 
-// @media screen and (max-width: 768px) {
-
-//     .ms_footer-first-row {
-//         display: flex;
-//         width: 100%;
-//         justify-content: center;
-
-//         .deliveboo-logo {
-//             width: 50%;
-//         }
-//     }
-
-//     .ms_footer-second-row {
-//         // flex-wrap: wrap;
-//         // justify-content: space-around;
-
-//         .ms_link-column {
-//             flex-direction: column;
-//             flex-wrap: wrap;
-//             width: calc(100% / 2);
-//             gap: 40px;
-//         }
-//     }
-// }
 </style>

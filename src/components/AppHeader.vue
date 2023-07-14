@@ -17,10 +17,7 @@ export default {
                     label: "Restaurants",
                     route: "restaurants"
                 },
-                {
-                    label: "About Us",
-                    route: "about-us"
-                },
+                
             ],
             mobileNavLinks: [
                 {
@@ -31,10 +28,7 @@ export default {
                     icon: 'fa-solid fa-utensils',
                     route: 'restaurants'
                 },
-                {
-                    icon: 'fa-solid fa-info-circle',
-                    route: 'about-us'
-                },
+                
             ],
         }
 
@@ -147,7 +141,7 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
-            
+
             a {
                 margin: 0 5px;
                 padding: 10px;
@@ -241,7 +235,7 @@ header {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 20%;
+                    width: 25%;
                     border-right: 1px solid;
                     border-color: rgba($color: #ffffff, $alpha: .6);
                     height: 100%;
@@ -288,8 +282,6 @@ header {
                 }
             }
         }
-
-        .hamburger-menu {}
 
         .user-interactions {
             width: 20%;
@@ -342,10 +334,6 @@ header {
 }
 
 @media screen and (max-width: 768px) {
-
-    .deliveboo-logo {
-        // height: 500px;
-    }
 
     .nav-links {
         display: none;

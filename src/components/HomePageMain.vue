@@ -99,8 +99,8 @@ export default{
             
             .ms_col{
                 
-                width: 350px;
-                height: 150px;
+                width: 440px;
+                height: 220px;
                 padding: 5px 5px;
             }
         }
