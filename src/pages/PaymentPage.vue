@@ -4,6 +4,7 @@ import { store } from '../store';
 import axios from 'axios';
 import braintree from 'braintree-web';
 import SectionJumbo from '../components/SectionJumbo.vue';
+import AppCart from "../components/AppCart.vue";
 
 export default {
     name: "PaymentPage",
@@ -18,8 +19,10 @@ export default {
             address: "",
             email: "",
             notes: "",
-            cardOwner:"",
-            hover:false,
+            cardOwner: "",
+            hover: false,
+            products: [],
+            cartProducts: [],
 
         }
     },
@@ -107,7 +110,7 @@ export default {
 
                     }).then(resp => {
                         this.store.method.delete();
-                        this.$router.push({path: '/restaurants',query:{success:true}}) ;
+                        this.$router.push({ path: '/restaurants', query: { success: true } });
                         console.log(resp);
                     })
                 })
@@ -115,19 +118,17 @@ export default {
                         console.error(err);
                     })
             }
-        }
-
+        },
+        removeCart() {
+            this.store.method.delete();
+            this.cartProducts = [];
+        },
 
     },
     components: {
-
+        AppCart,
         SectionJumbo
     }
-
-
-
-
-
 }
 
 </script>
@@ -141,7 +142,7 @@ export default {
 
                 <div class="card-container">
 
-                    <div :class="hover?'front-rotate':'' " class="front">
+                    <div :class="hover ? 'front-rotate' : ''" class="front">
                         <div class="image">
                             <img src="../assets/chip.png" alt="">
                             <img src="../assets/visa.png" alt="">
@@ -150,7 +151,7 @@ export default {
                         <div class="flexbox">
                             <div class="box">
                                 <span>Intestatario</span>
-                                <div class="card-holder-name">{{cardOwner}}</div>
+                                <div class="card-holder-name">{{ cardOwner }}</div>
                             </div>
                             <div class="box">
                                 <span>Scade il</span>
@@ -162,7 +163,7 @@ export default {
                         </div>
                     </div>
 
-                    <div :class="hover?'back-rotate':'' " class="back">
+                    <div :class="hover ? 'back-rotate' : ''" class="back">
                         <div class="stripe"></div>
                         <div class="box">
                             <span>cvv</span>
@@ -182,52 +183,65 @@ export default {
                 <div class="forms d-flex mt-4">
                     <!-- shipping form info -->
                     <div class="shipping text-start">
-                        <h5 class="text-center">informazioni di consegna</h5>    
+                        <h5 class="text-center">informazioni di consegna</h5>
                         <form>
 
                             <label for="name">Nome e Cognome: *</label>
                             <input class="mb-2" type="text" id="name" v-model="nameSurname">
-                     
+
                             <label for="address">indirizzo di Consegna: *</label>
                             <input class="mb-2" type="text" id="address" v-model="address">
-                           
+
                             <label for="email">email: *</label>
                             <input class="mb-2" type="email" id="email" v-model="email">
-                         
-                            <label for="text">Note: </label>
-                            <textarea class="mb-2"  id="text" v-model="notes"></textarea>
-                            
-                        </form>
-                        
 
+                            <label for="text">Note: </label>
+                            <textarea class="mb-2" id="text" v-model="notes"></textarea>
+
+                        </form>
                     </div>
                     <!-- /shipping form info -->
 
                     <!-- Credit Card from Info -->
                     <div class="payment text-start">
                         <h5 class="text-center">Dettagli Carta</h5>
-                        <form >
+                        <form>
                             <label for="cardOwner">Intestatario Carta</label>
                             <input type="text" class="mb-2" v-model="cardOwner" id="cardOwner">
 
                             <label for="creditCardNumber">Numero Carta</label>
                             <div id="creditCardNumber" class="form-control mb-2"></div>
-                        
+
                             <label for="expireDate">Data di Scadenza</label>
                             <div id="expireDate" class="form-control mb-2"></div>
-                            
+
                             <div @mouseenter="hover = true" @mouseleave="hover = false" class="cvv-input">
                                 <label for="cvv">CVV</label>
                                 <div id="cvv" class="form-control mb-2"></div>
-                            </div>         
+                            </div>
                         </form>
                     </div>
                 </div>
+
+                <hr>
+
+                <h5 class="text-center">Riepilogo ordine</h5>
+                <div class="cart-summary py-3">
+                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
+                        <div class="cart-actions">
+                            <button class="cart-btn minus">&minus;</button>
+                            <button class="cart-btn">&plus;</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- /Credit Card from Info -->
                 <button class="submit-btn" @click="sendPayment()"> Procedi all' ordine</button>
+
                 <hr>
+
                 <p class="text-center mb-2">
-                     ti invieremo un email con i dettagli della consegna ad avvenuto pagamento 
+                    ti invieremo un email con i dettagli della consegna ad avvenuto pagamento
                 </p>
                 <p>* campi obbligatori</p>
             </div>
@@ -235,7 +249,6 @@ export default {
         </div>
 
     </section>
-    
 </template>
 
 
@@ -243,9 +256,11 @@ export default {
 section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
+    // margin-bottom: 10rem;
     height: calc(100vh - 200px);
     position: relative;
-    @media screen and (max-width: 768px){
+
+    @media screen and (max-width: 768px) {
         height: calc(100vh + 100px);
     }
 
@@ -257,69 +272,119 @@ section.payment-page {
         left: 50%;
         transform: translateX(-50%);
         box-shadow: 0px 10px 30px rgb(77, 77, 77);
-        .shipping-payment{
-            .submit-btn{
+
+        .shipping-payment {
+            .submit-btn {
                 display: inline-block;
-                
+
                 width: 50%;
-                background:linear-gradient(45deg, blueviolet, deeppink);
+                background: linear-gradient(45deg, blueviolet, deeppink);
                 margin-top: 20px;
                 padding: 10px;
                 font-size: 20px;
-                color:#fff;
+                color: #fff;
                 border-radius: 10px;
                 cursor: pointer;
                 transition: .2s linear;
                 border: none;
             }
-            @media screen and (max-width:768px){
-                .forms{
+
+            @media screen and (max-width:768px) {
+                .forms {
                     flex-direction: column-reverse;
                     align-items: center;
                     gap: 2rem;
-                    .payment,.shipping{
+
+                    .payment,
+                    .shipping {
                         width: 70%;
-                        
+
                     }
                 }
             }
-            .payment,.shipping{
+
+            .payment,
+            .shipping {
                 width: 50%;
                 padding: 0 .5rem;
-                form{
+
+                form {
                     display: flex;
                     flex-direction: column;
-                    .form-control{
+
+                    .form-control {
                         height: 26px;
-                        border-radius: 10px ;
-                        border-color: grey ;
+                        border-radius: 10px;
+                        border-color: grey;
                         width: 100%;
                         transition: 200ms;
-                       
-                        
+
+
                     }
-                    label{
+
+                    label {
                         display: block;
                         color: #585858;
                     }
-                    input,textarea{
+
+                    input,
+                    textarea {
                         border-radius: 10px;
                         border: 1px solid grey;
                         padding: 0 .8rem;
                         transition: 200ms;
-                        
-                        &:focus{
+
+                        &:focus {
                             outline: none;
-                            
+
                         }
                     }
                 }
             }
-           
+
+            .cart-summary {
+                width: 70%;
+                max-height: 300px;
+                min-height: 100px;
+                margin: 0 auto;
+                overflow: auto;
+
+                .cart-item {
+                    display: flex;
+                    width: 100%;
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid rgb(218, 218, 218);
+
+                    p {
+                        width: 70%;
+                    }
+
+                    .cart-actions {
+                        width: 30%;
+
+                        .cart-btn {
+
+                            cursor: pointer;
+                            margin: 0 2px;
+                            height: 25px;
+                            width: 25px;
+                            border: none;
+                            background-color: lightgreen;
+                            display: inline-block;
+                            border-radius: 100%;
+
+                            &.minus {
+                                background-color: lightcoral;
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
         .card-section-container {
-            
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -332,10 +397,12 @@ section.payment-page {
                 height: 250px;
                 margin-bottom: -100px;
                 width: 400px;
-                @media screen and (max-width: 450px){
+
+                @media screen and (max-width: 450px) {
                     width: 100%;
                 }
-                @media screen and (max-width : 330px){
+
+                @media screen and (max-width : 330px) {
                     display: none;
                 }
 
@@ -436,10 +503,11 @@ section.payment-page {
     }
 }
 
-.front-rotate{
+.front-rotate {
     transform: perspective(1000px) rotateY(-180deg) !important;
 }
-.back-rotate{
+
+.back-rotate {
     transform: perspective(1000px) rotateY(0deg) !important;
 }
 </style>

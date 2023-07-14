@@ -119,10 +119,11 @@ export default {
 .ms_footer {
     background-color: rgb(0, 0, 0);
     color: silver;
-    padding: 20px;
+    // padding: 20px;
     display: flex;
     flex-direction: column;
     position: relative;
+    bottom: 0;
 
     .background-extencion {
         position: absolute;
@@ -134,7 +135,7 @@ export default {
         background-color: rgb(0, 0, 0);
     }
 
-    &-first-row {
+    .ms_footer-first-row {
         width: 90%;
         margin: 0 auto;
 
@@ -150,7 +151,7 @@ export default {
         }
     }
 
-    &-second-row {
+    .ms_footer-second-row {
         width: 80%;
         margin: 0 auto;
 
@@ -223,7 +224,7 @@ export default {
         }
     }
 
-    &-third-row {
+    .ms_footer-third-row {
         width: 80%;
         margin: 0 auto;
 
