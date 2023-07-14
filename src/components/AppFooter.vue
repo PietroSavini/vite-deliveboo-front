@@ -119,7 +119,7 @@ export default {
 .ms_footer {
     background-color: rgb(0, 0, 0);
     color: silver;
-    // padding: 20px;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -228,6 +228,7 @@ export default {
     .ms_footer-third-row {
         width: 80%;
         margin: 0 auto;
+        position: relative;
 
         .ms_apps {
 
@@ -261,11 +262,10 @@ export default {
             }
         }
     }
-
     .return-btn {
             position: absolute;
             right: 1%;
-            bottom: 0;
+            bottom: 30px;
             padding: 5px 10px;
             font-size: 30px;
             border: 1px solid white;
@@ -279,6 +279,7 @@ export default {
                 transition: .2s ease-in-out;
             }
         }
+
 }
 
 // MEDIA QUERIES
