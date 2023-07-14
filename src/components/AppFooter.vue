@@ -212,7 +212,7 @@ export default {
 
                     // SUBSCRIBE FORM
                     .ms_subscribe {
-                        width: 100%;
+                        width: 60%;
                         border-radius: 10px;
                         display: flex;
                         align-items: center;
