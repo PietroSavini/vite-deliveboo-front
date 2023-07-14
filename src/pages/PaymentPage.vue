@@ -233,6 +233,36 @@ export default {
                             <button class="cart-btn">&plus;</button>
                         </div>
                     </div>
+                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
+                        <div class="cart-actions">
+                            <button class="cart-btn minus">&minus;</button>
+                            <button class="cart-btn">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
+                        <div class="cart-actions">
+                            <button class="cart-btn minus">&minus;</button>
+                            <button class="cart-btn">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
+                        <div class="cart-actions">
+                            <button class="cart-btn minus">&minus;</button>
+                            <button class="cart-btn">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
+                        <div class="cart-actions">
+                            <button class="cart-btn minus">&minus;</button>
+                            <button class="cart-btn">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
+                        <div class="cart-actions">
+                            <button class="cart-btn minus">&minus;</button>
+                            <button class="cart-btn">&plus;</button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- /Credit Card from Info -->
@@ -256,8 +286,9 @@ export default {
 section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
-    // margin-bottom: 10rem;
-    height: calc(100vh - 200px);
+    
+    min-height: 1500px;
+    
     position: relative;
 
     @media screen and (max-width: 768px) {
@@ -272,6 +303,7 @@ section.payment-page {
         left: 50%;
         transform: translateX(-50%);
         box-shadow: 0px 10px 30px rgb(77, 77, 77);
+        z-index: 3;
 
         .shipping-payment {
             .submit-btn {
