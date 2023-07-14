@@ -8,6 +8,19 @@
 *{
   user-select: none;
 }
+
+#app{
+  min-height: 100vh;
+  position: relative;
+}
+
+.featured,.restaurants{
+  min-height: 600px;
+  padding-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+
 body{
   font-family: 'Poppins', sans-serif;
   background-color: $secondary_color;
@@ -41,11 +54,6 @@ ul{
   }
 }
 
-section.featured {
-  padding-bottom: 6rem;
-  min-height: 500px;
-  
-}
 
 
 

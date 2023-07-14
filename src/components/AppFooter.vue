@@ -123,7 +123,8 @@ export default {
     display: flex;
     flex-direction: column;
     position: relative;
-    bottom: 0;
+    
+    
 
     .background-extencion {
         position: absolute;

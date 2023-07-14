@@ -83,7 +83,7 @@ export default {
 
 <template>
     <SectionJumbo :restaurant="restaurant" />
-    <section>
+    <section class="restaurants">
 
         <div class="container">
             <div class="restaurant-details-col">
