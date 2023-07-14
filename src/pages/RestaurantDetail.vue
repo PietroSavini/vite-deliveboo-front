@@ -115,8 +115,7 @@ export default {
                                             <span>{{ product.price }}</span><span>€</span>
                                         </div>
                                         <div>
-                                            <span @click="newObj(product, index)" class="buy">Aggiungi al <i
-                                                    class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
+                                            <span @click="newObj(product, index)" class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
                                         </div>
 
                                     </div>
@@ -130,13 +129,14 @@ export default {
 
             <!-- <a class="cart-mobile-btn" href="#">CART</a> -->
 
-            <AppCart class="d-none d-sm-block" :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
-                @backToRestaurant="getRestaurantDetails" />
+            <AppCart class="d-none d-sm-block" :cartProducts="cartProducts" :not_allowed="not_allowed"
+                @deleteCart="removeCart" @backToRestaurant="getRestaurantDetails" />
 
 
 
-            <button class="btn btn-primary d-sm-none cart-mobile-btn" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button>
+            <button class="btn d-sm-none cart-mobile-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-cart-shopping"
+                    style="color: #FFC245;"></i></button>
 
             <div class="offcanvas offcanvas-top ms_trans" tabindex="-1" id="offcanvasTop"
                 aria-labelledby="offcanvasTopLabel">
@@ -165,19 +165,25 @@ section {
 
 .container {
     display: flex;
+    padding-right: 0;
 
     .ms_trans {
         background-color: transparent;
     }
 
     .cart-mobile-btn {
-        width: 35px;
-        height: 35px;
-        background-color: red;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         top: 50px;
+        margin: 10px;
         display: none;
-        text-align: center;
+        display: block;
+        position: sticky;
+        background-color: #27A182;
+        box-shadow: 0px 10px 15px rgb(166, 166, 166);
+
+        // text-align: center;
     }
 
     @media screen and (max-width: 578px) {
@@ -189,13 +195,6 @@ section {
             top: 100px;
             right: 0%;
             // display: none;
-        }
-
-        .cart-mobile-btn {
-            display: block;
-            position: sticky;
-
-
         }
     }
 
@@ -301,9 +300,10 @@ section {
 
                             .buy {
                                 display: inline-block;
-                                padding: 0 1rem;
+                                padding: 0 .7rem;
                                 line-height: 30px;
                                 height: 30px;
+                                font-size: .7rem;
                                 background-color: $primary_color;
                                 border-radius: 50px;
                                 cursor: pointer;
