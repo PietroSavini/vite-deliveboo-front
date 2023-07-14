@@ -95,7 +95,7 @@ export default {
                     </div>
                 </div>
                 <div class="restaurant-products">
-                    
+
                     <div class="product-list">
                         <!-- CREAZIONE COMPONENTE? -->
                         <div v-for="product, index in products" class="product-card mb-3">
@@ -115,8 +115,7 @@ export default {
                                             <span>{{ product.price }}</span><span>€</span>
                                         </div>
                                         <div>
-                                            <span @click="newObj(product, index)" class="buy">Aggiungi al <i
-                                                    class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
+                                            <span @click="newObj(product, index)" class="buy">Aggiungi al <i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></span>
                                         </div>
 
                                     </div>
@@ -126,8 +125,31 @@ export default {
                     </div>
                 </div>
             </div>
-            <AppCart :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
-                @backToRestaurant="getRestaurantDetails" />
+
+
+            <!-- <a class="cart-mobile-btn" href="#">CART</a> -->
+
+            <AppCart class="d-none d-sm-block" :cartProducts="cartProducts" :not_allowed="not_allowed"
+                @deleteCart="removeCart" @backToRestaurant="getRestaurantDetails" />
+
+
+
+            <button class="btn d-sm-none cart-mobile-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-cart-shopping"
+                    style="color: #FFC245;"></i></button>
+
+            <div class="offcanvas offcanvas-top ms_trans" tabindex="-1" id="offcanvasTop"
+                aria-labelledby="offcanvasTopLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body ">
+                    <AppCart :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
+                        @backToRestaurant="getRestaurantDetails" />
+
+                </div>
+            </div>
 
         </div>
     </section>
@@ -143,15 +165,44 @@ section {
 
 .container {
     display: flex;
+    padding-right: 0;
+
+    .ms_trans {
+        background-color: transparent;
+    }
+
+    .cart-mobile-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        top: 50px;
+        margin: 10px;
+        display: none;
+        display: block;
+        position: sticky;
+        background-color: #27A182;
+        box-shadow: 0px 10px 15px rgb(166, 166, 166);
+
+        // text-align: center;
+    }
+
+    @media screen and (max-width: 578px) {
+
+        .cart-col {
+            display: block;
+            width: 100%;
+            position: absolute;
+            top: 100px;
+            right: 0%;
+            // display: none;
+        }
+    }
 
     @media screen and (max-width: 768px) {
         .restaurant-details-col {
             width: 100%;
         }
 
-        .cart-col {
-            display: none;
-        }
     }
 
     .restaurant-details-col {
@@ -202,7 +253,7 @@ section {
             display: flex;
             height: 100%;
 
-            
+
 
             .product-list {
                 width: 100%;
@@ -249,9 +300,10 @@ section {
 
                             .buy {
                                 display: inline-block;
-                                padding: 0 1rem;
+                                padding: 0 .7rem;
                                 line-height: 30px;
                                 height: 30px;
+                                font-size: .7rem;
                                 background-color: $primary_color;
                                 border-radius: 50px;
                                 cursor: pointer;

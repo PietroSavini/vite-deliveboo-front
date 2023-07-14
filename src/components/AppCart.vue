@@ -11,6 +11,9 @@ export default {
     props: {
         cartProducts: Array,
         not_allowed: Boolean,
+        checkout: { type: Boolean, default: true },
+
+
     },
     emits: [
         'deleteCart'
@@ -47,6 +50,11 @@ export default {
             return total
         },
         newObj(object) {
+            if (this.not_allowed) {
+                this.checkout = false;
+                return;
+            }
+
             const obj = {
                 id: object.id,
                 name: object.name,
@@ -81,20 +89,23 @@ export default {
                             </div>
                         </li>
                         <div v-if="not_allowed" class="">
-                            <p class="">hai un ordine in corso con un altro ristorante <router-link
+                            <h2 class="text-center">Attenzione!</h2>
+                            <p class="fs-4">Hai un ordine in corso con un altro ristorante!</p>
+                            <p class="fs-4">Per tornare a quello precedente clicca <router-link
                                     :to="{ name: 'restaurant-detail', params: { id: cartProducts[0].restaurant } }"
                                     @click="$emit('backToRestaurant', cartProducts[0].restaurant)"
-                                    class="btn btn-primary">continua</router-link> o svuota carrello per continuare</p>
-
-
+                                    class="text-primary"><u>qui</u></router-link>, altrimenti svuota il carrello.</p>
                         </div>
 
                     </ul>
-                    <div>totale: {{ getTotal() }}&euro;</div>
+
+                    <hr>
+                     
+                    <div class="fs-3">Totale: {{ getTotal() }}&euro;</div>
                     <div class="final-actions d-flex justify-content-center">
-                        <span class="btn btn-danger ms_btn" @click="$emit('deleteCart')">svuota carrello</span>
-                        <span class="btn btn-success ms_btn"><router-link
-                                :to="{ name: 'payment' }">checkout</router-link></span>
+                        <span class="btn btn-danger ms_btn" @click="$emit('deleteCart')">Svuota carrello</span>
+                        <span v-if="checkout" class="btn btn-success ms_btn" :class="{ 'disabled': not_allowed }"><router-link
+                                :to="{ name: 'payment' }">Checkout</router-link></span>
                     </div>
 
                 </div>
@@ -135,9 +146,9 @@ export default {
             background-color: #ffffff;
 
             .ms_btn {
-                width: 130px;
+                width: 150px;
                 border-radius: 40px;
-                font-size: .8rem;
+                font-size: 1rem;
                 margin: 0 5px;
 
             }

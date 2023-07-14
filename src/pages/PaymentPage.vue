@@ -119,6 +119,83 @@ export default {
                     })
             }
         },
+
+        // FUNZIONI PER RIEPILOGO
+        getProducts(restaurantId) {
+            axios.get(`${this.store.ApiProductsUrl}`, { params: { restaurant_id: restaurantId } }).then((resp) => {
+                this.products = resp.data.results;
+
+            })
+        },
+
+        getRestaurantDetails(restaurantId) {
+            axios.get(`${this.store.ApiRestaurantUrl}`, { params: { restaurant_id: restaurantId } }).then((resp) => {
+                this.restaurant = resp.data.results[0];
+                this.getProducts(restaurantId);
+                this.not_allowed = false;
+            })
+        },
+
+        getPrice(obj) {
+            return parseFloat(obj.price) * obj.quantity
+        },
+
+        decrementProduct(index) {
+            const product = this.cartProducts[index];
+            if (product.quantity > 1) {
+                product.quantity--;
+            } else {
+                this.removeObj(index);
+            }
+            this.store.method.salva(this.cartProducts);
+
+        },
+        removeObj(index) {
+
+            if (index >= 0 && index < this.cartProducts.length) {
+                this.cartProducts.splice(index, 1);
+                this.store.method.salva(this.cartProducts);
+            }
+        },
+
+        getTotal() {
+            let total = 0;
+            this.cartProducts.forEach(product => {
+                total += parseFloat(product.price) * product.quantity
+            })
+            return total
+        },
+
+        // funzione che crea oggetto e lo aggiunge all array e salva nel localstorage
+        newObj(object) {
+            const obj = {
+                id: object.id,
+                name: object.name,
+                quantity: 0,
+                price: object.price,
+                restaurant: object.restaurant_id
+            }
+            //  vedi se contiene gia oggetto
+            if (this.cartProducts.some(item => item.id === object.id)) {
+
+                const oggetto = this.cartProducts.find(item => item.id === object.id);
+                oggetto.quantity++
+            } else {
+                // se è un altro ristorante non puoi
+                if (this.cartProducts.some(item => item.restaurant !== object.restaurant_id)) {
+                    console.log(this.cartProducts[0].restaurant);
+                    this.not_allowed = true;
+                    //  senno pusha oggetto
+                } else {
+                    this.cartProducts.push(obj);
+                    obj.quantity = 1;
+                    console.log(obj);
+                    this.not_allowed = false;
+                }
+            }
+            // salvo array aaggiornato nel local storage
+            this.store.method.salva(this.cartProducts);
+        },
         removeCart() {
             this.store.method.delete();
             this.cartProducts = [];
@@ -225,45 +302,28 @@ export default {
 
                 <hr>
 
+                <!-- RIEPILOGO ORDINE -->
                 <h5 class="text-center">Riepilogo ordine</h5>
                 <div class="cart-summary py-3">
-                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
+                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">
+                        <p>{{ obj.name }} x {{ obj.quantity }} : {{ getPrice(obj) }}&euro; </p>
                         <div class="cart-actions">
-                            <button class="cart-btn minus">&minus;</button>
-                            <button class="cart-btn">&plus;</button>
+                            <button class="cart-btn minus" @click="decrementProduct(index)">&minus;</button>
+                            <button class="cart-btn" @click="newObj(obj, index)">&plus;</button>
                         </div>
                     </div>
-                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
-                        <div class="cart-actions">
-                            <button class="cart-btn minus">&minus;</button>
-                            <button class="cart-btn">&plus;</button>
-                        </div>
-                    </div>
-                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
-                        <div class="cart-actions">
-                            <button class="cart-btn minus">&minus;</button>
-                            <button class="cart-btn">&plus;</button>
-                        </div>
-                    </div>
-                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
-                        <div class="cart-actions">
-                            <button class="cart-btn minus">&minus;</button>
-                            <button class="cart-btn">&plus;</button>
-                        </div>
-                    </div>
-                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
-                        <div class="cart-actions">
-                            <button class="cart-btn minus">&minus;</button>
-                            <button class="cart-btn">&plus;</button>
-                        </div>
-                    </div>
-                    <div class="mb-2 cart-item" v-for="obj, index in cartProducts">            
-                        <div class="cart-actions">
-                            <button class="cart-btn minus">&minus;</button>
-                            <button class="cart-btn">&plus;</button>
-                        </div>
-                    </div>
+
                 </div>
+                <div class="mb-3 fs-3">Totale: {{ getTotal() }}&euro;</div>
+                <div class="final-actions d-flex justify-content-center gap-2">
+                    <span class="btn btn-danger ms_btn">Svuota Carrello</span>
+                    <!-- <AppCart @deleteCart="removeCart"/> -->
+                    <span class="btn ms_btn btn-success" @click="$emit('backToRestaurant', cartProducts[0].restaurant)">Torna al ristorante</span>
+                </div>
+
+                <!-- / RIEPILOGO ORDINE -->
+
+
 
                 <!-- /Credit Card from Info -->
                 <button class="submit-btn" @click="sendPayment()"> Procedi all' ordine</button>
@@ -271,7 +331,7 @@ export default {
                 <hr>
 
                 <p class="text-center mb-2">
-                    ti invieremo un email con i dettagli dell' ordine ad avvenuto pagamento
+                    Ti invieremo un email con i dettagli dell' ordine ad avvenuto pagamento
                 </p>
                 <p>* campi obbligatori</p>
             </div>
@@ -286,9 +346,15 @@ export default {
 section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
+<<<<<<< HEAD
     
     min-height: 1100px;
     
+=======
+
+    min-height: 1500px;
+
+>>>>>>> fix-restaurant-page-2
     position: relative;
 
     @media screen and (max-width: 768px) {
@@ -383,6 +449,18 @@ section.payment-page {
                 overflow: auto;
 
                 .cart-item {
+
+                    .ms_btn {
+                        width: 130px;
+                        border-radius: 40px;
+                        font-size: .8rem;
+                        margin: 0 5px;
+                    }
+
+                    .btn-empty {
+                        background-color: lightcoral;
+                    }
+
                     display: flex;
                     width: 100%;
                     padding-bottom: 1rem;
