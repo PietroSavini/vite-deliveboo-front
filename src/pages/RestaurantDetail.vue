@@ -95,7 +95,7 @@ export default {
                     </div>
                 </div>
                 <div class="restaurant-products">
-                    
+
                     <div class="product-list">
                         <!-- CREAZIONE COMPONENTE? -->
                         <div v-for="product, index in products" class="product-card mb-3">
@@ -126,6 +126,10 @@ export default {
                     </div>
                 </div>
             </div>
+
+
+            <a class="cart-mobile-btn" href="#">CART</a>
+
             <AppCart :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
                 @backToRestaurant="getRestaurantDetails" />
 
@@ -144,14 +148,39 @@ section {
 .container {
     display: flex;
 
+    .cart-mobile-btn {
+        width: 70px;
+        height: 70px;
+        background-color: red;
+        border-radius: 50%;
+        top: 50px;
+        display: none;
+        text-align: center;
+    }
+
+    @media screen and (max-width: 578px) {
+
+        .cart-col {
+            display: block;
+            width: 100%;
+            position: absolute;
+            top: 100px;
+            right: 0%;
+        }
+
+        .cart-mobile-btn {
+            display: block;
+            position: sticky;
+
+
+        }
+    }
+
     @media screen and (max-width: 768px) {
         .restaurant-details-col {
             width: 100%;
         }
 
-        .cart-col {
-            display: none;
-        }
     }
 
     .restaurant-details-col {
@@ -202,7 +231,7 @@ section {
             display: flex;
             height: 100%;
 
-            
+
 
             .product-list {
                 width: 100%;
