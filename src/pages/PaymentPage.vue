@@ -271,7 +271,7 @@ export default {
                 <hr>
 
                 <p class="text-center mb-2">
-                    ti invieremo un email con i dettagli della consegna ad avvenuto pagamento
+                    ti invieremo un email con i dettagli dell' ordine ad avvenuto pagamento
                 </p>
                 <p>* campi obbligatori</p>
             </div>
