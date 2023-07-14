@@ -104,13 +104,16 @@ export default {
             </div>
 
             <div class="ms_3rd-row-center d-flex gap-3">
-                <div class="ms_apple">
-                    <i class="fa-brands fa-apple"></i>
-                    <p class="">Download from the <span>Apple Store</span></p>
-                </div>
-                <div class="ms_play">
-                    <i class="fa-brands fa-google-play"></i>
-                    <p class="">Download from the <span>Play Store</span></p>
+
+                <div class="ms_apps">
+                    <div class="ms_apple my-3">
+                        <i class="fa-brands fa-apple"></i>
+                        <p class="">Download from the <span>Apple Store</span></p>
+                    </div>
+                    <div class="ms_play">
+                        <i class="fa-brands fa-google-play"></i>
+                        <p class="">Download from the <span>Play Store</span></p>
+                    </div>
                 </div>
             </div>
             <div class="ms_3rd-row-col d-flex">
@@ -260,7 +263,9 @@ export default {
         flex-wrap: wrap;
         flex-direction: row;
         .ms_3rd-row-col {
+
             width: calc(100% / 3); 
+            justify-content: flex-end;
             @media screen and (max-width: 768px) {
                 width: 100%;
             };
@@ -270,6 +275,7 @@ export default {
         };
         .ms_3rd-row-center {
             width: calc(100% / 3);
+            justify-content: center;
             .ms_apple, .ms_play {
                 max-width: 200px;
                 max-height: 80px;
@@ -301,6 +307,7 @@ export default {
             };
             @media screen and (max-width: 768px) {
                 width: 100%;
+                justify-content: center;
             };
             @media screen and (max-width: 425px) {
                     flex-wrap: wrap;
