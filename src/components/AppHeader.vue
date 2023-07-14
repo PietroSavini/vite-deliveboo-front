@@ -147,7 +147,7 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
-            
+
             a {
                 margin: 0 5px;
                 padding: 10px;
@@ -289,8 +289,6 @@ header {
             }
         }
 
-        .hamburger-menu {}
-
         .user-interactions {
             width: 20%;
             justify-content: end;
@@ -342,10 +340,6 @@ header {
 }
 
 @media screen and (max-width: 768px) {
-
-    .deliveboo-logo {
-        // height: 500px;
-    }
 
     .nav-links {
         display: none;
