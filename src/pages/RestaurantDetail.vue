@@ -95,15 +95,7 @@ export default {
                     </div>
                 </div>
                 <div class="restaurant-products">
-                    <div class="product-categories">
-                        <div class="categories">
-                            <!-- DA INSERIRE LE CATEGORIE DEI PRODOTTI CHE HA IL RISTORANTE -->
-                            <p class="text-center">categorie</p>
-                            <ul>
-                                <li></li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                     <div class="product-list">
                         <!-- CREAZIONE COMPONENTE? -->
                         <div v-for="product, index in products" class="product-card mb-3">
@@ -210,18 +202,10 @@ section {
             display: flex;
             height: 100%;
 
-            .product-categories {
-                width: 20%;
-                padding: 0.5rem;
-
-                .categories {
-                    position: sticky;
-                    top: 10px;
-                }
-            }
+            
 
             .product-list {
-                width: 80%;
+                width: 100%;
                 padding: .5rem .5rem;
 
                 .product-card {
