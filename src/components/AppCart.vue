@@ -11,7 +11,7 @@ export default {
     props: {
         cartProducts: Array,
         not_allowed: Boolean,
-        checkout: { type: Boolean, default: true},
+        checkout: { type: Boolean, default: true },
 
 
     },
@@ -88,8 +88,6 @@ export default {
                                     :to="{ name: 'restaurant-detail', params: { id: cartProducts[0].restaurant } }"
                                     @click="$emit('backToRestaurant', cartProducts[0].restaurant)"
                                     class="btn btn-primary">continua</router-link> o svuota carrello per continuare</p>
-
-
                         </div>
 
                     </ul>
