@@ -128,10 +128,28 @@ export default {
             </div>
 
 
-            <a class="cart-mobile-btn" href="#">CART</a>
+            <!-- <a class="cart-mobile-btn" href="#">CART</a> -->
 
-            <AppCart :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
+            <AppCart class="d-none d-sm-block" :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
                 @backToRestaurant="getRestaurantDetails" />
+
+
+
+            <button class="btn btn-primary d-sm-none cart-mobile-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button>
+
+            <div class="offcanvas offcanvas-top ms_trans" tabindex="-1" id="offcanvasTop"
+                aria-labelledby="offcanvasTopLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body ">
+                    <AppCart :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
+                        @backToRestaurant="getRestaurantDetails" />
+
+                </div>
+            </div>
 
         </div>
     </section>
@@ -148,9 +166,13 @@ section {
 .container {
     display: flex;
 
+    .ms_trans {
+        background-color: transparent;
+    }
+
     .cart-mobile-btn {
-        width: 70px;
-        height: 70px;
+        width: 35px;
+        height: 35px;
         background-color: red;
         border-radius: 50%;
         top: 50px;
@@ -166,6 +188,7 @@ section {
             position: absolute;
             top: 100px;
             right: 0%;
+            // display: none;
         }
 
         .cart-mobile-btn {
