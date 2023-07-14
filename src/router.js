@@ -18,7 +18,6 @@ const router = createRouter({
             name: "restaurants",
             component: RestaurantsPage
         },
-        
         {
             path:"/restaurant/detail/:id",
             name:"restaurant-detail",

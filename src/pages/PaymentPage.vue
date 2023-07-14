@@ -287,12 +287,13 @@ section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
     
-    min-height: 1500px;
+    min-height: 1100px;
     
     position: relative;
 
     @media screen and (max-width: 768px) {
-        height: calc(100vh + 100px);
+        min-height: 1500px;
+
     }
 
     .container {
