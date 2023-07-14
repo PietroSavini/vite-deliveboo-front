@@ -43,8 +43,8 @@ export default {
                 </div>
                 <div class="d-flex gap-1">
                     <p><i class="fa-solid fa-burger fa-lg"></i></p>
-                    <p><i class="fa-solid fa-sushi fa-lg"></i></p>
                     <p><i class="fa-solid fa-pizza-slice fa-lg"></i></p>
+                    <p><i class="fa-solid fa-utensils fa-lg"></i></p>
                 </div>
             </div>
         </div>
