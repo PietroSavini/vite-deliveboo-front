@@ -14,7 +14,7 @@ export default {
                     route: "home"
                 },
                 {
-                    label: "Restaurants",
+                    label: "Ristoranti",
                     route: "restaurants"
                 },
                 

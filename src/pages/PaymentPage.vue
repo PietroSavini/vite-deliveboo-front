@@ -316,9 +316,9 @@ export default {
                 </div>
                 <div class="mb-3 fs-3">Totale: {{ getTotal() }}&euro;</div>
                 <div class="final-actions d-flex justify-content-center gap-2">
-                    <span class="btn btn-danger ms_btn">Svuota Carrello</span>
+                    <!-- <span class="btn btn-danger ms_btn">Svuota Carrello</span> -->
                     <!-- <AppCart @deleteCart="removeCart"/> -->
-                    <span class="btn ms_btn btn-success" @click="$emit('backToRestaurant', cartProducts[0].restaurant)">Torna al ristorante</span>
+                    <!-- <span class="btn ms_btn btn-success" @click="$emit('backToRestaurant', cartProducts[0].restaurant)">Torna al ristorante</span> -->
                 </div>
 
                 <!-- / RIEPILOGO ORDINE -->
