@@ -127,14 +127,14 @@ export default {
             </div>
 
 
-            <!-- <a class="cart-mobile-btn" href="#">CART</a> -->
-
-            <AppCart class="d-none d-sm-block" :cartProducts="cartProducts" :not_allowed="not_allowed"
+            
+            
+            <AppCart class="desktop" :cartProducts="cartProducts" :not_allowed="not_allowed"
                 @deleteCart="removeCart" @backToRestaurant="getRestaurantDetails" />
 
 
 
-            <button class="btn d-sm-none cart-mobile-btn" type="button" data-bs-toggle="offcanvas"
+            <button class="btn  cart-mobile-btn" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-cart-shopping"
                     style="color: #FFC245;"></i></button>
 
@@ -145,7 +145,7 @@ export default {
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body ">
-                    <AppCart :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
+                    <AppCart class="mobile" :cartProducts="cartProducts" :not_allowed="not_allowed" @deleteCart="removeCart"
                         @backToRestaurant="getRestaurantDetails" />
 
                 </div>
@@ -157,6 +157,15 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/partials/root.scss" as *;
+
+.desktop{
+    @media screen and (max-width: 768px){
+        display: none;
+    }
+    
+}
+
+
 
 section {
     background-color: #FFF3DA;
@@ -174,29 +183,23 @@ section {
     .cart-mobile-btn {
         width: 50px;
         height: 50px;
-        border-radius: 50%;
+        border-radius: 100%;
         top: 50px;
         margin: 10px;
         display: none;
-        display: block;
         position: sticky;
-        background-color: #27A182;
+        background-color: #ffffff;
         box-shadow: 0px 10px 15px rgb(166, 166, 166);
+        i{
+            color: black;
+        }
 
-        // text-align: center;
-    }
-
-    @media screen and (max-width: 578px) {
-
-        .cart-col {
+        @media screen and (max-width: 768px){
             display: block;
-            width: 100%;
-            position: absolute;
-            top: 100px;
-            right: 0%;
-            // display: none;
         }
     }
+
+   
 
     @media screen and (max-width: 768px) {
         .restaurant-details-col {

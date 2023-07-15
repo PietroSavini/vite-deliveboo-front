@@ -23,6 +23,8 @@
 body{
   font-family: 'Poppins', sans-serif;
   background-color: black;
+  overflow: auto !important;
+  
     &::-webkit-scrollbar {
       background: #161616;
       

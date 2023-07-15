@@ -343,6 +343,7 @@ export default {
 
 
 <style lang="scss" scoped>
+
 section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
