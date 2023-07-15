@@ -22,7 +22,16 @@
 
 body{
   font-family: 'Poppins', sans-serif;
-  background-color: $secondary_color;
+  background-color: black;
+    &::-webkit-scrollbar {
+      background: #161616;
+      
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #434343;
+        border-radius: 10px;
+    }
   
 }
 

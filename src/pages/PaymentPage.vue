@@ -371,11 +371,12 @@ section.payment-page {
                 display: inline-block;
 
                 width: 50%;
-                background: linear-gradient(45deg, blueviolet, deeppink);
+                background-color: #90EE90;
+                color: black;
                 margin-top: 20px;
                 padding: 10px;
                 font-size: 20px;
-                color: #fff;
+                box-shadow: 0px 10px 10px rgb(163, 163, 163);
                 border-radius: 10px;
                 cursor: pointer;
                 transition: .2s linear;
@@ -441,6 +442,15 @@ section.payment-page {
                 min-height: 100px;
                 margin: 0 auto;
                 overflow: auto;
+                &::-webkit-scrollbar {
+                    background: transparent;
+                    
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: #90EE90;
+                    border-radius: 10px;
+                }
 
                 .cart-item {
 
