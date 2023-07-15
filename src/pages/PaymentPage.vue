@@ -369,7 +369,6 @@ section.payment-page {
         .shipping-payment {
             .submit-btn {
                 display: inline-block;
-
                 width: 50%;
                 background-color: #90EE90;
                 color: black;
@@ -379,8 +378,11 @@ section.payment-page {
                 box-shadow: 0px 10px 10px rgb(163, 163, 163);
                 border-radius: 10px;
                 cursor: pointer;
-                transition: .2s linear;
+                transition: 200ms;
                 border: none;
+                &:active{
+                    transform: scale(.9);
+                }
             }
 
             @media screen and (max-width:768px) {
