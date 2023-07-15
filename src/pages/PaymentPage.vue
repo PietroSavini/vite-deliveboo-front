@@ -347,7 +347,7 @@ section.payment-page {
     background-color: #EEEEEE;
     padding: 2rem 0;
 
-    min-height: 1500px;
+    min-height: 1200px;
 
     position: relative;
 
