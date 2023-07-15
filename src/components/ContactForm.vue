@@ -52,7 +52,7 @@ export default {
 
     form {
         height: 500px;
-        width: 70%;
+        width: 50%;
         background-color: $green_deli;
         padding: 40px;
         border: 1px solid $green_deli;
@@ -109,7 +109,7 @@ export default {
             input:focus+.input-border,
             textarea:focus+.input-border {
                 transform: scaleX(1);
-                background-color: $green_deli;
+                background-color: orange;
                 transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
             }
         }
