@@ -134,9 +134,10 @@ export default {
 
 
 
-            <button class="btn  cart-mobile-btn" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa-solid fa-cart-shopping"
-                    style="color: #FFC245;"></i></button>
+            <button class="btn  cart-mobile-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span v-if="cartProducts.length > 0">{{ cartProducts.length }}</span>
+            </button>
 
             <div class="offcanvas offcanvas-top ms_trans" tabindex="-1" id="offcanvasTop"
                 aria-labelledby="offcanvasTopLabel">
@@ -181,6 +182,7 @@ section {
     }
 
     .cart-mobile-btn {
+        position: relative;
         width: 50px;
         height: 50px;
         border-radius: 100%;
@@ -192,6 +194,22 @@ section {
         box-shadow: 0px 10px 15px rgb(166, 166, 166);
         i{
             color: black;
+        }
+        span{
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 100%;
+            background-color: #FFDD44;
+            position: absolute;
+            bottom: -10px;
+            font-weight: 500;
+            font-size: 1.2rem;
+            line-height: 25px;
+            left: -5px;
+            z-index: 3;
+            color: #2c2c2c;
+            box-shadow: 0px -3px 15px rgb(124, 124, 124);
         }
 
         @media screen and (max-width: 768px){
