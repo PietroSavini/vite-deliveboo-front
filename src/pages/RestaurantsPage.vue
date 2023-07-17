@@ -58,8 +58,21 @@ export default {
 </script>
 
 <template>
+  <div v-if="payment_message" class="overlay">
+
+    <div  class="payment-success text-center  p-2 ">
+      <i class="fa-regular fa-circle-check fa-3x"></i>
+      <h5>pagamento effettuato</h5>
+      <hr>
+      <p class="mb-2">riceverai un email con il riepilogo del tuo ordine</p>
+      <button type="button" class="btn btn-secondary" @click="payment_message =false">Close</button>
+    </div>
+
+  </div>
   <SectionJumbo />
   <section class="restaurants">
+
+
     <div v-if="!loading">
       <div class="background-extencion"></div>
       <div class="container">
@@ -72,15 +85,7 @@ export default {
           <h5>Tutti i locali</h5>
         </div>
         <!-- message payment success -->
-  <div v-if="payment_message" class="payment-success text-center w-25 p-2 ">
-  <i class="fa-regular fa-circle-check fa-3x"></i>
-
-  <h5>pagamento effettuato</h5>
-  <hr>
-  <p class="mb-2">riceverai un email con il riepilogo del tuo ordine</p>
-  <button type="button" class="btn btn-secondary" @click="payment_message =false">Close</button>
-
-</div>
+  
         <!-- /message payment success -->
 
      
@@ -102,12 +107,30 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/partials/root.scss" as *;
-.payment-success{
-margin: 0 auto;
-border: 2px solid #28a181;
-  i{color:#28a181};
-  h5{
-    color: #28a181;
+.overlay{
+  width: 100%;
+  background-color: rgba($color: #000000, $alpha: .5);
+  position: absolute;
+  z-index: 556;
+  top: 0;
+  left: 0;
+  height: 100%;
+  
+  .payment-success{
+    position: sticky;
+    width: 70%;
+    max-width: 800px;
+    margin: 0 auto;
+    top: 40%;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px black;
+    z-index: 555;
+    background-color: #E1F4E5;
+    border: 1px solid #28a181;
+    i{color:#28a181};
+    h5{
+      color: #28a181;
+    }
   }
 }
 
