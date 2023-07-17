@@ -8,10 +8,33 @@
 *{
   user-select: none;
 }
+
+#app{
+  min-height: 100vh;
+  position: relative;
+}
+
+.featured,.restaurants{
+  min-height: 630px;
+  padding-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
 body{
   font-family: 'Poppins', sans-serif;
-  background-color: $secondary_color;
-  // background-color: $primary_color;
+  background-color: black;
+  overflow: auto !important;
+  
+    &::-webkit-scrollbar {
+      background: #161616;
+      
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #434343;
+        border-radius: 10px;
+    }
+  
 }
 
 video{
@@ -41,10 +64,6 @@ ul{
   }
 }
 
-section.featured {
-  padding-bottom: 6rem;
-  
-}
 
 
 

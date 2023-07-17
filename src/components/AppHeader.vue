@@ -14,13 +14,10 @@ export default {
                     route: "home"
                 },
                 {
-                    label: "Restaurants",
+                    label: "Ristoranti",
                     route: "restaurants"
                 },
-                {
-                    label: "About Us",
-                    route: "about-us"
-                },
+                
             ],
             mobileNavLinks: [
                 {
@@ -31,10 +28,7 @@ export default {
                     icon: 'fa-solid fa-utensils',
                     route: 'restaurants'
                 },
-                {
-                    icon: 'fa-solid fa-info-circle',
-                    route: 'about-us'
-                },
+                
             ],
         }
 
@@ -66,7 +60,7 @@ export default {
     <header>
         <div class="overlay"></div>
 
-        <div :class="[headerHeight ? '' : 'header-extends']" class="container">
+        <div :class="[headerHeight && !mobileMenuOpen ? '' : 'header-extends']" class="container">
 
             <div class="deliveboo-logo">
                 <img src="../assets/Testo_del_paragrafo-removebg-preview.png" alt="">
@@ -77,7 +71,7 @@ export default {
                     <li v-for="link in navLinks">
                         <router-link :to="{ name: link.route }">{{ link.label }}</router-link>
                     </li>
-                    <li><a href="#">Contattaci</a></li>
+                    <li><a href="">Contattaci</a></li>
                     <li @click="searchBar"><i class="fa-solid fa-magnifying-glass fa-rotate-90"></i></li>
                 </ul>
 
@@ -89,9 +83,9 @@ export default {
 
             </nav>
 
-            <ul class="mobile-nav-links" v-if="mobileMenuOpen">
-                <li v-for="link in mobileNavLinks">
-                    <router-link :to="{ name: link.route }">
+            <ul class="mobile-nav-links" >
+                <li :class="mobileMenuOpen ? 'show' : 'hidden'" v-for="link in mobileNavLinks">
+                    <router-link :to="{ name: link.route }  ">
                         <i :class="link.icon"></i>
                     </router-link>
                 </li>
@@ -104,10 +98,14 @@ export default {
             </div>
 
             <div class="user-interactions">
-                <a href="http://localhost:8000/" class="login-container">
-                    <div class="login-btn">
+                <a href="http://localhost:8000/" >
                         <p class="login-cta">Sei un ristoratore?</p>
-                        <span>accedi</span>
+                        <span class="login-btn">accedi</span>
+                </a>
+
+                <a href="http://localhost:8000/" >
+                    <div class="login-btn type-2">
+                        <i class="fa-regular fa-user" style="color: #ffffff;"></i>
                     </div>
                 </a>
             </div>
@@ -128,6 +126,7 @@ header {
     right: 0;
     z-index: 999;
     color: #ffff;
+    overflow: hidden;
 
     .overlay {
         position: absolute;
@@ -142,36 +141,62 @@ header {
 
 
     .container {
-        .mobile-nav-links {
-            // display: block;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            
-            a {
-                margin: 0 5px;
-                padding: 10px;
-                border-radius: 50%;
-                background-color: #FFC245;
-                transition: background-color 200ms;
-                font-size: 0.9rem;
-            }
-
-            a:hover {
-                background-color: red;
-            }
-        }
-
-        // margin: 0 auto;
-        // max-width: 1300px;
         width: 100%;
         height: 80px;
         transition: 500ms;
         display: flex;
+        align-items: start;
         padding: 5px 0;
         justify-content: center;
-        gap: 1%;
-        // align-items: center;
+        
+        
+        .mobile-nav-links {
+            
+            position: absolute;
+            bottom: 0;
+           
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @media screen and (min-width:800px){
+                display: none;
+            }
+            & li{
+                transition: 500ms;
+                & a:hover{
+                    background-color: rgba($color: #FFC245, $alpha: .35);
+                    color:#fff;
+                }
+            }
+
+            & li.hidden {
+                opacity: 0;
+            }
+
+            & li.show { 
+                opacity: 1;
+            }
+
+            a {
+                transition: 200ms;
+                display: flex;
+                width: 40px;
+                height: 40px;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                margin: 0 5px;
+                border: 2px solid rgba($color: #ffffffa8, $alpha: .8);
+                color: rgba(#ffffffa8, $alpha: .8);
+                transition: background-color 200ms;
+                font-size: 0.9rem;
+            }
+
+        }
+
+        
+        
 
         &.header-extends {
             height: 120px;
@@ -182,24 +207,20 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 20%;
+            width: 30%;
             height: 60px;
-
+            
             img {
+                width: 200px;
+                object-fit: cover;
+                height: 200px;
                 position: relative;
-                width: 100%;
-                top: 0;
-                left: 0;
-                // min-width: 200px;    
+                top: -10px;
             }
         }
 
         .nav-links {
-            .show-nav-links {
-                display: none;
-            }
-
-
+            
             width: 60%;
 
             // flex-grow: 1;
@@ -241,7 +262,7 @@ header {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 20%;
+                    width: 25%;
                     border-right: 1px solid;
                     border-color: rgba($color: #ffffff, $alpha: .6);
                     height: 100%;
@@ -289,44 +310,102 @@ header {
             }
         }
 
-        .hamburger-menu {}
+        .hamburger-menu{
+            display: none;
+            @media screen and (max-width: 800px){
+                width: 20%;
+                
+                order: -1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 60px;
+                
+                .btn{
+                    height: 50px;
+                    border: 3px solid rgba(255, 255, 255, 0.603);
+                    width: 50px;
+                    border-radius: 100%;
+                    &:hover{
+                        background-color: rgba($color: #FFC245, $alpha: .35);
+                    }
+                }
+            }
 
+        }
         .user-interactions {
             width: 20%;
-            justify-content: end;
+            display: flex;
+            justify-content: center;
             align-items: center;
             height: 60px;
-            margin-left: 1%;
-
-            .login-btn {
+            position: relative;
+            
+            @media screen and (max-width: 500px) {  
+                width: 20%;   
+                align-items: center;
+                justify-content: center;
+            }
+            
+            span.login-btn{
                 border: 2px solid;
                 border-color: rgba($color: #ffffff, $alpha: .6);
-                position: relative;
-                width: 50%;
+                width: 80px;
                 border-radius: 15px;
                 height: 30px;
                 z-index: 1;
                 text-align: center;
                 transition: 200ms;
-                margin-top: 25px;
+                padding: 0 .5rem;
+                margin-left: 10px;
+            }
+            .login-btn {
+                border: 2px solid;
+                border-color: rgba($color: #ffffff, $alpha: .6);
+                width: 80px;
+                border-radius: 15px;
+                height: 30px;
+                z-index: 1;
+                text-align: center;
+                transition: 200ms;
+                @media screen and (max-width: 500px) {
+                    display: none;
+                }
+                &.type-2{
+                    display: none;
+                    
+                    @media screen and (max-width: 500px) {     
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 50px;
+                        height: 50px;
+                        
+                        border-radius: 100%;
+                    }
+                }
+                
 
                 &:hover {
-                    background-color: #FFC244;
+                    background-color: rgba($color: #FFC245, $alpha: .35);
                     color: #ffff;
                 }
 
-                .login-cta {
-                    font-family: 'Great Vibes', cursive;
-                    color: #ffdd44;
-                    font-size: 2rem;
-                    transform: rotate(-5deg);
-                    position: absolute;
-                    width: 200px;
-                    bottom: 70%;
-                    left: 0;
-                    z-index: 2;
-
+            }
+            .login-cta {
+                font-family: 'Great Vibes', cursive;
+                color: #ffdd44;
+                font-size: 1.5rem;
+                position: absolute;
+                width: 160px;
+                top: -10px;
+                left: 60%;
+                transform: translateX(-50%);
+                z-index: 2;
+                @media screen and (max-width: 500px) {
+                    display: none;  
                 }
+
             }
 
         }
@@ -335,43 +414,26 @@ header {
 }
 
 // MEDIA QUERIES
-@media screen and (max-width: 578px) {
-    .hamburger-menu {
-        display: block;
+
+
+@media screen and (max-width: 800px) {
+    .container{
+        .deliveboo-logo{
+            min-width: 40%;
+            height: 100%;
+           
+        }
+        .nav-links {
+            display: none;
+        }
     }
+
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 800px) {
 
-    .deliveboo-logo {
-        // height: 500px;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-
-    .user-interactions {
-        display: none;
-    }
-
-    .container {
-        justify-content: space-between;
-    }
-
-    .hamburger-menu {
-        align-self: center;
-        display: block;
-    }
-}
-
-@media screen and (min-width: 769px) {
-
-    .hamburger-menu,
-    .mobile-nav-links {
-        display: none;
-    }
+    
+    
 }
 
 @media screen and (max-width: 992px) {

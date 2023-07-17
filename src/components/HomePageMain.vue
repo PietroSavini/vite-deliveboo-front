@@ -1,5 +1,6 @@
 <script>
 import RestaurantCard from "./RestaurantCard.vue"
+import ContactForm from './ContactForm.vue';
 export default{
     name:"HomePageMain",
     props:{randomRestaurants:Object},
@@ -12,7 +13,8 @@ export default{
         
     },
     components:{
-        RestaurantCard
+        RestaurantCard,
+        ContactForm
     }
 }
 </script>
@@ -32,6 +34,9 @@ export default{
                 <RestaurantCard :restaurant="restaurant" />       
             </div>
         </div>
+
+        <!-- CONTACT -->
+        <ContactForm />
     </div>
 </section>
 <section class="best-of">
@@ -44,6 +49,8 @@ export default{
 
 <style scoped lang="scss">
 @use "../styles/partials/root.scss" as *;
+@use "../styles/style.scss";
+
 
 .featured{
     background-color: $secondary_color;
@@ -99,8 +106,8 @@ export default{
             
             .ms_col{
                 
-                width: 350px;
-                height: 150px;
+                width: 400px;
+                height: 220px;
                 padding: 5px 5px;
             }
         }
