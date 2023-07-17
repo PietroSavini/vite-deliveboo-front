@@ -91,7 +91,7 @@ export default {
                     <div class="restaurant-detail-card ">
                         <h2 class="d-inline-block me-2">{{ restaurant.name }}</h2>
                         <!-- Altrimenti, puoi mostrare un messaggio di caricamento o una stringa predefinita -->
-                        <p><i class="fa-solid fa-location-dot"></i>{{ restaurant.address }}</p>
+                        <p><i style="color:#28A182" class="fa-solid fa-location-dot"></i> {{ restaurant.address }}</p>
                     </div>
                 </div>
                 <div class="restaurant-products">
