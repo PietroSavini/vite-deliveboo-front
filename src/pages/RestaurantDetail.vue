@@ -102,7 +102,7 @@ export default {
                             <section class="card-body" v-if="product.visible">
 
                                 <div class="product-img">
-                                    <img :src="product.image" alt="">
+                                    <img :src="store.method.getImgPath(product.image)" alt="">
                                 </div>
                                 <div class="product-content d-flex">
                                     <div class="product-description">
