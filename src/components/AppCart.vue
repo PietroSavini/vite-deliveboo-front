@@ -79,6 +79,7 @@ export default {
     <div class="cart-col">
         <div class="cart-container">
             <div class="cart">
+                <h2 class="text-center">Il tuo carrello</h2>
                 <div v-if="cartProducts.length > 0">
                     <ul id="cart">
                         <li class="mb-2 cart-item" v-for="obj, index in cartProducts">
@@ -99,9 +100,9 @@ export default {
 
                     </ul>
 
-                    <hr>
+                    
                      
-                    <div class="fs-3">Totale: {{ getTotal() }}&euro;</div>
+                    <div class="fs-3 ms-2">Totale: {{ getTotal() }}&euro;</div>
                     <div class="final-actions d-flex justify-content-center">
                         <span class="btn btn-danger ms_btn" @click="$emit('deleteCart')">Svuota carrello</span>
                         <span v-if="checkout" class="btn btn-success ms_btn" :class="{ 'disabled': not_allowed }"><router-link
@@ -124,9 +125,19 @@ export default {
 
 <style lang="scss" scoped>
 .cart-col {
+
     width: 40%;
     padding: 0 .5rem;
-    position: relative;
+    position: relative; 
+    
+    
+    @media screen and (max-width: 768px) {
+        
+        width: 100%;
+        position: absolute;
+        top: 100px;
+        right: 0%;
+    }
 
     .cart-container {
         position: absolute;
@@ -140,10 +151,13 @@ export default {
 
             position: sticky;
             top: 20px;
-            padding: 1rem 2rem;
+            padding: 1rem 0;
             border-radius: 20px;
             box-shadow: 0px 10px 15px rgb(166, 166, 166);
             background-color: #ffffff;
+    
+            
+            
 
             .ms_btn {
                 width: 150px;
@@ -158,7 +172,18 @@ export default {
             }
 
             #cart {
+                max-height: 400px;
+                overflow: auto;
+                padding: 0 .5rem;
+                &::-webkit-scrollbar {
+                    background: transparent;
+                    
+                }
 
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba($color: #949494, $alpha: .5);
+                    border-radius: 10px;
+                }
                 .cart-item {
                     display: flex;
                     width: 100%;

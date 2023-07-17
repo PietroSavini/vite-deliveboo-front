@@ -15,14 +15,25 @@
 }
 
 .featured,.restaurants{
-  min-height: 600px;
+  min-height: 630px;
   padding-bottom: 3rem;
   margin-bottom: 2rem;
 }
 
 body{
   font-family: 'Poppins', sans-serif;
-  background-color: $secondary_color;
+  background-color: black;
+  overflow: auto !important;
+  
+    &::-webkit-scrollbar {
+      background: #161616;
+      
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #434343;
+        border-radius: 10px;
+    }
   
 }
 
