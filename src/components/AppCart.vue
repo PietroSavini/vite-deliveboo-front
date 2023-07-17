@@ -112,7 +112,7 @@ export default {
                 </div>
 
                 <div v-else class="empty-cart">
-                    <h2 class="text-center">Il tuo carrello</h2>
+                    
                     <img src="../assets/empty-cart.png" alt="">
                     <p class="text-center">Non hai ancora aggiunto alcun prodotto. Quando lo farai, compariranno
                         qui!</p>
