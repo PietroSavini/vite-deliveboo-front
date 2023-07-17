@@ -29,7 +29,6 @@ export default {
     mounted() {
 
         this.cartProducts = this.store.method.getArray();
-        this.getIdQuantity();
         // token
 
         axios.get(this.store.ApiToken).then((resp) => {
@@ -92,7 +91,10 @@ export default {
             })
         },
         sendPayment() {
+
             if (this.hostedFieldInstance) {
+                this.getIdQuantity();
+
                 this.hostedFieldInstance.tokenize().then(payload => {
                     axios.post(`${this.store.ApiPayment}`, {
 

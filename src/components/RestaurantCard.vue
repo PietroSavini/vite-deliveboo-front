@@ -85,7 +85,7 @@ export default {
             top: 0;
             bottom: 0;
             z-index: 2;
-            background-color: rgba($color: #232323, $alpha: .6);
+            // background-color: rgba($color: #232323, $alpha: .6);
         }
 
         img {
