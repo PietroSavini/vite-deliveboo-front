@@ -52,7 +52,8 @@ export default {
 
     form {
         height: 500px;
-        width: 50%;
+        width: 100%;
+        max-width: 800px;
         background-color: $green_deli;
         padding: 40px;
         border: 1px solid $green_deli;
@@ -85,8 +86,9 @@ export default {
                 padding: 10px;
                 border: none;
                 border-radius: 4px;
-                background-color: #ffdd444e;
+                background-color: #eeeeee4e;
                 z-index: 1;
+                color: #fff;
             }
 
             input::placeholder,
