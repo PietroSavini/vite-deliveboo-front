@@ -71,7 +71,7 @@ export default {
                     <li v-for="link in navLinks">
                         <router-link :to="{ name: link.route }">{{ link.label }}</router-link>
                     </li>
-                    <li><a href="">Contattaci</a></li>
+                    <li><a href="#header-link">Contattaci</a></li>
                     <li @click="searchBar"><i class="fa-solid fa-magnifying-glass fa-rotate-90"></i></li>
                 </ul>
 

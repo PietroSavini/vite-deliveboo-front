@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-    <div class="ms_footer">
+    <div id="header-link" class="ms_footer">
         <div class="background-extencion"></div>
         <div class="ms_footer-first-row">
             <div class="deliveboo-logo">
