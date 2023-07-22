@@ -1,14 +1,56 @@
-@use "./partials/root.scss";
+@use "./partials/root.scss" as *;
 @import "node_modules/@fortawesome/fontawesome-free/css/all.css";
 @import "bootstrap/scss/bootstrap.scss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 //common 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+*{
+  user-select: none;
 }
 
+#app{
+  min-height: 100vh;
+  position: relative;
+}
+
+.featured,.restaurants{
+  min-height: 630px;
+  padding-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  background-color: black;
+  overflow: auto !important;
+  
+    &::-webkit-scrollbar {
+      background: #161616;
+      
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #434343;
+        border-radius: 10px;
+    }
+  
+}
+
+video{
+  max-width: 100%;
+}
+
+img{
+  max-width: 100%;
+}
+
+p{
+  margin: 0;
+}
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 ul{
@@ -16,10 +58,12 @@ ul{
   margin: 0;
   padding: 0;
   li{
+    display: inline-block;
     margin: 0;
     padding: 0;
   }
 }
+
 
 
 
